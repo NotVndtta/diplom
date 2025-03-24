@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
-  devise_for :users
+  resources :job_cards
+  resources :profiles do
+    resources :experiences
+  end
+
+  devise_for :users, controllers: { registrations: "users/registrations" }
+
+  root to: "experiences#index"
 
   devise_scope :user do
-    root to: "devise/sessions#new"
   end
 
   get "up" => "rails/health#show", as: :rails_health_check

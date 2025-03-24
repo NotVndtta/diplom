@@ -1,0 +1,62 @@
+<%= form_with(model: job_card, class: "contents") do |form| %>
+  <% if job_card.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
+      <h2><%= pluralize(job_card.errors.count, "error") %> prohibited this job_card from being saved:</h2>
+
+      <ul class="list-disc ml-6">
+        <% job_card.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :farm_name %>
+    <%= form.text_field :farm_name, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": job_card.errors[:farm_name].none?, "border-red-400 focus:outline-red-600": job_card.errors[:farm_name].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :remuneration %>
+    <%= form.number_field :remuneration, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": job_card.errors[:remuneration].none?, "border-red-400 focus:outline-red-600": job_card.errors[:remuneration].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :work_amount %>
+    <%= form.number_field :work_amount, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": job_card.errors[:work_amount].none?, "border-red-400 focus:outline-red-600": job_card.errors[:work_amount].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :description %>
+    <%= form.textarea :description, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": job_card.errors[:description].none?, "border-red-400 focus:outline-red-600": job_card.errors[:description].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :date_at %>
+    <%= form.date_field :date_at, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": job_card.errors[:date_at].none?, "border-red-400 focus:outline-red-600": job_card.errors[:date_at].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :location %>
+    <%= form.text_field :location, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": job_card.errors[:location].none?, "border-red-400 focus:outline-red-600": job_card.errors[:location].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :status %>
+    <%= form.text_field :status, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": job_card.errors[:status].none?, "border-red-400 focus:outline-red-600": job_card.errors[:status].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :count_users %>
+    <%= form.number_field :count_users, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": job_card.errors[:count_users].none?, "border-red-400 focus:outline-red-600": job_card.errors[:count_users].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": job_card.errors[:user_id].none?, "border-red-400 focus:outline-red-600": job_card.errors[:user_id].any?}] %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>

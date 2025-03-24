@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :ratings, as: :rateable, dependent: :destroy
+  has_many :job_cards, dependent: :destroy
+  has_many :experiences, dependent: :destroy
 end

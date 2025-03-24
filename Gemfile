@@ -21,6 +21,9 @@ gem "rails-i18n"
 gem "view_component"
 gem "sorbet-runtime"
 
+gem "pundit"
+gem "shrine"
+
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 gem "solid_cache"
