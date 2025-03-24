@@ -1,0 +1,24 @@
+<div class="suggestions" data-controller="geocoder">
+  <%= render Form::Group.new(classes: @classes, label_position: @label_html[:position], show_all_errors: @show_all_errors, errors:) do %>
+    <%= render Form::Label.new(@form_object, @object_name, @label, @label_html) if @label %>
+    <div class="form-input-with-loop">
+      <%= render Form::TextField.new(
+        @form_object,
+        @object_name,
+        {
+          **@input_html,
+          autocomplete: "off",
+          data: {
+            **@input_html.fetch(:data, {}),
+            geocoder_target: "input",
+            geocoder_lang_value: I18n.locale,
+            action: "input->geocoder#suggest"
+          }
+        }
+      ) %>
+    </div>
+  <% end %>
+  <div data-geocoder-target="suggestions" class="suggestions-dropdown"></div>
+  <%= @form_object.hidden_field "#{@object_name}_lat", data: {geocoder_target: "lat"} %>
+  <%= @form_object.hidden_field "#{@object_name}_lng", data: {geocoder_target: "lng"} %>
+</div>

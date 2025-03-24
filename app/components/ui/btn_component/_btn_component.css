@@ -1,0 +1,39 @@
+.btn {
+  @apply flex items-center justify-center rounded-lg text-white whitespace-nowrap gap-x-2 px-3 py-2 transition-colors cursor-pointer;
+}
+
+.btn-green {
+  @apply btn bg-green-400 hover:bg-green-500 focus:ring focus:ring-green-300;
+}
+
+.btn-white-green {
+  @apply btn text-green-400 border border-green-400 hover:bg-green-400 hover:text-white focus:ring focus:ring-green-200 !important;
+}
+
+.btn-white-blue {
+  @apply btn text-blue-400 border border-blue-400 hover:bg-blue-400 hover:text-white focus:ring focus:ring-blue-200 !important;
+}
+
+.btn-blue {
+  @apply btn bg-blue-400 hover:bg-blue-600 focus:ring focus:ring-blue-200;
+}
+
+.btn-white-red {
+  @apply btn text-[#E74694] border border-[#E74694] hover:bg-[#E74694] hover:text-white focus:ring focus:ring-pink-300 !important;
+}
+
+.btn-outline-blue {
+  @apply flex justify-center py-3 text-blue-400 hover:text-blue-500 active:text-blue-600 border border-blue-400 hover:border-blue-500 active:border-blue-600 rounded-lg;
+}
+
+.btn-outline-green {
+  @apply flex justify-center py-3 text-green-400 hover:text-green-500 active:text-green-600 border border-green-400 hover:border-green-500 active:border-green-600 rounded-lg;
+}
+
+.btn-outline-gray {
+  @apply flex justify-center py-3 text-gray-400 hover:text-gray-500 active:text-gray-600 border border-gray-400 hover:border-gray-500 active:border-gray-600 rounded-lg;
+}
+
+.btn-outline-black {
+  @apply flex justify-center text-gray-900 hover:text-gray-600 active:text-gray-900 border border-gray-900 hover:border-gray-600 active:border-gray-900 rounded-lg;
+}

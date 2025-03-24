@@ -19,6 +19,7 @@ gem "devise"
 gem "discard"
 gem "rails-i18n"
 gem "view_component"
+gem "sorbet-runtime"
 
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
@@ -36,6 +37,11 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
   gem "factory_bot_rails"
   gem "rspec-rails"
+  gem "standard-sorbet"
+  gem "rubocop-sorbet", require: false
+  gem "sorbet"                  # the static type checker. Use `sorbet-runtime` (above) for runtime checks
+  gem "tapioca"                 # generate RBIs
+  gem "rspec-sorbet"
 end
 
 group :development do

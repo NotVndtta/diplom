@@ -1,0 +1,5 @@
+.dropdown {
+  .active {
+    @apply bg-gray-100;
+  }
+}

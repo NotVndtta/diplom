@@ -1,0 +1,19 @@
+:root {
+  --header-height: 65px;
+  --main-content-header-height: 60px;
+  --operations-sidebar-position-top-margin: calc(var(--header-height) + var(--main-content-header-height));
+  --new-work-order-header-height: 40px;
+
+  --icon-search-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='19' height='19' fill='none'%3E%3Cpath stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m16.625 16.625-4.75-4.75m1.583-3.958a5.542 5.542 0 1 1-11.083 0 5.542 5.542 0 0 1 11.083 0'/%3E%3C/svg%3E");
+  --active-icon-search-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='19' height='19' fill='none'%3E%3Cpath stroke='%231C64F2' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m16.625 16.625-4.75-4.75m1.583-3.958a5.542 5.542 0 1 1-11.083 0 5.542 5.542 0 0 1 11.083 0'/%3E%3C/svg%3E");
+
+  --icon-clock-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' viewBox='0 0 16 16'%3E%3Cpath stroke='%236B7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M8 5V8L10.25 10.25M14.75 8C14.75 8.886 14.575 9.764 14.236 10.583c-.339.819-.836 1.563-1.463 2.19-.627.627-1.371 1.125-2.19 1.464-.819.339-1.697.513-2.583.513s-1.764-.174-2.583-.513c-.819-.339-1.563-.837-2.19-1.464-.627-.627-1.125-1.371-1.464-2.19C1.425 9.764 1.25 8.886 1.25 8c0-1.79.711-3.507 1.977-4.773C4.492 1.961 6.21 1.25 8 1.25s3.507.711 4.773 1.977C14.039 4.493 14.75 6.21 14.75 8Z'/%3E%3C/svg%3E");
+  --active-icon-clock-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' viewBox='0 0 16 16'%3E%3Cpath stroke='%231C64F2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M8 5V8L10.25 10.25M14.75 8C14.75 8.886 14.575 9.764 14.236 10.583c-.339.819-.836 1.563-1.463 2.19-.627.627-1.371 1.125-2.19 1.464-.819.339-1.697.513-2.583.513s-1.764-.174-2.583-.513c-.819-.339-1.563-.837-2.19-1.464-.627-.627-1.125-1.371-1.464-2.19C1.425 9.764 1.25 8.886 1.25 8c0-1.79.711-3.507 1.977-4.773C4.492 1.961 6.21 1.25 8 1.25s3.507.711 4.773 1.977C14.039 4.493 14.75 6.21 14.75 8Z'/%3E%3C/svg%3E");
+}
+
+[data-controller="sidebar--toggle"] {
+  --sidebar-width: 250px;
+  --collapsed-sidebar-width: 65px;
+  --sidebar-transition-duration: 300ms;
+  --sidebar-nav-paddings: 12px;
+}

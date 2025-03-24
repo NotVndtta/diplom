@@ -1,0 +1,51 @@
+.label {
+  @apply text-gray-800 bg-gray-100 font-medium rounded-md md:rounded-lg w-max text-xs md:text-sm px-2 md:px-2.5 py-0.5 md:py-1 text-center cursor-default;
+
+  &.interactive {
+    @apply hover:bg-gray-200;
+  }
+
+  &.green {
+    @apply text-green-800 bg-green-100;
+
+    &.interactive {
+      @apply hover:bg-green-200;
+    }
+  }
+
+  &.blue {
+    @apply text-blue-800 bg-blue-100;
+
+    &.interactive {
+      @apply hover:bg-blue-200;
+    }
+  }
+
+  &.orange {
+    @apply text-orange-800 bg-orange-100 !important;
+
+    &.interactive {
+      @apply hover:bg-orange-200;
+    }
+  }
+
+  &.yellow {
+    @apply text-yellow-800 bg-yellow-100;
+
+    &.interactive {
+      @apply hover:bg-yellow-200;
+    }
+  }
+
+  &.red {
+    @apply text-red-800 bg-red-100;
+
+    &.interactive {
+      @apply hover:bg-red-200;
+    }
+  }
+
+  &.dark-gray {
+    @apply bg-gray-200;
+  }
+}

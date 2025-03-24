@@ -1,0 +1,264 @@
+/*work order index and show pages*/
+.work-order {
+  &__tab {
+    @apply relative inline-block text-lg py-0.5 px-4 max-lg:border-b-2;
+
+    &::after {
+      @apply content-[""] absolute left-0 -bottom-[2px] w-full h-[2px]
+      transition-transform duration-300 ease-in-out scale-x-0 hover:scale-x-100;
+    }
+
+    &.active {
+      @apply font-bold text-blue-400 max-lg:border-blue-400;
+
+      &::after {
+        @apply content-[""] bg-blue-400;
+      }
+    }
+
+    &.inactive {
+      @apply font-normal hover:text-gray-600 border-transparent;
+
+      &::after {
+        @apply content-[""] bg-gray-300;
+      }
+    }
+  }
+
+  &__status {
+    @apply w-fit whitespace-nowrap px-2 py-0.5 text-sm rounded-md;
+
+    &.in_work {
+      @apply bg-yellow-100 text-yellow-800;
+    }
+
+    &.ready_for_work {
+      @apply bg-blue-100 text-blue-800;
+    }
+
+    &.draft {
+      @apply bg-violet-200 text-blue-800;
+    }
+
+    &.assigned_to_performers {
+      @apply bg-orange-200 text-yellow-800;
+    }
+
+    &.closed {
+      @apply bg-green-100 text-green-800;
+    }
+
+    &.canceled {
+      @apply bg-gray-200 text-gray-900;
+    }
+
+    &.undefined {
+      @apply bg-red-200 text-orange-900;
+    }
+  }
+
+  &__header {
+    @apply bg-white border-b border-gray-200;
+
+    &-content {
+      @apply bg-white border-b border-gray-200;
+
+      div > p:nth-child(odd) {
+        @apply font-normal text-gray-500;
+      }
+      div > p:nth-child(even) {
+        @apply font-medium;
+      }
+    }
+  }
+}
+
+.operations {
+  &__tab {
+    @apply px-5 py-1.5 font-normal bg-white rounded-lg;
+
+    &.active {
+      @apply border-[1px] border-gray-600;
+    }
+
+    &.inactive {
+      @apply text-gray-500 border-[1px] border-gray-200;
+    }
+  }
+}
+/*work order index and show pages*/
+.work-order {
+  &__tab {
+    @apply relative inline-block text-lg py-0.5 px-4 max-lg:border-b-2;
+
+    &::after {
+      @apply content-[""] absolute left-0 -bottom-[2px] w-full h-[2px]
+      transition-transform duration-300 ease-in-out scale-x-0 hover:scale-x-100;
+    }
+
+    &.active {
+      @apply font-bold text-blue-400 max-lg:border-blue-400;
+
+      &::after {
+        @apply content-[""] bg-blue-400;
+      }
+    }
+
+    &.inactive {
+      @apply font-normal hover:text-gray-600 border-transparent;
+
+      &::after {
+        @apply content-[""] bg-gray-300;
+      }
+    }
+  }
+
+  &__status {
+    @apply w-fit whitespace-nowrap px-2 py-0.5 text-sm rounded-md;
+
+    &.in_work {
+      @apply bg-yellow-100 text-yellow-800;
+    }
+
+    &.ready_for_work {
+      @apply bg-blue-100 text-blue-800;
+    }
+
+    &.draft {
+      @apply bg-violet-200 text-blue-800;
+    }
+
+    &.assigned_to_performers {
+      @apply bg-orange-200 text-yellow-800;
+    }
+
+    &.closed {
+      @apply bg-green-100 text-green-800;
+    }
+
+    &.canceled {
+      @apply bg-gray-200 text-gray-900;
+    }
+
+    &.undefined {
+      @apply bg-red-200 text-orange-900;
+    }
+  }
+
+  &__header {
+    @apply bg-white border-b border-gray-200;
+
+    &-content {
+      @apply bg-white border-b border-gray-200;
+
+      div > p:nth-child(odd) {
+        @apply font-normal text-gray-500;
+      }
+      div > p:nth-child(even) {
+        @apply font-medium;
+      }
+    }
+  }
+}
+
+.operations {
+  &__tab {
+    @apply px-5 py-1.5 font-normal bg-white rounded-lg;
+
+    &.active {
+      @apply border-[1px] border-gray-600;
+    }
+
+    &.inactive {
+      @apply text-gray-500 border-[1px] border-gray-200;
+    }
+  }
+}
+/*work order index and show pages*/
+.work-order {
+  &__tab {
+    @apply relative inline-block text-lg py-0.5 px-4 max-lg:border-b-2;
+
+    &::after {
+      @apply content-[""] absolute left-0 -bottom-[2px] w-full h-[2px]
+      transition-transform duration-300 ease-in-out scale-x-0 hover:scale-x-100;
+    }
+
+    &.active {
+      @apply font-bold text-blue-400 max-lg:border-blue-400;
+
+      &::after {
+        @apply content-[""] bg-blue-400;
+      }
+    }
+
+    &.inactive {
+      @apply font-normal hover:text-gray-600 border-transparent;
+
+      &::after {
+        @apply content-[""] bg-gray-300;
+      }
+    }
+  }
+
+  &__status {
+    @apply w-fit whitespace-nowrap px-2 py-0.5 text-sm rounded-md;
+
+    &.in_work {
+      @apply bg-yellow-100 text-yellow-800;
+    }
+
+    &.ready_for_work {
+      @apply bg-blue-100 text-blue-800;
+    }
+
+    &.draft {
+      @apply bg-violet-200 text-blue-800;
+    }
+
+    &.assigned_to_performers {
+      @apply bg-orange-200 text-yellow-800;
+    }
+
+    &.closed {
+      @apply bg-green-100 text-green-800;
+    }
+
+    &.canceled {
+      @apply bg-gray-200 text-gray-900;
+    }
+
+    &.undefined {
+      @apply bg-red-200 text-orange-900;
+    }
+  }
+
+  &__header {
+    @apply bg-white border-b border-gray-200;
+
+    &-content {
+      @apply bg-white border-b border-gray-200;
+
+      div > p:nth-child(odd) {
+        @apply font-normal text-gray-500;
+      }
+      div > p:nth-child(even) {
+        @apply font-medium;
+      }
+    }
+  }
+}
+
+.operations {
+  &__tab {
+    @apply px-5 py-1.5 font-normal bg-white rounded-lg;
+
+    &.active {
+      @apply border-[1px] border-gray-600;
+    }
+
+    &.inactive {
+      @apply text-gray-500 border-[1px] border-gray-200;
+    }
+  }
+}

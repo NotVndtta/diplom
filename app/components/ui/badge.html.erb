@@ -1,0 +1,6 @@
+<div class="max-w-[175px] inline-flex items-center gap-1 rounded-full px-2 py-0.5 <%= @classes %>">
+  <%= inline_svg "icons/#{@icon}", class:"[&>svg]:size-4" %>
+  <span data-action="mouseenter->tippy-tooltip#titleIfTruncated" class="truncate">
+    <%= content %>
+  </span>
+</div>

@@ -1,0 +1,7 @@
+.active-vineyard-cell {
+  @apply border-gray-700 outline outline-1 outline-gray-700;
+}
+
+.active-vineyard-row {
+  @apply border-violet-700 outline outline-1 outline-violet-700;
+}

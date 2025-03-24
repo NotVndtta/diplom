@@ -1,0 +1,13 @@
+<%= render Form::Group.new(
+  classes: @classes,
+  label_position: @label_html[:position],
+  errors:) do %>
+
+  <% if @label %>
+    <%= render Form::Label.new(@form_object, @object_name, @label, @label_html) %>
+  <% end %>
+  
+  <div class="form-input-with-clock">
+    <%= render Form::NumberField.new(@form_object, @object_name, @input_html) %>
+  </div>
+<% end %>

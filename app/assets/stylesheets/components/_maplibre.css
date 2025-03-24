@@ -1,0 +1,7 @@
+.maplibregl-popup-content {
+  @apply rounded-md px-5 py-3;
+}
+
+.maplibregl-popup-close-button {
+  @apply inline-block size-5 focus:outline-none hover:bg-transparent;
+}

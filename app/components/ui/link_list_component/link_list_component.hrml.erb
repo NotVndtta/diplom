@@ -1,0 +1,16 @@
+<% if links? %>
+  <div class="flex items-center space-x-2">
+    <% links.first(@wrap_count).each do |link| %>
+      <%= link %>
+      <% if @items_in_tooltip.present? %>
+        <%= content_tag(:span, "+#{@items_in_tooltip.size}",
+                        class: "label green interactive",
+                        data: {
+                          tippy_tooltip_target: "tooltip",
+                          tippy_content: @items_in_tooltip.join
+                        })
+        %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

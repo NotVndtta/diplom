@@ -1,0 +1,11 @@
+<div class="flex <%= @classes %>">
+  <%= link_to @href,
+              class: ["flex truncate space-x-2 items-center text-blue-400 hover:text-blue-500 active:text-blue-600", ("flex-row-reverse space-x-reverse" if @reverse)],
+              data: @data.merge(turbo: @turbo),
+              target: @target do
+  %>
+    <span class="truncate"><%= content %></span>
+    
+    <%= inline_svg "icons/link" if @icon %>
+  <% end %>
+</div>

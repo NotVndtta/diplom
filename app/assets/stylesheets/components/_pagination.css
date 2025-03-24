@@ -1,0 +1,49 @@
+.pagy {
+  @apply flex space-x-2 font-bold text-base text-gray-900;
+
+  a:not(.gap) {
+    @apply border border-gray-300 rounded-lg px-3 py-1;
+
+    &:hover {
+      /* none */
+    }
+
+    &:not([href]) { /* disabled links */
+      @apply text-gray-300 cursor-default;
+    }
+
+    &.current {
+      @apply text-green-400 border-green-400;
+    }
+  }
+
+  .gap {
+    @apply mt-auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .pagy {
+    @apply space-x-0 font-medium text-sm text-gray-500;
+
+    a:not(.gap) {
+      @apply rounded-none px-5 py-2;
+
+      &.current {
+        @apply border-gray-300 text-blue-600 bg-blue-100;
+      }
+    }
+
+    a[aria-label="Previous"] {
+      @apply rounded-l-lg;
+    }
+
+    a[aria-label="Next"] {
+      @apply rounded-r-lg;
+    }
+
+    .gap {
+      @apply px-2;
+    }
+  }
+}

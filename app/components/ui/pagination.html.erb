@@ -1,0 +1,7 @@
+<% if @view_model.pagy.pages > 1 %>
+  <div class="w-full p-4 bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6">
+    <div class="flex flex-wrap ml-auto items-center mt-3 text-sm text-gray-500 sm:mt-0">
+      <%== pagy_nav(@view_model.pagy) %>
+    </div>
+  </div>
+<% end %>

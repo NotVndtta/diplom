@@ -1,0 +1,37 @@
+.operation {
+  &__status {
+    @apply w-fit whitespace-nowrap px-2 py-0.5 text-sm rounded-md;
+
+    &.open {
+      @apply bg-blue-100 text-blue-800;
+    }
+
+    &.assigned_to_performers {
+      @apply bg-orange-200 text-yellow-800;
+    }
+
+    &.in_work {
+      @apply bg-yellow-100 text-yellow-800;
+    }
+
+    &.confirmation {
+      @apply bg-amber-200 text-yellow-800;
+    }
+
+    &.rejected {
+      @apply bg-red-200 text-orange-900;
+    }
+
+    &.done {
+      @apply bg-green-100 text-green-800;
+    }
+
+    &.canceled {
+      @apply bg-gray-200 text-gray-900;
+    }
+
+    &.undefined {
+      @apply bg-red-200 text-orange-900;
+    }
+  }
+}

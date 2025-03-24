@@ -1,0 +1,54 @@
+/* tank show page */
+.tank-wine-material-info {
+  @apply flex flex-col m-4 sm:m-7 space-y-10;
+
+  h2 {
+    @apply mb-2 sm:mb-5 text-sm font-bold uppercase;
+  }
+
+  .info-card {
+    @apply bg-white rounded-lg shadow h-auto xl:min-h-[485px] px-4 py-5 sm:px-6 sm:py-[30px];
+  }
+
+  .font-semibold-info-card {
+    & div:nth-child(even):not(:has(*)),  
+    & p:nth-child(even):not(:has(*)) {
+      @apply font-semibold !important;
+    }
+  }
+
+  .info-card-content {
+    @apply grid grid-cols-2 gap-x-12 gap-y-1;
+
+    > div:nth-child(odd), p:nth-child(odd) {
+      @apply font-normal text-gray-500;
+    }
+
+    > div:nth-child(even), p:nth-child(even) {
+      @apply font-medium;
+    }
+  }
+}
+
+.table-wrapper {
+  @apply flex flex-col;
+  height: calc(100vh - var(--header-height));
+
+  tr.body-row {
+    @apply bg-white border-b border-gray-200 hover:bg-gray-100 cursor-pointer;
+
+    &:hover {
+      .sticky {
+        @apply bg-gray-100;
+      }
+    }
+
+    td {
+      @apply px-6 py-2 text-ellipsis truncate;
+    }
+
+    td.small {
+      @apply px-3 py-2;
+    }
+  }
+}

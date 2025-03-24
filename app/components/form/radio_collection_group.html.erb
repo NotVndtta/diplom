@@ -1,0 +1,17 @@
+<div class="flex flex-col w-full gap-2 mb-4">
+  <%= render Form::Label.new(@form_object, @object_name, @label, @label_html) if @label %>
+
+  <div class="flex flex-wrap gap-x-6 gap-y-4">
+    <% @options.each do |id, title| %>
+      <span class="flex items-center gap-x-2">
+        <%= @form_object.radio_button(
+          @object_name,
+            id,
+            **@input_html,
+            checked: @checked_option == id
+        ) %>
+        <%= @form_object.label("#{@object_name}_#{id}", title) %>
+      </span>
+    <% end %>
+  </div>
+</div>

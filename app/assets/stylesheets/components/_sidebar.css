@@ -1,0 +1,103 @@
+.toggle-sidebar-btn-icon {
+  @apply space-y-1;
+
+  span {
+    @apply block w-6 h-1 rounded-xl bg-black sm:bg-gray-500 transition-width duration-[--sidebar-transition-duration];
+
+    &.collapsed {
+      @apply w-4;
+    }
+  }
+}
+
+.sidebar {
+  @apply flex flex-col fixed top-[--header-height] bottom-0 w-[--sidebar-width] overflow-x-hidden bg-white border-r border-gray-200 py-4 transition-width duration-[--sidebar-transition-duration] shadow-full sm:shadow-none z-30;
+
+  nav {
+    @apply px-[--sidebar-nav-paddings];
+  }
+
+  a {
+    @apply flex items-center space-x-3 p-2 my-1 truncate;
+
+    svg {
+      @apply shrink-0 text-gray-500;
+    }
+
+    p {
+      @apply opacity-100 transition-opacity duration-[--sidebar-transition-duration] text-nowrap;
+    }
+
+    &:hover, &.active {
+      @apply rounded-lg bg-gray-100;
+
+      svg {
+        @apply text-gray-900;
+      }
+
+      p {
+        @apply font-bold;
+      }
+    }
+  }
+
+  &.collapsed {
+    @apply sm:w-[--collapsed-sidebar-width] w-0 shadow-none;
+
+    nav {
+      @apply px-0;
+    }
+
+    a {
+      @apply relative;
+
+      &::before {
+        @apply absolute left-0 top-1/2 -translate-y-1/2 content-[""] w-[3px] h-8 rounded-r-sm ;
+      }
+
+      svg {
+        @apply sm:ml-[--sidebar-nav-paddings] ;
+      }
+
+      p {
+        @apply opacity-0 text-nowrap;
+      }
+
+      &:hover, &.active {
+        @apply rounded-none;
+
+        &::before {
+          @apply bg-gray-900;
+        }
+      }
+    }
+  }
+}
+
+.main-content {
+  @apply min-h-screen transition-margin-left duration-[--sidebar-transition-duration] pt-[--header-height] ml-0 sm:ml-[--sidebar-width];
+
+  &.collapsed {
+    @apply sm:ml-[--collapsed-sidebar-width] ml-0;
+  }
+}
+
+.operations-sidebar {
+  @apply hidden lg:block absolute z-[1] sm:z-0 sm:fixed top-[--operations-sidebar-position-top-margin]
+    bottom-0 overflow-x-hidden bg-white border-r border-gray-200 px-3 py-6;
+
+  &.collapsed {
+    @apply p-0;
+    width: 0 !important;
+  }
+}
+
+.mobile-operations-sidebar {
+  @apply relative top-0 z-[1] bottom-0 overflow-x-hidden bg-white border-r border-gray-200 px-5;
+}
+
+@media (max-width: 1024px) {
+  .mobile-operations-sidebar {
+    height: calc(100vh - var(--header-height)) !important;
+  }
+}

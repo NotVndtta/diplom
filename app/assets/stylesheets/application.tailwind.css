@@ -1,0 +1,57 @@
+/* tailwindcss */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import "fonts/_inter.css";
+
+/* js libraries */
+@import "@uppy/core/dist/style.min.css";
+@import "@uppy/dashboard/dist/style.min.css";
+@import "select2";
+@import "base/_visx.css";
+@import "base/_tippy_tooltip.css";
+@import "maplibre-gl/dist/maplibre-gl.css";
+@import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
+@import "dw-react-gantt-chart/dist/index.css";
+@import "mapbox-gl-draw-bezier-curve-mode/src/icon/bezier-curve.css";
+
+/* base */
+@import "base/_reset.css";
+@import "base/_variables.css";
+
+/* components */
+@import "components/_sidebar.css";
+@import "components/_pagination.css";
+@import "components/_tabs.css";
+@import "components/_dropdown.css";
+@import "components/_borders.css";
+@import "components/_set-new-password-form.css";
+@import "components/_select2_winery_theme.css";
+@import "components/_gantt_chart.css";
+@import "components/_vineyard_cell.css";
+@import "components/_maplibre.css";
+
+/* pages */
+@import "pages/_tank.css";
+@import "pages/_vineyard.css";
+@import "pages/_show.css";
+@import "pages/_work_order.css";
+
+/* form components */
+@import "../../components/form/_field_with_errors.css";
+@import "../../components/form/_input.css";
+
+/* ui components */
+@import "../../components/ui/add_element_btn/_add_element_btn.css";
+@import "../../components/ui/analysis_result_card/_analysis_result_card.css";
+@import "../../components/ui/btn_component/_btn_component.css";
+@import "../../components/ui/datetime_input_component/_datetime_input_component.css";
+@import "../../components/ui/number_input_component/_number_input_component.css";
+@import "../../components/ui/select_component/_select_component.css";
+@import "../../components/ui/card_component/_card_component.css";
+@import "../../components/ui/label_component/_label_component.css";
+@import "../../components/ui/operation_status_component/_operation_status_component.css";
+
+/* pages components */
+@import "../../components/pages/operations/_losses_component.css";

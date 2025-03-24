@@ -1,0 +1,20 @@
+<div class="max-w-full w-fit flex flex-nowrap items-center gap-1">
+  <div data-action="mouseenter->tippy-tooltip#titleIfTruncated" class="<%= @classes %>">
+    <%= @first_item.html_safe.presence || "-" %>
+  </div>
+  <% if @items_in_tooltip.any? %>
+    <span data-tippy-tooltip-target="tooltip">
+      <span class="label green interactive">+<%= @items_in_tooltip.size %></span>
+      <template>
+        <% @items_in_tooltip.map.with_index do |item, index| %>
+          <div class="flex">
+            <% if @list_icon %>
+              <div class="self-center shrink-0 w-2 h-2 bg-green-500 rounded-full"></div>
+            <% end %>
+            <div class="self-center"><%= item %></div>
+          </div>
+        <% end %>
+      </template>
+    </span>
+  <% end %>
+</div>
