@@ -1,0 +1,24 @@
+ru:
+  profile:
+    title: "Профиль пользователя"
+    about: "О себе"
+    phone: "Телефон"
+    birth_year: "Год рождения"
+    city: "Город"
+    account_created: "Дата создания аккаунта"
+    last_updated: "Дата последнего обновления"
+    add_experience: "Добавить новый опыт"
+    experience_start_date: "Дата начала"
+    experience_end_date: "Дата окончания"
+    experience_description: "Описание"
+    experience_company: "Компания"
+    create_experience: "Создать опыт"
+    no_experiences: "Опыт не найден."
+    edit_profile: "Редактировать профиль"
+    agro_operation: "К агрооперация"
+    errors:
+      experience:
+        start_date_at: "Дата начала не может быть пустой"
+        end_date_at: "Дата окончания не может быть пустой"
+        description: "Описание обязательно"
+        company: "Компания обязательна"

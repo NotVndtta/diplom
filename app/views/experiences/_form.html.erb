@@ -1,4 +1,4 @@
-<%= form_with(model: [@profile, @experience], local: true, class: "contents") do |form| %>
+<%= form_with(url: edit_profile_experience_path(profile, experience), model: experience, method: :patch, class: "contents") do |form| %>
 
   <% if experience.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">

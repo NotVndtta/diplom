@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   resources :job_cards
+
   resources :profiles do
-    resources :experiences
+    resources :experiences, only: %i[create new show update destroy edit]
   end
 
   devise_for :users, controllers: { registrations: "users/registrations" }

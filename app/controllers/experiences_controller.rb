@@ -1,38 +1,31 @@
 class ExperiencesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_experience, only: %i[ show edit update destroy ]
-
-  def index
-    @profile = User.find(params[:profile_id])
-    @experiences = @profile.experiences
-
-  end
+  before_action :set_experience, only: %i[new edit update destroy]
 
   def new
-    @profile = User.find(params[:profile_id])
     @experience = Experience.new
   end
 
   def edit
-    
   end
 
   def create
-      @profile = User.find(params[:profile_id])
-      @experience = @profile.experiences.build(experience_params)
-      if @experience.save
-        redirect_to profile_path(@profile), notice: "Experience created successfully."
-      else
-        @user = @profile
-        @experiences = @profile.experiences
-        render "profiles/show", status: :unprocessable_entity
-      end
+    @experience = Experience.new(experience_params)
+    @experience.user = @profile
+
+    if @experience.save
+      redirect_to profile_path(@profile), notice: "Experience created successfully."
+    else
+      @user = @profile
+      @experiences = @profile.experiences
+      render "profiles/show", status: :unprocessable_entity
+    end
   end
 
   def update
     respond_to do |format|
       if @experience.update(experience_params)
-        format.html { redirect_to @experience, notice: "Experience was successfully updated." }
+        format.html { redirect_to @profile, notice: "Experience was successfully updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -40,16 +33,20 @@ class ExperiencesController < ApplicationController
   end
 
   def destroy
+    binding.irb
     @experience.destroy!
 
     respond_to do |format|
-      format.html { redirect_to profile_experience_path(@profile, @experience), status: :see_other, notice: "Experience was successfully destroyed." }
+      format.html {
+        redirect_to profile_path(@profile), notice: "Experience was successfully destroyed."
+      }
     end
   end
 
   private
     def set_experience
-      @experience = Experience.find(params[:id])
+      @profile = User.find(params[:profile_id])
+      @experience = @profile.experiences.find(params[:id])
     end
 
     def experience_params
