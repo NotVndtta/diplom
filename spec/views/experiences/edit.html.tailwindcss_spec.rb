@@ -16,7 +16,7 @@ RSpec.describe "experiences/edit", type: :view do
   it "renders the edit experience form" do
     render
 
-    assert_select "form[action=?][method=?]", experience_path(experience), "post" do
+    assert_select "form[action=?][method=?]", profile_experience_path(@profile, experience), "post" do
 
       assert_select "textarea[name=?]", "experience[description]"
 

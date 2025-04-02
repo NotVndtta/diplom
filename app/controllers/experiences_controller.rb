@@ -3,19 +3,22 @@ class ExperiencesController < ApplicationController
   before_action :set_experience, only: %i[ show edit update destroy ]
 
   def index
-    @experiences = Experience.all
+    @profile = User.find(params[:profile_id])
+    @experiences = @profile.experiences
+
   end
 
   def new
+    @profile = User.find(params[:profile_id])
     @experience = Experience.new
   end
 
   def edit
+    
   end
 
   def create
-    def create
-      @profile = User.find(params[:profile_id]) # Adjust if it's User
+      @profile = User.find(params[:profile_id])
       @experience = @profile.experiences.build(experience_params)
       if @experience.save
         redirect_to profile_path(@profile), notice: "Experience created successfully."
@@ -24,7 +27,6 @@ class ExperiencesController < ApplicationController
         @experiences = @profile.experiences
         render "profiles/show", status: :unprocessable_entity
       end
-    end
   end
 
   def update
@@ -41,13 +43,13 @@ class ExperiencesController < ApplicationController
     @experience.destroy!
 
     respond_to do |format|
-      format.html { redirect_to experiences_path, status: :see_other, notice: "Experience was successfully destroyed." }
+      format.html { redirect_to profile_experience_path(@profile, @experience), status: :see_other, notice: "Experience was successfully destroyed." }
     end
   end
 
   private
     def set_experience
-      @experience = Experience.find(params.expect(:id))
+      @experience = Experience.find(params[:id])
     end
 
     def experience_params

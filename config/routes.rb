@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: "users/registrations" }
 
-  root to: "experiences#index"
+  root to: "job_cards#index"
 
   devise_scope :user do
   end

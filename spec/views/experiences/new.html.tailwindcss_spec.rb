@@ -12,7 +12,7 @@ RSpec.describe "experiences/new", type: :view do
   it "renders new experience form" do
     render
 
-    assert_select "form[action=?][method=?]", experiences_path, "post" do
+    assert_select "form[action=?][method=?]", profile_experience_path, "post" do
 
       assert_select "textarea[name=?]", "experience[description]"
 
