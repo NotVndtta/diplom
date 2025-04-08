@@ -12,8 +12,8 @@
     <div class="mb-4">
       <div class="text-sm font-medium text-gray-500">Период</div>
       <div class="text-sm text-gray-500">
-        <%= experience.start_date_at.strftime("%b %Y") %> - 
-        <%= experience.end_date_at.strftime("%b %Y") %>
+        <%= experience.start_date_at&.strftime("%b %Y") %> - 
+        <%= experience.end_date_at&.strftime("%b %Y") %>
       </div>
     </div>
     </div>
