@@ -170,6 +170,8 @@ GEM
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     json (2.10.2)
+    jwt (2.10.1)
+      base64
     kamal (2.5.3)
       activesupport (>= 7.0)
       base64 (~> 0.2)
@@ -233,6 +235,10 @@ GEM
       racc (~> 1.4)
     orm_adapter (0.5.0)
     ostruct (0.6.1)
+    otp-jwt (0.3.1)
+      activesupport
+      jwt (~> 2)
+      rotp (~> 6)
     parallel (1.26.3)
     parser (3.3.7.1)
       ast (~> 2.4.1)
@@ -314,6 +320,7 @@ GEM
       actionpack (>= 5.2)
       railties (>= 5.2)
     rexml (3.4.1)
+    rotp (6.3.0)
     rspec-core (3.13.3)
       rspec-support (~> 3.13.0)
     rspec-expectations (3.13.3)
@@ -512,6 +519,7 @@ DEPENDENCIES
   jbuilder
   kamal
   lefthook
+  otp-jwt
   pg (~> 1.1)
   propshaft
   puma (>= 5.0)

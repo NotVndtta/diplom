@@ -15,6 +15,8 @@ gem "jbuilder"
 
 gem "devise-i18n"
 gem "devise"
+gem 'otp-jwt'
+
 
 gem "discard"
 gem "rails-i18n"

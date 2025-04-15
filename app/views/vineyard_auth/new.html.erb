@@ -1,0 +1,17 @@
+<h2 class="text-2xl font-bold text-center mb-4">Sign up via Vineyard</h2>
+
+<%= form_tag vineyard_auth_path, method: :post, class: "space-y-4" do %>
+  <div>
+    <%= label_tag :email, "Email", class: "block text-sm font-medium text-gray-700" %>
+    <%= email_field_tag :email, nil, class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm sm:text-sm" %>
+  </div>
+
+  <div>
+    <%= label_tag :password, "Password", class: "block text-sm font-medium text-gray-700" %>
+    <%= password_field_tag :password, nil, class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm sm:text-sm" %>
+  </div>
+
+  <div>
+    <%= submit_tag "Sign in via Vineyard", class: "w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700" %>
+  </div>
+<% end %>
