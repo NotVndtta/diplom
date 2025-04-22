@@ -28,4 +28,8 @@ class User < ApplicationRecord
   validates :city, presence: true, length: { maximum: 100 }
   validates :role, presence: true, inclusion: { in: ROLES }
 
+  def name
+    "#{first_name} #{last_name}"
+  end
+
 end
