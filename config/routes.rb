@@ -1,13 +1,20 @@
 Rails.application.routes.draw do
-  resources :job_cards
+  root to: "job_cards#index"
+
+  resources :job_cards do
+  
+    resources :job_applications, only: [:create, :index, :update]
+  end
+
 
   resources :profiles do
+    member do
+      get :job_cards
+    end
     resources :experiences, only: %i[create new show update destroy edit]
   end
 
   devise_for :users, controllers: { registrations: "users/registrations" }
-
-  root to: "job_cards#index"
 
   devise_scope :user do
   end

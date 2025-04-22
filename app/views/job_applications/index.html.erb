@@ -1,0 +1,54 @@
+
+  <div class="container mx-auto p-6">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Отклики на вакансию</h1>
+
+    <% if @job_applications.present? %>
+      <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-lime-600 text-white">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Имя</th>
+              <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Город</th>
+              <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Последний опыт</th>
+              <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Дата отклика</th>
+              <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Действия</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <% @job_applications.each do |application| %>
+              <tr class="hover:bg-gray-50">
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <%= link_to "#{application.user.first_name} #{application.user.last_name}", profile_path(application.user), class: "text-blue-600 hover:underline" %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <%= application.user.city %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= application.user.experiences.last&.description || "Нет опыта" %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <%= application.created_at.strftime("%d.%m.%Y %H:%M") %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <% if application.pending? %>
+                    <%= button_to "Подтвердить", job_card_job_application_path(@job_card, application, job_application: { status: "accepted" }), method: :patch, class: "bg-green-500 text-white px-3 py-1 rounded-md hover:bg-green-600 mr-2" %>
+                    <%= button_to "Отклонить", job_card_job_application_path(@job_card, application, job_application: { status: "rejected" }), method: :patch, class: "bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600" %>
+                  <% elsif application.accepted? %>
+                    <%= button_to "Отклонить", job_card_job_application_path(@job_card, application, job_application: { status: "rejected" }), method: :patch, class: "bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600" %>
+                  
+                  <% else %>
+                    <%= button_to "Подтвердить", job_card_job_application_path(@job_card, application, job_application: { status: "accepted" }), method: :patch, class: "bg-green-500 text-white px-3 py-1 rounded-md hover:bg-green-600 mr-2" %>
+                  <% end %>
+                    <span class="text-gray-500"><%= application.status %></span>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <p class="mt-4 text-gray-600">Нет откликов на эту вакансию.</p>
+    <% end %>
+
+    <%= link_to "Назад к вакансии", job_card_path(@job_card), class: "mt-6 inline-block bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600" %>
+  </div>

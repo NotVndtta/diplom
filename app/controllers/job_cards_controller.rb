@@ -46,11 +46,12 @@ class JobCardsController < ApplicationController
   end
 
   private
-    def set_job_card
-      @job_card = JobCard.find(params.expect(:id))
-    end
 
-    def job_card_params
-      params.expect(job_card: [ :farm_name, :remuneration, :work_amount, :description, :date_at, :location, :status, :count_users, :user_id ])
-    end
+  def set_job_card
+    @job_card = JobCard.find(params.expect(:id))
+  end
+
+  def job_card_params
+    params.expect(job_card: [ :farm_name, :remuneration, :work_amount, :description, :date_at, :location, :status, :count_users, :user_id ])
+  end
 end

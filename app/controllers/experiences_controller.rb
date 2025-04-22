@@ -10,6 +10,7 @@ class ExperiencesController < ApplicationController
   end
 
   def create
+    @profile = User.find(params[:profile_id])
     @experience = Experience.new(experience_params)
     @experience.user = @profile
 

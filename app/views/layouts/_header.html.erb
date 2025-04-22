@@ -1,31 +1,84 @@
-<header class="bg-white">
-  <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+<header class=" bg-lime-600 shadow-xl relative overflow-hidden">
+  <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/green-dust.png')] opacity-20 animate-subtle-move"></div>
+
+  <nav class="mx-auto flex max-w-7xl items-center justify-between p-3 lg:px-8 relative z-10" aria-label="Global">
     <div class="flex lg:flex-1">
-      <a href="#" class="-m-1.5 p-1.5">
-        <img class="h-8 w-auto" src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600" alt="">
+      <a href="#" class="-m-1.5 p-1.5 flex items-center space-x-3 group">
+        <img class="h-12 w-auto transform group-hover:scale-110 transition-transform duration-300" src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=green&shade=900" alt="AgroJobs Logo">
+        <span class="text-2xl font-extrabold text-white tracking-tight animate-pulse-slow">AgroJobs</span>
       </a>
     </div>
+
     <div class="flex lg:hidden">
-      <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+      <button type="button" aria-controls="mobile-menu" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-white hover:bg-lime-800 hover:scale-105 transition-all duration-200">
         <span class="sr-only">Open main menu</span>
-        <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+        <svg class="size-7" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
         </svg>
       </button>
     </div>
+
     <div class="hidden lg:flex lg:gap-x-12">
-      <%= link_to "Агрооперации", job_cards_path, class:"text-sm/6 font-semibold pr-6" %>
-      <%if current_user.present? %>
-        <%= link_to "Профиль", profile_path(current_user), class:"text-sm/6 font-semibold pr-6" %>
+      <%= link_to "Агрооперации", job_cards_path, class:"text-base font-semibold text-white hover:bg-lime-700 hover:scale-105 px-5 py-2 rounded-lg transition-all duration-300 animate-slide-in" %>
+      <% if current_user.present? %>
+        <%= link_to "Профиль", profile_path(current_user), class:"text-base font-semibold text-white hover:bg-lime-700 hover:scale-105 px-5 py-2 rounded-lg transition-all duration-300 animate-slide-in delay-100" %>
+        <%= link_to "Мои агрооперации", job_cards_profile_path(current_user), class:"text-base font-semibold text-white hover:bg-lime-700 hover:scale-105 px-5 py-2 rounded-lg transition-all duration-300 animate-slide-in" %>
       <% end %>
     </div>
 
     <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-      <%if current_user.present? %>
-        <%= link_to 'Выход <span aria-hidden="true">→</span>'.html_safe, destroy_user_session_path, data: { turbo_method: :delete }, class: 'text-sm/6 font-semibold' %>
+      <% if current_user.present? %>
+        <%= link_to 'Выход <span aria-hidden="true">→</span>'.html_safe, destroy_user_session_path, data: { turbo_method: :delete }, class: 'text-base font-semibold text-white hover:bg-lime-700 hover:scale-105 px-5 py-2 rounded-lg transition-all duration-300 animate-slide-in delay-200' %>
       <% else %>
-        <%= link_to 'Вход <span aria-hidden="true">→</span>'.html_safe, user_session_path, class: 'text-sm/6 font-semibold' %>
+        <%= link_to 'Вход <span aria-hidden="true">→</span>'.html_safe, user_session_path, class: 'text-base font-semibold text-white hover:bg-lime-700 hover:scale-105 px-5 py-2 rounded-lg transition-all duration-300 animate-slide-in delay-200' %>
       <% end %>
     </div>
   </nav>
+
+  <div class="lg:hidden hidden transform translate-y-full" id="mobile-menu">
+    <div class="bg-lime-700 px-6 py-6 space-y-4 shadow-lg">
+      <%= link_to "Агрооперации", job_cards_path, class:"block text-base font-semibold text-white hover:bg-lime-800 px-5 py-3 rounded-lg transition-all duration-300 animate-slide-in" %>
+      <% if current_user.present? %>
+        <%= link_to "Профиль", profile_path(current_user), class:"block text-base font-semibold text-white hover:bg-lime-800 px-5 py-3 rounded-lg transition-all duration-300 animate-slide-in delay-100" %>
+        <%= link_to 'Выход <span aria-hidden="true">→</span>'.html_safe, destroy_user_session_path, data: { turbo_method: :delete }, class: 'block text-base font-semibold text-white hover:bg-lime-800 px-5 py-3 rounded-lg transition-all duration-300 animate-slide-in delay-200' %>
+      <% else %>
+        <%= link_to 'Вход <span aria-hidden="true">→</span>'.html_safe, user_session_path, class: 'block text-base font-semibold text-white hover:bg-lime-800 px-5 py-3 rounded-lg transition-all duration-300 animate-slide-in delay-200' %>
+      <% end %>
+    </div>
+  </div>
 </header>
+
+<style>
+  @keyframes subtle-move {
+    0% { background-position: 0 0; }
+    50% { background-position: 100px 100px; }
+    100% { background-position: 0 0; }
+  }
+
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.85; }
+  }
+  .animate-pulse-slow {
+    animation: pulse-slow 4s ease-in-out infinite;
+  }
+
+  .animate-slide-in {
+    animation: slide-in 0.5s ease-out forwards;
+  }
+  .delay-100 { animation-delay: 0.1s; }
+  .delay-200 { animation-delay: 0.2s; }
+</style>
+
+<script>
+  document.querySelector('button[aria-controls="mobile-menu"]')?.addEventListener('click', () => {
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileMenu.classList.contains('hidden')) {
+      mobileMenu.classList.remove('hidden', 'translate-y-full');
+      mobileMenu.classList.add('translate-y-0');
+    } else {
+      mobileMenu.classList.add('translate-y-full');
+      setTimeout(() => mobileMenu.classList.add('hidden'), 300);
+    }
+  });
+</script>

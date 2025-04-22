@@ -8,7 +8,13 @@
   <h1 class="font-bold text-4xl">Showing job card</h1>
 
   <%= render @job_card %>
+<% if user_signed_in? && @job_card.user != current_user %>
+  <%= link_to "Apply for this job", job_card_job_applications_path(@job_card), method: :post, class: "btn btn-primary" %>
+<% end %>
 
+<% if user_signed_in? && @job_card.user == current_user %>
+  <%= link_to "View Applicants", job_card_job_applications_path(@job_card), class: "btn btn-secondary" %>
+<% end %>
   <%= link_to "Edit this job card", edit_job_card_path(@job_card), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
   <%= link_to "Back to job cards", job_cards_path, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
   <div class="sm:inline-block mt-2 sm:mt-0 sm:ml-2">

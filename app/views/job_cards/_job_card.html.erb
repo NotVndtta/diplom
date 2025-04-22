@@ -1,4 +1,5 @@
 <div id="<%= dom_id job_card %>" class="w-full sm:w-auto my-5 space-y-5">
+  
   <div>
     <strong class="block font-medium mb-1">Farm name:</strong>
     <%= job_card.farm_name %>
@@ -36,3 +37,12 @@
     <%= job_card.user_id %>
   </div>
 </div>
+<% if user_signed_in? && current_user.freelancer? && !job_card.job_applications.exists?(user: current_user) %>
+  <%= button_to "Откликнуться", job_card_job_applications_path(job_card), method: :post, class: "btn btn-primary" %>
+<% end %>
+<% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p class="alert alert-danger"><%= alert %></p>
+<% end %>

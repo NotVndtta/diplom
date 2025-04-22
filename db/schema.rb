@@ -25,6 +25,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_15_213116) do
     t.index ["user_id"], name: "index_experiences_on_user_id"
   end
 
+  create_table "job_applications", force: :cascade do |t|
+    t.bigint "job_card_id", null: false
+    t.bigint "user_id", null: false
+    t.string "status", default: "pending", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_card_id", "user_id"], name: "index_job_applications_on_job_card_id_and_user_id", unique: true
+    t.index ["job_card_id"], name: "index_job_applications_on_job_card_id"
+    t.index ["user_id"], name: "index_job_applications_on_user_id"
+  end
+
   create_table "job_cards", force: :cascade do |t|
     t.string "farm_name"
     t.integer "remuneration"
@@ -72,5 +83,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_15_213116) do
   end
 
   add_foreign_key "experiences", "users"
+  add_foreign_key "job_applications", "job_cards"
+  add_foreign_key "job_applications", "users"
   add_foreign_key "job_cards", "users"
 end
