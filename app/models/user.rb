@@ -14,6 +14,7 @@ class User < ApplicationRecord
 
   scope :with_jobs, -> { joins(:job_cards).distinct }
 
+  has_one :foreman_description, dependent: :destroy
   has_many :ratings, as: :rateable, dependent: :destroy
   has_many :job_cards, dependent: :destroy
   has_many :job_applications, dependent: :destroy
@@ -31,5 +32,4 @@ class User < ApplicationRecord
   def name
     "#{first_name} #{last_name}"
   end
-
 end

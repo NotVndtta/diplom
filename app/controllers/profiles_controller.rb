@@ -1,10 +1,12 @@
 class ProfilesController < ApplicationController
-  before_action :set_user, only: %i[show edit update job_cards]
-  before_action :authenticate_user!, only: %i[edit update]
-  before_action :authorize_user, only: %i[edit update]
+  before_action :set_user, only: %i[show edit update job_cards foreman_description]
+  before_action :authenticate_user!, only: %i[edit update foreman_description]
+  before_action :authorize_user, only: %i[edit update foreman_description]
 
   def show
     @experiences = @user.experiences.order(start_date_at: :desc)
+    @foreman_description = @user.foreman_description || @user.build_foreman_description
+    @editing = params[:edit] == 'true' && current_user == @user # Enable edit mode if ?edit=true and user is authorized
   end
 
   def edit
@@ -14,7 +16,7 @@ class ProfilesController < ApplicationController
     if user_params[:password].present? || user_params[:password_confirmation].present?
       if @user.update(user_params)
         bypass_sign_in(@user)
-        redirect_to profile_path(@user), notice: t('profile.update_success')
+        redirect_to profile_path(@user), notice: "Профиль был обновлен"
       else
         render :edit, status: :unprocessable_entity
       end
@@ -44,6 +46,20 @@ class ProfilesController < ApplicationController
     @job_cards = @user.job_cards.order(created_at: :desc)
   end
 
+  def foreman_description
+    @foreman_description = @user.foreman_description || @user.build_foreman_description
+    if request.post?
+      if @foreman_description.update(foreman_description_params)
+        redirect_to profile_path(@user), notice: t('foreman_description.update_success')
+      else
+        # If update fails, render the show page with errors and keep edit mode
+        @experiences = @user.experiences.order(start_date_at: :desc)
+        @editing = true
+        render 'show', status: :unprocessable_entity
+      end
+    end
+  end
+
   private
 
   def set_user
@@ -65,7 +81,11 @@ class ProfilesController < ApplicationController
     )
   end
 
+  def foreman_description_params
+    params.require(:foreman_description).permit(:farm_name, :description)
+  end
+
   def authorize_user
-    redirect_to root_path, alert: t('profile.unauthorized') unless current_user == @user
+    redirect_to root_path, alert: "Вы не авторизированы" unless current_user == @user
   end
 end

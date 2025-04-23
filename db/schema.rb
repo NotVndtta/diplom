@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_15_213116) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_23_202855) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -23,6 +23,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_15_213116) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_experiences_on_user_id"
+  end
+
+  create_table "foreman_descriptions", force: :cascade do |t|
+    t.string "farm_name"
+    t.text "description"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_foreman_descriptions_on_user_id"
   end
 
   create_table "job_applications", force: :cascade do |t|
@@ -83,6 +92,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_15_213116) do
   end
 
   add_foreign_key "experiences", "users"
+  add_foreign_key "foreman_descriptions", "users"
   add_foreign_key "job_applications", "job_cards"
   add_foreign_key "job_applications", "users"
   add_foreign_key "job_cards", "users"

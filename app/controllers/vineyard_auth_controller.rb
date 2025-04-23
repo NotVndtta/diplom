@@ -1,6 +1,6 @@
-require 'net/http'
-require 'uri'
-require 'json'
+require "net/http"
+require "uri"
+require "json"
 
 class VineyardAuthController < ApplicationController
   def new
@@ -9,7 +9,7 @@ class VineyardAuthController < ApplicationController
   def create
     uri = URI("http://localhost:3001/auth/api/sign_in")
 
-    request = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
+    request = Net::HTTP::Post.new(uri, "Content-Type" => "application/json")
     request.body = {
       email: params[:email],
       password: params[:password]

@@ -34,7 +34,6 @@ class ExperiencesController < ApplicationController
   end
 
   def destroy
-    binding.irb
     @experience.destroy!
 
     respond_to do |format|
@@ -45,12 +44,15 @@ class ExperiencesController < ApplicationController
   end
 
   private
-    def set_experience
-      @profile = User.find(params[:profile_id])
-      @experience = @profile.experiences.find(params[:id])
-    end
 
-    def experience_params
-      params.require(:experience).permit(:start_date_at, :end_date_at, :description, :company)
-    end
+  def set_experience
+    binding.irb
+
+    @profile = User.find(params[:profile_id])
+    @experience = @profile.experiences.find(params[:id])
+  end
+
+  def experience_params
+    params.require(:experience).permit(:start_date_at, :end_date_at, :description, :company)
+  end
 end
