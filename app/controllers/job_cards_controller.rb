@@ -17,6 +17,7 @@ class JobCardsController < ApplicationController
 
   def create
     @job_card = JobCard.new(job_card_params)
+    @job_card.user = current_user
 
     respond_to do |format|
       if @job_card.save
