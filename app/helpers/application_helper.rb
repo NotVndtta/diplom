@@ -7,5 +7,14 @@ module ApplicationHelper
         when 'cancelled' then 'bg-red-100 text-red-800'
         else 'bg-gray-100 text-gray-800'
         end
+    end
+
+    def base_input_class(object, field)
+      base = "block w-full rounded-md shadow-sm px-3 py-2 border focus:outline-none transition"
+      if object.errors[field].any?
+        "#{base} border-red-400 focus:ring-red-500 focus:border-red-500"
+      else
+        "#{base} border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
       end
+    end
 end

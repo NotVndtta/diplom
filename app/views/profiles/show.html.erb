@@ -22,7 +22,6 @@
           <p class="text-base text-lime-600 font-semibold mt-1 capitalize"><%= @user.role %></p>
         </div>
 
-        <!-- Bottom Block: Profile Details -->
         <div class="bg-gray-50 p-6 rounded-xl shadow-sm">
           <h2 class="text-2xl font-semibold text-gray-900 mb-6"><%= t('profile.title') %></h2>
           <dl class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2">
@@ -63,7 +62,6 @@
       </div>
     </div>
 
-    <!-- Account Details -->
     <div class="border-t border-lime-200 pt-8 mt-8">
       <h2 class="text-2xl font-semibold text-gray-900 mb-6"><%= t('profile.account_details') %></h2>
       <div class="space-y-4">
@@ -82,7 +80,6 @@
       </div>
     </div>
 
-    <!-- Action Buttons -->
     <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-8">
       <%= link_to t('profile.agro_operation'), job_cards_path, 
           class: "flex-1 text-center px-6 py-3 border border-lime-300 text-sm font-medium rounded-lg text-lime-700 bg-lime-50 hover:bg-lime-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500 transition-all duration-300 transform hover:scale-105 animate-slide-in" %>
@@ -91,7 +88,6 @@
     </div>
   </div>
 
-  <!-- Experience Section -->
   <div class="w-full max-w-4xl mx-auto py-12">
     <% if notice.present? %>
       <p class="py-3 px-4 bg-lime-100 mb-6 text-lime-700 font-medium rounded-lg inline-block animate-slide-in" id="notice"><%= notice %></p>
@@ -146,7 +142,6 @@
       <% end %>
     </div>
 
-    <!-- Experience List -->
     <div id="experiences" class="mt-8 space-y-6">
       <% if @experiences.any? %>
         <% @experiences.each_with_index do |experience, index| %>

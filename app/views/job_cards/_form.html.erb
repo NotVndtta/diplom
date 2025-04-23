@@ -1,9 +1,8 @@
-<%= form_with(model: job_card, class: "contents") do |form| %>
+<%= form_with(model: job_card, class: "max-w-xl mx-auto space-y-5") do |form| %>
   <% if job_card.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
-      <h2><%= pluralize(job_card.errors.count, "error") %> prohibited this job_card from being saved:</h2>
-
-      <ul class="list-disc ml-6">
+    <div class="bg-red-100 text-red-600 px-4 py-3 rounded-md">
+      <h2 class="font-semibold mb-1"><%= pluralize(job_card.errors.count, "ошибка") %> не позволили сохранить форму:</h2>
+      <ul class="list-disc list-inside text-sm">
         <% job_card.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -11,52 +10,35 @@
     </div>
   <% end %>
 
-  <div class="my-5">
-    <%= form.label :farm_name %>
-    <%= form.text_field :farm_name, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": job_card.errors[:farm_name].none?, "border-red-400 focus:outline-red-600": job_card.errors[:farm_name].any?}] %>
-  </div>
+  <% fields = {
+    farm_name: "Название фермы",
+    remuneration: "Оплата",
+    work_amount: "Объем работы",
+    description: "Описание",
+    date_at: "Дата",
+    location: "Локация",
+    status: "Статус",
+    count_users: "Требуемое количество работников",
+    user_id: "ID пользователя"
+  } %>
 
-  <div class="my-5">
-    <%= form.label :remuneration %>
-    <%= form.number_field :remuneration, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": job_card.errors[:remuneration].none?, "border-red-400 focus:outline-red-600": job_card.errors[:remuneration].any?}] %>
-  </div>
+  <% fields.each do |field, label| %>
+    <div>
+      <%= form.label field, label, class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= case field
+        when :description
+          form.text_area field, rows: 3, class: base_input_class(job_card, field)
+        when :remuneration, :work_amount, :count_users
+          form.number_field field, class: base_input_class(job_card, field)
+        when :date_at
+          form.date_field field, class: base_input_class(job_card, field)
+        else
+          form.text_field field, class: base_input_class(job_card, field)
+      end %>
+    </div>
+  <% end %>
 
-  <div class="my-5">
-    <%= form.label :work_amount %>
-    <%= form.number_field :work_amount, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": job_card.errors[:work_amount].none?, "border-red-400 focus:outline-red-600": job_card.errors[:work_amount].any?}] %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :description %>
-    <%= form.textarea :description, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": job_card.errors[:description].none?, "border-red-400 focus:outline-red-600": job_card.errors[:description].any?}] %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :date_at %>
-    <%= form.date_field :date_at, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": job_card.errors[:date_at].none?, "border-red-400 focus:outline-red-600": job_card.errors[:date_at].any?}] %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :location %>
-    <%= form.text_field :location, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": job_card.errors[:location].none?, "border-red-400 focus:outline-red-600": job_card.errors[:location].any?}] %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :status %>
-    <%= form.text_field :status, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": job_card.errors[:status].none?, "border-red-400 focus:outline-red-600": job_card.errors[:status].any?}] %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :count_users %>
-    <%= form.number_field :count_users, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": job_card.errors[:count_users].none?, "border-red-400 focus:outline-red-600": job_card.errors[:count_users].any?}] %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": job_card.errors[:user_id].none?, "border-red-400 focus:outline-red-600": job_card.errors[:user_id].any?}] %>
-  </div>
-
-  <div class="inline">
-    <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+  <div>
+    <%= form.submit "Сохранить", class: "w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white font-semibold px-4 py-2 rounded-md transition" %>
   </div>
 <% end %>
