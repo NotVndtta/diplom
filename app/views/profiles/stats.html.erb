@@ -1,0 +1,103 @@
+<%= content_for :title, "Статистика задач" %>
+
+<h1 class="text-3xl font-bold mb-8 text-center w-full">Статистика задач</h1>
+<div class="max-w-7xl mx-auto py-12 flex flex-col md:flex-row justify-center items-center gap-8">
+
+  <div class="w-[600px] h-[600px] rounded-lg shadow-md p-6">
+    <canvas id="taskChart" class="w-full h-full"></canvas>
+  </div>
+
+  <div class="w-[600px] h-[600px] rounded-lg shadow-md p-6">
+    <canvas id="ratingChart" class="w-full h-full"></canvas>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+
+<script>
+  document.addEventListener('turbo:load', function () {
+    setTimeout(() => {
+      if (typeof Chart !== 'undefined') {
+
+        const taskCtx = document.getElementById('taskChart');
+        if (taskCtx) {
+          const existingTaskChart = Chart.getChart('taskChart');
+          if (existingTaskChart) {
+            existingTaskChart.destroy();
+          }
+
+          const taskData = {
+            labels: ['Завершены', 'В процессе', 'Ожидают'],
+            datasets: [{
+              data: [3, 5, 7],
+              backgroundColor: ['#84cc16', '#facc15', '#e11d48'],
+              hoverOffset: 4
+            }]
+          };
+
+          const taskOptions = {
+            responsive: true,
+            plugins: {
+              legend: {
+                position: 'bottom',
+                labels: {
+                  font: {
+                    size: 18 // Увеличение размера шрифта легенды
+                  }
+                }
+              }
+            }
+          };
+
+          const taskConfig = {
+            type: 'doughnut',
+            data: taskData,
+            options: taskOptions,
+          };
+
+          new Chart(taskCtx, taskConfig);
+        }
+
+        const ratingCtx = document.getElementById('ratingChart');
+        if (ratingCtx) {
+          const existingRatingChart = Chart.getChart('ratingChart');
+          if (existingRatingChart) {
+            existingRatingChart.destroy();
+          }
+
+          const ratingData = {
+            labels: ['1', '2', '3', '4', '5'],
+            datasets: [{
+              label: 'Оценка за работу',
+              data: [3, 7, 4, 12, 15],
+              backgroundColor: ['#e11d48', '#facc15', '#84cc16', '#3b82f6', '#9333ea'],
+              hoverOffset: 4
+            }]
+          };
+
+          const ratingOptions = {
+            responsive: true,
+            plugins: {
+              legend: {
+                position: 'bottom',
+                labels: {
+                  font: {
+                    size: 18 // Увеличение размера шрифта легенды
+                  }
+                }
+              }
+            }
+          };
+
+          const ratingConfig = {
+            type: 'doughnut',
+            data: ratingData,
+            options: ratingOptions,
+          };
+
+          new Chart(ratingCtx, ratingConfig);
+        }
+      }
+    }, 50);
+  });
+</script>

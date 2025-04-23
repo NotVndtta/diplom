@@ -27,6 +27,19 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def stats
+    @user = User.find(params[:id])
+    
+    @tasks_data = {
+      completed: @user.job_cards.where(status: "completed").count,
+      in_progress: @user.job_cards.where(status: "in_progress").count,
+      pending: @user.job_cards.where(status: "pending").count
+    }
+  
+    render :stats
+  end
+  
+
   def job_cards
     @job_cards = @user.job_cards.order(created_at: :desc)
   end

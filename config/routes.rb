@@ -10,9 +10,11 @@ Rails.application.routes.draw do
   resources :profiles do
     member do
       get :job_cards
+      get :stats
     end
     resources :experiences, only: %i[create new show update destroy edit]
   end
+  
 
   devise_for :users, controllers: { registrations: "users/registrations" }
 

@@ -1,4 +1,6 @@
 <% content_for :title, "Профиль" %>
+<%= link_to "Статистика задач", stats_profile_path(@user),
+      class: "flex-1 text-center px-6 py-3 border border-lime-300 text-sm font-medium rounded-lg text-lime-700 bg-lime-50 hover:bg-lime-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500 transition-all duration-300 transform hover:scale-105 animate-slide-in delay-200" %>
 
 <div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
   <div class="max-w-4xl mx-auto bg-white shadow-2xl rounded-2xl p-8 transform transition-all hover:shadow-3xl animate-slide-in">
