@@ -15,7 +15,7 @@ ru:
     create_experience: "Создать опыт"
     no_experiences: "Опыт не найден."
     edit_profile: "Редактировать профиль"
-    agro_operation: "К агрооперация"
+    agro_operation: "К агрооперациям"
     errors:
       experience:
         start_date_at: "Дата начала не может быть пустой"
