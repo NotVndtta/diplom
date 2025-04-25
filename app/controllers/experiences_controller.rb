@@ -46,7 +46,6 @@ class ExperiencesController < ApplicationController
   private
 
   def set_experience
-    binding.irb
 
     @profile = User.find(params[:profile_id])
     @experience = @profile.experiences.find(params[:id])
