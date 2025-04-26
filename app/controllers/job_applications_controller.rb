@@ -1,6 +1,6 @@
 class JobApplicationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_job_card, only: [:create, :index, :update]
+  before_action :set_job_card, only: [ :create, :index, :update ]
 
   def create
     @job_application = @job_card.job_applications.build(user: current_user, status: "pending")

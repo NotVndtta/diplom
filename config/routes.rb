@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root to: "job_cards#index"
 
   resources :job_cards do
-    resources :job_applications, only: [:create, :index, :update]
+    resources :job_applications, only: [ :create, :index, :update ]
   end
 
   resources :profiles do
@@ -12,11 +12,14 @@ Rails.application.routes.draw do
       get :foreman_description
       post :foreman_description
     end
-    resources :experiences, only: %i[create new  update destroy edit]
+    resources :experiences, only: %i[create new update destroy edit]
   end
-  
 
-  devise_for :users, controllers: { registrations: "users/registrations" }
+
+  devise_for :users, controllers: {
+    registrations: "users/registrations",
+    sessions: "users/sessions"
+  }
 
   devise_scope :user do
   end

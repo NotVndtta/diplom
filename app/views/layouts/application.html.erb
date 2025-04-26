@@ -18,12 +18,17 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="bg-gray-100">
-
+  <body>
     <%= render "layouts/header" %>
-
-    <main class="px-5">
-      <%= yield %>
-    </main>
+    <% if current_user %>
+      <main class="bg-gray-100 px-5">
+        <%= yield %>
+      </main>
+    <% else %>
+      <main class="flex items-center justify-center h-screen bg-cover bg-center bg-no-repeat" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(<%= image_path('session_bg.png') %>);">
+        <%= yield %>
+      </main>
+    <% end %>
+   
   </body>
 </html>

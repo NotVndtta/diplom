@@ -105,11 +105,9 @@
     </div>
   </div>
 </div>
-
 <% if user_signed_in? && @job_card.user != current_user && current_user.freelancer? %>
-  <%= link_to "Откликнуться на вакансию ", job_card_job_applications_path(@job_card), method: :post, class: "btn btn-primary" %>
+  <%= link_to "Откликнуться на вакансию", job_card_job_applications_path(@job_card),data: { turbo_method: :post }, class: "btn btn-primary" %>
 <% end %>
-
 <% if user_signed_in? && @job_card.user == current_user %>
   <%= link_to "Просмотр откликов", job_card_job_applications_path(@job_card), class: "btn btn-secondary" %>
 <% end %>

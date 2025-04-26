@@ -1,10 +1,10 @@
-<header class=" bg-lime-600 shadow-xl relative overflow-hidden mb-8">
+<header class="bg-lime-700 shadow-xl relative overflow-hidden">
   <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/green-dust.png')] opacity-20 animate-subtle-move"></div>
 
   <nav class="mx-auto flex max-w-7xl items-center justify-between p-3 lg:px-8 relative z-10" aria-label="Global">
     <div class="flex lg:flex-1">
       <a href="#" class="-m-1.5 p-1.5 flex items-center space-x-3 group">
-        <img class="h-12 w-auto transform group-hover:scale-110 transition-transform duration-300" src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=green&shade=900" alt="AgroJobs Logo">
+        <img class="h-10 w-auto transform group-hover:scale-110 transition-transform duration-300" src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=green&shade=900" alt="AgroJobs Logo">
         <span class="text-2xl font-extrabold text-white tracking-tight animate-pulse-slow">AgroJobs</span>
       </a>
     </div>
@@ -59,15 +59,7 @@
     0%, 100% { opacity: 1; }
     50% { opacity: 0.85; }
   }
-  .animate-pulse-slow {
-    animation: pulse-slow 4s ease-in-out infinite;
-  }
 
-  .animate-slide-in {
-    animation: slide-in 0.5s ease-out forwards;
-  }
-  .delay-100 { animation-delay: 0.1s; }
-  .delay-200 { animation-delay: 0.2s; }
 </style>
 
 <script>
@@ -78,7 +70,7 @@
       mobileMenu.classList.add('translate-y-0');
     } else {
       mobileMenu.classList.add('translate-y-full');
-      setTimeout(() => mobileMenu.classList.add('hidden'), 300);
+      setTimeout(() => mobileMenu.classList.add('hidden'));
     }
   });
 </script>

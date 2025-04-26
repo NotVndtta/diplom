@@ -1,9 +1,0 @@
-<% if @status.in?(Operation::Statuses::ALL) %>
-  <div class="operation__status <%= @status %>">
-    <%= I18n.t("work_orders.show_page.statuses.#{@status}") %>
-  </div>
-<% else %>
-  <div class="operation__status undefined">
-    <%= I18n.t("work_orders.show_page.statuses.undefined") %>
-  </div>
-<% end %>

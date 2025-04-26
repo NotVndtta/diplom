@@ -1,9 +1,0 @@
-<%= content_tag :div, class: @classes, data: @data do %>
-  <%= content_tag :div, content, class: @input_classes %>
-
-  <div style="display: block !important">
-    <%= render Ui::CaptionComponent.new(classes: @caption_classes, data: @caption_data) do %>
-      <%= @errors.first&.capitalize %>
-    <% end %>
-  </div>
-<% end %>

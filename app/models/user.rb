@@ -5,7 +5,7 @@ class User < ApplicationRecord
     ADMIN = "admin"
   ].freeze
 
-  ROLES_ENUM = ROLES.to_h { |role| [role.to_sym, role] }.freeze
+  ROLES_ENUM = ROLES.to_h { |role| [ role.to_sym, role ] }.freeze
 
   enum :role, ROLES_ENUM
 

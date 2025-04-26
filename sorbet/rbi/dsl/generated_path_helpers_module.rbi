@@ -31,10 +31,22 @@ module GeneratedPathHelpersModule
   def edit_user_registration_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def foreman_description_profile_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def job_card_job_application_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def job_card_job_applications_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def job_card_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def job_cards_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def job_cards_profile_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def new_job_card_path(*args); end
@@ -59,6 +71,9 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def new_user_session_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def new_vineyard_auth_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def preview_view_component_path(*args); end
@@ -163,6 +178,9 @@ module GeneratedPathHelpersModule
   def root_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def stats_profile_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def turbo_recede_historical_location_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -182,4 +200,7 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def user_session_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def vineyard_auth_path(*args); end
 end

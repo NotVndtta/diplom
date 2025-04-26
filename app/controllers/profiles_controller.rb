@@ -6,7 +6,7 @@ class ProfilesController < ApplicationController
   def show
     @experiences = @user.experiences.order(start_date_at: :desc)
     @foreman_description = @user.foreman_description || @user.build_foreman_description
-    @editing = params[:edit] == 'true' && current_user == @user # Enable edit mode if ?edit=true and user is authorized
+    @editing = params[:edit] == "true" && current_user == @user # Enable edit mode if ?edit=true and user is authorized
   end
 
   def edit
@@ -22,7 +22,7 @@ class ProfilesController < ApplicationController
       end
     else
       if @user.update_without_password(user_params.except(:password, :password_confirmation))
-        redirect_to profile_path(@user), notice: t('profile.update_success')
+        redirect_to profile_path(@user), notice: t("profile.update_success")
       else
         render :edit, status: :unprocessable_entity
       end
@@ -31,16 +31,16 @@ class ProfilesController < ApplicationController
 
   def stats
     @user = User.find(params[:id])
-    
+
     @tasks_data = {
       completed: @user.job_cards.where(status: "completed").count,
       in_progress: @user.job_cards.where(status: "in_progress").count,
       pending: @user.job_cards.where(status: "pending").count
     }
-  
+
     render :stats
   end
-  
+
 
   def job_cards
     @job_cards = @user.job_cards.order(created_at: :desc)
@@ -50,12 +50,11 @@ class ProfilesController < ApplicationController
     @foreman_description = @user.foreman_description || @user.build_foreman_description
     if request.post?
       if @foreman_description.update(foreman_description_params)
-        redirect_to profile_path(@user), notice: t('foreman_description.update_success')
+        redirect_to profile_path(@user), notice: t("foreman_description.update_success")
       else
-        # If update fails, render the show page with errors and keep edit mode
         @experiences = @user.experiences.order(start_date_at: :desc)
         @editing = true
-        render 'show', status: :unprocessable_entity
+        render "show", status: :unprocessable_entity
       end
     end
   end

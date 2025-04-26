@@ -3,6 +3,7 @@ class JobCardsController < ApplicationController
 
   def index
     @job_cards = JobCard.all
+    @view = params[:view] == "table" ? "table" : "card"
   end
 
   def show

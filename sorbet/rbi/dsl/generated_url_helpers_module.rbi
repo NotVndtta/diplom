@@ -31,7 +31,19 @@ module GeneratedUrlHelpersModule
   def edit_user_registration_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def foreman_description_profile_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def job_card_job_application_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def job_card_job_applications_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def job_card_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def job_cards_profile_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def job_cards_url(*args); end
@@ -59,6 +71,9 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def new_user_session_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def new_vineyard_auth_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def preview_view_component_url(*args); end
@@ -163,6 +178,9 @@ module GeneratedUrlHelpersModule
   def root_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def stats_profile_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def turbo_recede_historical_location_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -182,4 +200,7 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def user_session_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def vineyard_auth_url(*args); end
 end
