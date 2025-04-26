@@ -14,6 +14,7 @@ class JobCard < ApplicationRecord
   private
 
   def accepted_applications_within_work_amount
+    return if work_amount.blank?
     if job_applications.accepted.count > work_amount
       errors.add(:base, "Количество принятых рабочих не может превышать #{work_amount}")
     end

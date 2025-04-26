@@ -23,7 +23,7 @@ module Ui
     private
 
     def input_field
-      input_classes = "bg-white border text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 w-full p-2.5 placeholder-gray-400 mt-1 px-3 py-2 border-gray-300 rounded-md shadow-sm focus:outline-none"
+      input_classes = "bg-white border text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-lime-500 focus:border-lime-500 w-full p-2.5 placeholder-gray-400 mt-1 px-3 py-2 border-gray-300 rounded-md shadow-sm focus:outline-none"
       input_classes += " #{@input_class}" unless @input_class.empty?
       input_classes += " !border-red-500" if error.present?
 

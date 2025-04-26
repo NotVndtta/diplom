@@ -1,6 +1,5 @@
 <% content_for :title, "Профиль" %>
-
-<div class="min-h-screen px-4 sm:px-6 lg:px-8">
-  <%= render "profiles/profile",  user: @user %>
-  <%= render "profiles/experiences",  user: @user, experiences: @experiences if @user.freelancer? %>
-</div>
+  <div class="px-4 sm:px-6 lg:px-8">
+    <%= render "profiles/profile",  user: @user %>
+    <%= render "profiles/experiences",  user: @user, experiences: @experiences if @user.freelancer? %>
+  </div>

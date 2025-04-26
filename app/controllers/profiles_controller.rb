@@ -59,6 +59,19 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def show_modal
+    user = User.find(params[:id])
+
+    respond_to do |f|
+      f.turbo_stream {
+        render turbo_stream: turbo_stream.replace(
+          :modal,
+          renderable: ExperiencesModal.new(user)
+        )
+      }
+    end
+  end
+
   private
 
   def set_user

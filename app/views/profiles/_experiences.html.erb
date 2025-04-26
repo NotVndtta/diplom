@@ -1,4 +1,5 @@
-<div class="w-full max-w-4xl mx-auto py-12">
+<turbo-frame id="modal"></turbo-frame>
+<div class="w-full max-w-4xl mx-auto ">
   <div class="bg-white shadow-lg rounded-xl p-8 animate-slide-in">
     <h2 class="text-2xl font-semibold text-gray-900 mb-6"><%= t('profile.add_experience') %></h2>
     <%= form_with(model: [user, Experience.new], url: profile_experiences_path(user), class: "space-y-6", data: { turbo: true }) do |form| %>

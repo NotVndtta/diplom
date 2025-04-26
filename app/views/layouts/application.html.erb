@@ -18,10 +18,11 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="bg-gray-100 ">
     <%= render "layouts/header" %>
+
     <% if current_user %>
-      <main class="bg-gray-100 px-5">
+      <main class="px-5">
         <%= yield %>
       </main>
     <% else %>
@@ -29,6 +30,5 @@
         <%= yield %>
       </main>
     <% end %>
-   
   </body>
 </html>

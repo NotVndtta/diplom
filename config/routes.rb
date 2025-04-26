@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get :stats
       get :foreman_description
       post :foreman_description
+      get :show_modal
     end
     resources :experiences, only: %i[create new update destroy edit]
   end

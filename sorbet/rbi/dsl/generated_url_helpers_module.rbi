@@ -178,6 +178,9 @@ module GeneratedUrlHelpersModule
   def root_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def show_modal_profile_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def stats_profile_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }

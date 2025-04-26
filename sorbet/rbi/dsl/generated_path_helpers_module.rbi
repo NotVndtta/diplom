@@ -178,6 +178,9 @@ module GeneratedPathHelpersModule
   def root_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def show_modal_profile_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def stats_profile_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
