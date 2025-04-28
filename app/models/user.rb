@@ -1,4 +1,9 @@
 class User < ApplicationRecord
+  devise :database_authenticatable, :registerable,
+  :recoverable, :rememberable, :validatable
+
+  mount_uploader :avatar, AvatarUploader
+
   ROLES = [
     FREELANCER = "freelancer",
     FOREMAN = "foreman",
@@ -8,9 +13,6 @@ class User < ApplicationRecord
   ROLES_ENUM = ROLES.to_h { |role| [ role.to_sym, role ] }.freeze
 
   enum :role, ROLES_ENUM
-
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
 
   scope :with_jobs, -> { joins(:job_cards).distinct }
 
@@ -28,6 +30,8 @@ class User < ApplicationRecord
   validates :birth_year, presence: true, numericality: { only_integer: true, greater_than: 1900, less_than_or_equal_to: Date.current.year }
   validates :city, presence: true, length: { maximum: 100 }
   validates :role, presence: true, inclusion: { in: ROLES }
+  # validates :avatar, file_size: { less_than_or_equal_to: 10.megabytes },
+  # file_content_type: { allow: [ "image/jpeg", "image/png" ] }
 
   def name
     "#{first_name} #{last_name}"

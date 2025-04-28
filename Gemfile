@@ -4,6 +4,7 @@ gem "rails", "~> 8.0.1"
 gem "propshaft"
 gem "pg", "~> 1.1"
 gem "puma", ">= 5.0"
+gem "dotenv-rails", groups: [ :development, :test ]
 
 gem "importmap-rails"
 
@@ -15,8 +16,10 @@ gem "jbuilder"
 
 gem "devise-i18n"
 gem "devise"
-gem 'otp-jwt'
+gem "otp-jwt"
 
+gem "carrierwave"
+gem "cloudinary"
 
 gem "discard"
 gem "rails-i18n"

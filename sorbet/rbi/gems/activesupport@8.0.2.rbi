@@ -19813,11 +19813,7 @@ end
 
 module Process
   extend ::ActiveSupport::ForkTracker::CoreExt
-
-  class << self
-    # source://activesupport//lib/active_support/fork_tracker.rb#6
-    def _fork; end
-  end
+  extend ::FFI::ModernForkTracking
 end
 
 # source://activesupport//lib/active_support/core_ext/object/json.rb#250

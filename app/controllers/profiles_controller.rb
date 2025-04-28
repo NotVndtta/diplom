@@ -89,7 +89,8 @@ class ProfilesController < ApplicationController
       :city,
       :role,
       :password,
-      :password_confirmation
+      :password_confirmation,
+      :avatar
     )
   end
 

@@ -1,21 +1,19 @@
-<div class="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
-  <div class="max-w-lg w-full bg-white shadow-lg rounded-lg p-8 space-y-8">
+  <div class="mt-4 w-3/8 bg-white shadow-lg rounded-2xl p-8 space-y-8">
     <div class="text-center">
-      <h2 class="text-3xl font-bold text-gray-900">Create Your Account</h2>
-      <p class="mt-2 text-sm text-gray-600">Fill in the details below to get started</p>
+      <h2 class="text-3xl font-bold text-gray-900">Создайте аккаунт</h2>
+      <p class="mt-2 text-sm text-gray-600">Заполните данные ниже, чтобы начать</p>
     </div>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "space-y-6" }) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="space-y-4">
-        <h3 class="text-lg font-medium text-gray-900">Account Information</h3>
+        <h3 class="text-lg font-medium text-gray-900">Информация об аккаунте</h3>
         <div class="grid md:grid-cols-2 gap-4">
           <div>
             <%= render(Ui::StringInputComponent.new(
               form: f,
               field_name: :email,
-              label: "Email Address",
+              label: "Адрес электронной почты",
               type: "email",
               autocomplete: "email",
               input_class: "block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
@@ -25,7 +23,7 @@
             <%= render(Ui::StringInputComponent.new(
               form: f,
               field_name: :phone,
-              label: "Phone Number",
+              label: "Номер телефона",
               type: "tel",
               autocomplete: "tel",
               input_class: "block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
@@ -35,20 +33,20 @@
             <%= render(Ui::StringInputComponent.new(
               form: f,
               field_name: :password,
-              label: "Password",
+              label: "Пароль",
               type: "password",
               autocomplete: "new-password",
               input_class: "block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             )) %>
             <% if @minimum_password_length %>
-              <p class="mt-1 text-xs text-gray-500">Minimum <%= @minimum_password_length %> characters</p>
+              <p class="mt-1 text-xs text-gray-500">Минимум <%= @minimum_password_length %> символов</p>
             <% end %>
           </div>
           <div>
             <%= render(Ui::StringInputComponent.new(
               form: f,
               field_name: :password_confirmation,
-              label: "Confirm Password",
+              label: "Подтверждение пароля",
               type: "password",
               autocomplete: "new-password",
               input_class: "block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
@@ -58,13 +56,13 @@
       </div>
 
       <div class="space-y-4">
-        <h3 class="text-lg font-medium text-gray-900">Personal Information</h3>
+        <h3 class="text-lg font-medium text-gray-900">Личная информация</h3>
         <div class="grid md:grid-cols-2 gap-4">
           <div>
             <%= render(Ui::StringInputComponent.new(
               form: f,
               field_name: :first_name,
-              label: "First Name",
+              label: "Имя",
               autocomplete: "given-name",
               input_class: "block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             )) %>
@@ -73,7 +71,7 @@
             <%= render(Ui::StringInputComponent.new(
               form: f,
               field_name: :last_name,
-              label: "Last Name",
+              label: "Фамилия",
               autocomplete: "family-name",
               input_class: "block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             )) %>
@@ -82,7 +80,7 @@
             <%= render(Ui::NumberInputComponent.new(
               form: f,
               field_name: :birth_year,
-              label: "Birth Year",
+              label: "Год рождения",
               input_class: "block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             )) %>
           </div>
@@ -90,7 +88,7 @@
             <%= render(Ui::StringInputComponent.new(
               form: f,
               field_name: :city,
-              label: "City",
+              label: "Город",
               autocomplete: "address-level2",
               input_class: "block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             )) %>
@@ -99,23 +97,23 @@
       </div>
 
       <div class="space-y-4">
-        <h3 class="text-lg font-medium text-gray-900">Additional Information</h3>
+        <h3 class="text-lg font-medium text-gray-900">Дополнительная информация</h3>
         <div>
           <%= render(Ui::TextAreaComponent.new(
             form: f,
             field_name: :about,
-            label: "About You",
+            label: "О себе",
             input_class: "block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
           )) %>
         </div>
         <div>
-          <%= f.label :role, "Role", class: "block text-sm font-medium text-gray-700" %>
+          <%= f.label :role, "Роль", class: "block text-sm font-medium text-gray-700" %>
           <%= f.select :role, options_for_select(User::ROLES, @user.role), { prompt: t('profile.select_role') }, class: "mt-1 block w-full px-4 py-2 border #{@user.errors[:role].any? ? 'border-red-400' : 'border-gray-300'} rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm", required: true %>
         </div>
       </div>
 
       <div>
-        <%= f.submit "Sign Up", class: "w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150" %>
+        <%= f.submit "Зарегистрироваться", class: "w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150" %>
       </div>
     <% end %>
 
@@ -123,4 +121,3 @@
       <%= render "devise/shared/links" %>
     </div>
   </div>
-</div>
