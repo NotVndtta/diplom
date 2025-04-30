@@ -30,6 +30,8 @@ class User < ApplicationRecord
   validates :birth_year, presence: true, numericality: { only_integer: true, greater_than: 1900, less_than_or_equal_to: Date.current.year }
   validates :city, presence: true, length: { maximum: 100 }
   validates :role, presence: true, inclusion: { in: ROLES }
+  validates :about, length: { maximum: 360 }
+
   # validates :avatar, file_size: { less_than_or_equal_to: 10.megabytes },
   # file_content_type: { allow: [ "image/jpeg", "image/png" ] }
 

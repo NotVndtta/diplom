@@ -17,4 +17,11 @@ module ApplicationHelper
         "#{base} border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
       end
     end
+
+    def required_field?(model, attribute)
+      return false unless model.respond_to?(:class)
+      model.class.validators_on(attribute).any? do |validator|
+        validator.kind == :presence && validator.options[:if].blank? && validator.options[:unless].blank?
+      end
+    end
 end

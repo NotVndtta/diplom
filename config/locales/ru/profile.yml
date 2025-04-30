@@ -18,6 +18,7 @@ ru:
     edit_profile: "Редактировать профиль"
     not_provided: "Информация отстуствует"
     agro_operation: "К агрооперациям"
+    save: "Сохранить"
     errors:
       experience:
         start_date_at: "Дата начала не может быть пустой"

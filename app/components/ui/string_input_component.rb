@@ -13,7 +13,9 @@ module Ui
 
     def call
       content_tag(:div, class: "field px-3") do
-        label_tag = tag.label(@label, for: @field_name, class: "block text-sm mb-2 font-medium text-gray-700")
+        label_tag = tag.label(class: "block text-sm mb-2 font-medium text-gray-700") do
+          safe_join([@label, required_marker], " ")
+        end
         input = input_field
         error_tag = error_message
         label_tag + input + error_tag
@@ -48,6 +50,21 @@ module Ui
     def error_message
       return unless error.present?
       tag.span error, class: "text-red-500 text-sm block"
+    end
+
+    def required_marker
+      return unless required_field?
+      tag.span("*", class: "text-red-500")
+    end
+
+    def required_field?
+      return false unless @form.object
+      validators = @form.object.class.validators_on(@field_name)
+      validators.any? do |validator|
+        validator.kind == :presence && 
+        validator.options[:if].blank? && 
+        validator.options[:unless].blank?
+      end
     end
   end
 end
