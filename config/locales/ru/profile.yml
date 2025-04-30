@@ -7,6 +7,7 @@ ru:
     city: "Город"
     account_created: "Дата создания аккаунта"
     last_updated: "Дата последнего обновления"
+    leave_blank: "Введите пароль" 
     add_experience: "Добавить новый опыт"
     experience_start_date: "Дата начала"
     experience_end_date: "Дата окончания"
@@ -15,6 +16,7 @@ ru:
     create_experience: "Создать опыт"
     no_experiences: "Опыт не найден."
     edit_profile: "Редактировать профиль"
+    not_provided: "Информация отстуствует"
     agro_operation: "К агрооперациям"
     errors:
       experience:

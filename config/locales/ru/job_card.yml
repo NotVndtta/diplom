@@ -1,0 +1,11 @@
+ru:
+  job_card:
+    show_page:
+      title: "Детальная карточка агрооперации"
+      create: "Создал"
+      about_farm: "Об хозяйстве"
+      farm: "Хозяйство"
+      location: "Местоположение"
+      work_details: "Детали работы"
+      date: "Детали работы"
+      status: "Статус" 
