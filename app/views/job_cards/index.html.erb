@@ -16,7 +16,7 @@
       <%= link_to "Таблица", job_cards_path(view: "table"), class: "inline-flex items-center px-4 py-2 #{ @view == 'table' ? 'bg-lime-600 text-white' : 'bg-gray-200 text-gray-800' } hover:bg-lime-700 font-semibold rounded-full shadow-md transition-all duration-300 transform hover:text-white hover:scale-105 text-sm", data: { turbo_frame: "job_cards_frame", turbo_action: "replace" } %>
     </div>
       <% if user_signed_in? %>
-        <%= link_to "Создать карточку", new_job_card_path, class: "inline-flex items-center px-5 py-2.5 bg-lime-600 hover:bg-lime-700 text-white font-semibold rounded-full shadow-md transition-all duration-300 transform hover:scale-105 text-base" %>
+        <%= link_to "Создать карточку", new_job_card_path, data: { turbo_frame: "_top" }, class: "inline-flex items-center px-5 py-2.5 bg-lime-600 hover:bg-lime-700 text-white font-semibold rounded-full shadow-md transition-all duration-300 transform hover:scale-105 text-base" %>
       <% end %>
     </div>
   </div>
