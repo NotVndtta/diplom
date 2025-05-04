@@ -1,0 +1,47 @@
+<div class="container mx-auto p-6">
+  <h1 class="text-3xl font-bold text-gray-800 mb-6">Мои отклики</h1>
+
+  <% if @responses.present? %>
+    <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-lime-600 text-white">
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Ферма</th>
+            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Описание работы</th>
+            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Местоположение</th>
+            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Дата</th>
+            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Оплата</th>
+            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Статус отклика</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-300">
+          <% @responses.each do |respons| %>
+            <% job_card = respons.job_card %>
+            <tr class="hover:bg-gray-100 cursor-pointer" onclick="Turbo.visit('<%= job_card_path(job_card) %>')">
+              <td class="px-6 py-4 whitespace-nowrap">
+                <%= job_card.farm_name %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <%= truncate(job_card.description, length: 60) %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <%= job_card.location %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <%= job_card.date_at.strftime("%d.%m.%Y") %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <%= number_to_currency(job_card.remuneration, unit: "₽", precision: 0) %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="text-gray-700"><%= respons.status.humanize %></span>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <p class="mt-4 text-gray-600">Вы ещё не откликались на вакансии.</p>
+  <% end %>
+</div>

@@ -16,7 +16,7 @@
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
             <% @job_applications.each do |application| %>
-              <tr class="hover:bg-gray-50">
+              <tr class="hover:bg-gray-100 cursor-pointer" onclick="Turbo.visit('<%=profile_path(application.user) %>')">
                 <td class="px-6 py-4 whitespace-nowrap">
                   <%= link_to "#{application.user.first_name} #{application.user.last_name}", profile_path(application.user), class: "text-blue-600 hover:underline" %>
                 </td>

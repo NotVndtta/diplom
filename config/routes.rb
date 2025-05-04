@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :profiles do
     member do
+      get :responses
       get :job_cards
       get :stats
       get :foreman_description

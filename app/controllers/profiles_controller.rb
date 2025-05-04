@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  before_action :set_user, only: %i[show edit update job_cards foreman_description]
+  before_action :set_user
   before_action :authenticate_user!, only: %i[edit update foreman_description]
   before_action :authorize_user, only: %i[edit update foreman_description]
 
@@ -30,8 +30,6 @@ class ProfilesController < ApplicationController
   end
 
   def stats
-    @user = User.find(params[:id])
-
     @tasks_data = {
       completed: @user.job_cards.where(status: "completed").count,
       in_progress: @user.job_cards.where(status: "in_progress").count,
@@ -59,17 +57,20 @@ class ProfilesController < ApplicationController
     end
   end
 
-  def show_modal
-    user = User.find(params[:id])
 
+  def show_modal
     respond_to do |f|
       f.turbo_stream {
         render turbo_stream: turbo_stream.replace(
           :modal,
-          renderable: ExperiencesModal.new(user)
+          renderable: ExperiencesModal.new(@user)
         )
       }
     end
+  end
+
+  def responses
+    @responses = @user.job_applications
   end
 
   private
