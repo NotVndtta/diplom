@@ -1,0 +1,21 @@
+<%= form_with model: profile_ratings_path(user), 
+  url: (polymorphic_path([user, :reviews])),
+  method: :post,
+  data: { turbo: "_top" } do |form| 
+%> 
+  <div class="field">
+    <%= form.label :comment, "Комментарий" %>
+    <%= form.text_area :comment, required: true, class: "w-full p-2 border rounded identifying-green-500 rounded" %>
+    <%= form.hidden_field :rateable_id, value: @rateable.id %>
+    <%= form.hidden_field :rateable_type, value: @rateable.class.name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :grade, "Оценка" %>
+    <%= form.select :grade, options_for_select([1, 2, 3, 4, 5]), { prompt: "Выберите оценку" }, { class: "w-full p-2 border rounded", required: true } %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Отправить отзыв", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+  </div>
+<% end %>

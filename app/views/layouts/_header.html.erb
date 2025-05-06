@@ -1,10 +1,9 @@
-<header class="bg-lime-700 shadow-xl relative overflow-hidden">
+<header class="bg-[#2D531A]  shadow-xl relative overflow-hidden">
   <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/green-dust.png')] opacity-20 animate-subtle-move"></div>
 
   <nav class="mx-auto flex max-w-7xl items-center justify-between p-3 lg:px-8 relative z-10" aria-label="Global">
     <div class="flex lg:flex-1">
       <a href="#" class="-m-1.5 p-1.5 flex items-center space-x-3 group">
-        <img class="h-10 w-auto transform group-hover:scale-110 transition-transform duration-300" src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=green&shade=900" alt="AgroJobs Logo">
         <span class="text-2xl font-extrabold text-white tracking-tight animate-pulse-slow">AgroJobs</span>
       </a>
     </div>
@@ -40,7 +39,7 @@
   </nav>
 
   <div class="lg:hidden hidden transform translate-y-full" id="mobile-menu">
-    <div class="bg-lime-700 px-6 py-6 space-y-4 shadow-lg">
+    <div class="bg-lime-600 px-6 py-6 space-y-4 shadow-lg">
       <%= link_to "Агрооперации", job_cards_path, class:"block text-base font-semibold text-white hover:bg-lime-800 px-5 py-3 rounded-lg transition-all duration-300 animate-slide-in" %>
       <% if current_user.present? %>
         <%= link_to "Профиль", profile_path(current_user), class:"block text-base font-semibold text-white hover:bg-lime-800 px-5 py-3 rounded-lg transition-all duration-300 animate-slide-in delay-100" %>

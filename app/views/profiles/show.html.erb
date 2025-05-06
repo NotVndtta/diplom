@@ -2,4 +2,8 @@
   <div class="px-4 sm:px-6 lg:px-8">
     <%= render "profiles/profile",  user: @user %>
     <%= render "profiles/experiences",  user: @user, experiences: @experiences if @user.freelancer? %>
+    <%= render "ratings/form", user: @user, rating: @user.ratings.new %>
+    <% @user.ratings.each do |rating| %>
+      <%= render "ratings/rating", rating: rating %>
+    <% end %>
   </div>

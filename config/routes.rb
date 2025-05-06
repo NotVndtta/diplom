@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :job_cards do
     resources :job_applications, only: [ :create, :index, :update ]
+    resources :ratings, only: [:create, :destroy]
   end
 
   resources :profiles do
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
       get :show_modal
     end
     resources :experiences, only: %i[create new update destroy edit]
+    resources :ratings, only: [:create, :destroy]
   end
 
 

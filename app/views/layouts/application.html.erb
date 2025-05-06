@@ -13,12 +13,13 @@
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700&display=swap" rel="stylesheet">
 
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="bg-gray-100 ">
+  <body class="bg-[#fffdf5]", style="font-family: 'Manrope', sans-serif;">
     <%= render "layouts/header" %>
 
     <% if current_user %>

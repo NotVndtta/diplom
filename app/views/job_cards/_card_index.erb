@@ -2,7 +2,7 @@
   <% if job_cards.any? %>
     <% job_cards.each do |job_card| %>
       <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex flex-col min-h-[320px]">
-        <div class="bg-lime-600 px-4 py-3">
+        <div class="bg-[#628b35] px-4 py-3">
           <h2 class="text-lg font-semibold text-white truncate"><%= job_card.farm_name %></h2>
           <p class="text-lime-100 text-xs mt-0.5">Создано: <%= job_card.user&.name || "Неизвестно" %></p>
         </div>
