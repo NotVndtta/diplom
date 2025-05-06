@@ -1,12 +1,11 @@
-# app/controllers/ratings_controller.rb
-class RatingsController < ApplicationRecord
+class RatingsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_rating, only: [:destroy]
-  before_action :authorize_user!, only: [:destroy]
+  before_action :set_rating, only: [ :destroy ]
+  before_action :authorize_user!, only: [ :destroy ]
 
   def create
     @rateable = find_rateable
-    @rating = @rateable.ratings.build(rating_params)
+    @rating = @rateable.ratings.new(rating_params)
     @rating.user = current_user
 
     if @rating.save
@@ -46,6 +45,17 @@ class RatingsController < ApplicationRecord
   def authorize_user!
     unless @rating.user == current_user || current_user.admin?
       redirect_to @rating.rateable, alert: "Вы не можете удалить этот отзыв."
+    end
+  end
+
+  def rating_reviews_path
+    case @rateable
+    when User
+      profile_ratings_path(@rateable.user)
+    when JobCard
+      job_card_path(@rateable)
+    else
+      raise "Unknown rateable type: #{@rateable.class}"
     end
   end
 end

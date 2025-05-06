@@ -58,17 +58,6 @@ class ProfilesController < ApplicationController
   end
 
 
-  def show_modal
-    respond_to do |f|
-      f.turbo_stream {
-        render turbo_stream: turbo_stream.replace(
-          :modal,
-          renderable: ExperiencesModal.new(@user)
-        )
-      }
-    end
-  end
-
   def responses
     @responses = @user.job_applications
   end

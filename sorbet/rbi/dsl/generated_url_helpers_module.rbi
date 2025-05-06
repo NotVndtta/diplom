@@ -40,6 +40,12 @@ module GeneratedUrlHelpersModule
   def job_card_job_applications_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def job_card_rating_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def job_card_ratings_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def job_card_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -86,6 +92,12 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def profile_experiences_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def profile_rating_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def profile_ratings_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def profile_url(*args); end
@@ -175,10 +187,13 @@ module GeneratedUrlHelpersModule
   def rails_storage_redirect_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def responses_profile_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def root_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def show_modal_profile_url(*args); end
+  def show_modal_profile_experience_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def stats_profile_url(*args); end

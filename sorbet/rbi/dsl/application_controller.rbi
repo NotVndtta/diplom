@@ -8,4 +8,42 @@
 class ApplicationController
   include GeneratedUrlHelpersModule
   include GeneratedPathHelpersModule
+
+  sig { returns(HelperProxy) }
+  def helpers; end
+
+  module HelperMethods
+    include ::Turbo::DriveHelper
+    include ::Turbo::FramesHelper
+    include ::Turbo::IncludesHelper
+    include ::Turbo::StreamsHelper
+    include ::ActionView::Helpers::CaptureHelper
+    include ::ActionView::Helpers::OutputSafetyHelper
+    include ::ActionView::Helpers::TagHelper
+    include ::Turbo::Streams::ActionHelper
+    include ::ActionText::ContentHelper
+    include ::ActionText::TagHelper
+    include ::Importmap::ImportmapTagsHelper
+    include ::DeviseI18n::ViewHelpers
+    include ::ActionController::Base::HelperMethods
+    include ::ApplicationHelper
+    include ::ExperiencesHelper
+    include ::JobCardsHelper
+    include ::PreviewHelper
+    include ::DeviseHelper
+    include ::Pundit::Helper
+
+    sig { params(record: T.untyped).returns(T.untyped) }
+    def policy(record); end
+
+    sig { params(scope: T.untyped).returns(T.untyped) }
+    def pundit_policy_scope(scope); end
+
+    sig { returns(T.untyped) }
+    def pundit_user; end
+  end
+
+  class HelperProxy < ::ActionView::Base
+    include HelperMethods
+  end
 end

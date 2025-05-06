@@ -14,12 +14,18 @@ class ExperiencesController < ApplicationController
     @experience = Experience.new(experience_params)
     @experience.user = @profile
 
-    if @experience.save
+    if @experience.valid?
+      @experience.save!
       redirect_to profile_path(@profile), notice: "Experience created successfully."
     else
-      @user = @profile
-      @experiences = @profile.experiences
-      render "profiles/show", status: :unprocessable_entity
+      respond_to do |f|
+        f.turbo_stream {
+          render turbo_stream: turbo_stream.update(
+            :modal,
+            renderable: ExperiencesModal.new(@profile, @experience)
+          )
+        }
+      end
     end
   end
 
@@ -43,10 +49,23 @@ class ExperiencesController < ApplicationController
     end
   end
 
+  def show_modal
+    @experience = Experience.new
+    @user = User.find(params[:profile_id])
+
+    respond_to do |f|
+      f.turbo_stream {
+        render turbo_stream: turbo_stream.replace(
+          :modal,
+          renderable: ExperiencesModal.new(@user,  @experience)
+        )
+      }
+    end
+  end
+
   private
 
   def set_experience
-
     @profile = User.find(params[:profile_id])
     @experience = @profile.experiences.find(params[:id])
   end

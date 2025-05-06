@@ -43,6 +43,12 @@ module GeneratedPathHelpersModule
   def job_card_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def job_card_rating_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def job_card_ratings_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def job_cards_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -89,6 +95,12 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def profile_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def profile_rating_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def profile_ratings_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def profiles_path(*args); end
@@ -175,10 +187,13 @@ module GeneratedPathHelpersModule
   def rails_storage_redirect_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def responses_profile_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def root_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def show_modal_profile_path(*args); end
+  def show_modal_profile_experience_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def stats_profile_path(*args); end

@@ -10,9 +10,9 @@ module Ui
     end
 
     def call
-      content_tag(:div, class: "field px-3") do
+      content_tag(:div, class: "field") do
         label_tag = tag.label(class: "block text-sm mb-2 font-medium text-gray-700") do
-          safe_join([@label, required_marker], " ")
+          safe_join([ @label, required_marker ], " ")
         end
         input = number_field
         error_tag = error_message
@@ -53,8 +53,8 @@ module Ui
       return false unless @form.object
       validators = @form.object.class.validators_on(@field_name)
       validators.any? do |validator|
-        validator.kind == :presence && 
-        validator.options[:if].blank? && 
+        validator.kind == :presence &&
+        validator.options[:if].blank? &&
         validator.options[:unless].blank?
       end
     end

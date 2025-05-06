@@ -1,12 +1,8 @@
-<div>
-  <%= link_to "← Назад к вакансиям", job_cards_path, class: "rounded-md px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium transition" %>
-</div>
-
-<% content_for :title, "New job card" %>
+<% content_for :title, "Новая вакансия" %>
 
 <div class="min-h-screen flex items-center justify-center px-4 py-4">
-  <div class="w-full max-w-2xl">
-    <h1 class="font-bold text-3xl text-center mb-6">Новая вакансия</h1>
+  <div class="w-full max-w-2xl bg-white p-6 rounded-3xl shadow-lg">
+    <h1 class="font-bold text-3xl text-center pb-6">Новая вакансия</h1>
 
     <%= render "form", job_card: @job_card %>
   </div>

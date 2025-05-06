@@ -1,4 +1,4 @@
-<%= form_with(model: job_card, class: "max-w-3xl mx-auto") do |form| %>
+<%= form_with(model: job_card, class: "max-w-3xl ") do |form| %>
   <% fields = {
     farm_name: { label: "Название агрохозяйства", type: :string },
     location: { label: "Локация", type: :string },
@@ -42,7 +42,8 @@
     <% end %>
   </div>
 
-<div class="flex justify-end pr-3">
-  <%= form.submit "Сохранить", class: "w-full sm:w-auto bg-lime-600 hover:bg-lime-500 text-white font-semibold px-4 py-2 rounded-md transition" %>
-</div>
+  <div class="flex justify-between ">
+    <%= link_to "← Назад к вакансиям", job_cards_path, class: "rounded-md px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium transition" %>
+    <%= form.submit "Сохранить", class: "w-full sm:w-auto bg-lime-600 hover:bg-lime-500 text-white font-semibold px-4 py-2 rounded-md transition" %>
+  </div>
 <% end %>

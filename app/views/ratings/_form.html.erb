@@ -1,21 +1,43 @@
-<%= form_with model: profile_ratings_path(user), 
-  url: (polymorphic_path([user, :reviews])),
-  method: :post,
-  data: { turbo: "_top" } do |form| 
-%> 
-  <div class="field">
-    <%= form.label :comment, "Комментарий" %>
-    <%= form.text_area :comment, required: true, class: "w-full p-2 border rounded identifying-green-500 rounded" %>
-    <%= form.hidden_field :rateable_id, value: @rateable.id %>
-    <%= form.hidden_field :rateable_type, value: @rateable.class.name %>
-  </div>
+<% if user_signed_in? %>
+  <%= form_with model: Rating.new(rateable:), 
+    url: (rateable.is_a?(User) ? profile_ratings_path(rateable) : polymorphic_path([rateable, :rating])),
+    method: :post,
+    data: { turbo: "_top" } do |form| 
+  %> 
+    <div class="field">
+      <%= form.label :comment, "Комментарий" %>
+      <%= form.text_area :comment, required: true, class: "w-full p-2 border rounded identifying-green-500 rounded" %>
+      <%= form.hidden_field :rateable_id, value: rateable.id %>
+      <%= form.hidden_field :rateable_type, value: rateable.class.name %>
+    </div>
 
-  <div class="field">
-    <%= form.label :grade, "Оценка" %>
-    <%= form.select :grade, options_for_select([1, 2, 3, 4, 5]), { prompt: "Выберите оценку" }, { class: "w-full p-2 border rounded", required: true } %>
-  </div>
+    <div class="field">
+      <%= form.label :grade, "Оценка" %>
+      <%= form.select :grade, options_for_select([1, 2, 3, 4, 5]), { prompt: "Выберите оценку" }, { class: "w-full p-2 border rounded", required: true } %>
+    </div>
 
-  <div class="actions">
-    <%= form.submit "Отправить отзыв", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+    <div class="actions">
+      <%= form.submit "Отправить отзыв", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+    </div>
+  <% end %>
+<% end %>
+
+<% if @rating.present? %>
+  <div class="mt-6">
+    <% rating.first(3).each do |review| %>
+      <%= render "ratings/show", review: review %>
+    <% end %>
+
+    <div id="more_rating" class="hidden">
+      <% rating.drop(3).each do |review| %>
+        <%= render "ratings/show", review: review %>
+      <% end %>
+    </div>
+
+    <% if rating.count > 3 %>
+      <button id="show_more_rating" class="mt-4 text-blue-500 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300">
+        Посмотреть все комментарии
+      </button>
+    <% end %>
   </div>
 <% end %>
