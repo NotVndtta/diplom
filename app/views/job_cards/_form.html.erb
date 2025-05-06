@@ -10,7 +10,7 @@
     description: { label: "Описание", type: :textarea }
   } %>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
     <% fields.each do |field, config| %>
       <div class="<%= field == :description ? 'sm:col-span-2' : '' %>">
         <% case config[:type] %>
@@ -42,7 +42,7 @@
     <% end %>
   </div>
 
-  <div class="flex justify-between ">
+  <div class="flex flex-col sm:flex-row justify-end gap-2 pr-0 sm:pr-3">
     <%= link_to "← Назад к вакансиям", job_cards_path, class: "rounded-md px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium transition" %>
     <%= form.submit "Сохранить", class: "w-full sm:w-auto bg-lime-600 hover:bg-lime-500 text-white font-semibold px-4 py-2 rounded-md transition" %>
   </div>
