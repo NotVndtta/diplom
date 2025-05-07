@@ -8,18 +8,25 @@
   <% end %>
 
   <turbo-frame id="job_cards_frame">
-  <div class="flex justify-between items-center mb-6">
-    <h1 class="text-2xl font-bold text-gray-900">Работы на полях</h1>
-    <div class="flex items-center gap-4">
-     <div class="flex gap-2">
-      <%= link_to "Карточки", job_cards_path(view: "card"), class: "inline-flex items-center px-4 py-2 #{ @view == 'card' ? 'bg-lime-600 text-white' : 'bg-gray-200 text-gray-800' } hover:bg-lime-700 font-semibold rounded-full shadow-md transition-all duration-300 transform hover:text-white hover:scale-105 text-sm", data: { turbo_frame: "job_cards_frame", turbo_action: "replace" } %>
-      <%= link_to "Таблица", job_cards_path(view: "table"), class: "inline-flex items-center px-4 py-2 #{ @view == 'table' ? 'bg-lime-600 text-white' : 'bg-gray-200 text-gray-800' } hover:bg-lime-700 font-semibold rounded-full shadow-md transition-all duration-300 transform hover:text-white hover:scale-105 text-sm", data: { turbo_frame: "job_cards_frame", turbo_action: "replace" } %>
-    </div>
+    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 text-center sm:text-left gap-4">
+      <h1 class="text-2xl font-bold text-gray-900">Работы на полях</h1>
+
       <% if user_signed_in? %>
-        <%= link_to "Создать карточку", new_job_card_path, data: { turbo_frame: "_top" }, class: "inline-flex items-center px-5 py-2.5 bg-lime-600 hover:bg-lime-700 text-white font-semibold rounded-full shadow-md transition-all duration-300 transform hover:scale-105 text-base" %>
+        <%= link_to "Создать карточку", new_job_card_path,
+          data: { turbo_frame: "_top" },
+          class: "inline-block w-full sm:w-auto px-5 py-2.5 bg-lime-600 hover:bg-lime-700 text-white font-semibold rounded-full shadow-md transition-all duration-300 transform hover:scale-105 text-base" %>
       <% end %>
     </div>
-  </div>
+
+    <div class="flex gap-2 mb-4 sm:mb-6 justify-center sm:justify-start">
+      <%= link_to "Карточки", job_cards_path(view: "card"),
+        class: "hidden sm:inline-flex items-center px-4 py-2 #{ @view == 'card' ? 'bg-lime-600 text-white' : 'bg-gray-200 text-gray-800' } hover:bg-lime-700 font-semibold rounded-full shadow-md transition-all duration-300 transform hover:text-white hover:scale-105 text-sm",
+        data: { turbo_frame: "job_cards_frame", turbo_action: "replace" } %>
+
+      <%= link_to "Таблица", job_cards_path(view: "table"),
+        class: "hidden sm:inline-flex items-center px-4 py-2 #{ @view == 'table' ? 'bg-lime-600 text-white' : 'bg-gray-200 text-gray-800' } hover:bg-lime-700 font-semibold rounded-full shadow-md transition-all duration-300 transform hover:text-white hover:scale-105 text-sm",
+        data: { turbo_frame: "job_cards_frame", turbo_action: "replace" } %>
+    </div>
 
     <%= render partial: @view == 'table' ? 'table_index' : 'card_index', locals: { job_cards: @job_cards } %>
   </turbo-frame>

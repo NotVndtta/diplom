@@ -2,7 +2,7 @@
   <h1 class="text-3xl font-bold text-gray-800 mb-6">Мои отклики</h1>
 
   <% if @responses.present? %>
-    <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+      <div class="hidden sm:block overflow-x-auto bg-white shadow-md rounded-lg">
       <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-lime-600 text-white">
           <tr>
@@ -18,28 +18,20 @@
           <% @responses.each do |respons| %>
             <% job_card = respons.job_card %>
             <tr class="hover:bg-gray-100 cursor-pointer" onclick="Turbo.visit('<%= job_card_path(job_card) %>')">
-              <td class="px-6 py-4 whitespace-nowrap">
-                <%= job_card.farm_name %>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <%= truncate(job_card.description, length: 60) %>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <%= job_card.location %>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <%= job_card.date_at.strftime("%d.%m.%Y") %>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <%= number_to_currency(job_card.remuneration, unit: "₽", precision: 0) %>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <span class="text-gray-700"><%= respons.status.humanize %></span>
-              </td>
+              <td class="px-6 py-4 whitespace-nowrap"><%= job_card.farm_name %></td>
+              <td class="px-6 py-4 whitespace-nowrap"><%= truncate(job_card.description, length: 60) %></td>
+              <td class="px-6 py-4 whitespace-nowrap"><%= job_card.location %></td>
+              <td class="px-6 py-4 whitespace-nowrap"><%= job_card.date_at.strftime("%d.%m.%Y") %></td>
+              <td class="px-6 py-4 whitespace-nowrap"><%= number_to_currency(job_card.remuneration, unit: "₽", precision: 0) %></td>
+              <td class="px-6 py-4 whitespace-nowrap"><%= respons.status.humanize %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
+    </div>
+
+    <div class="block sm:hidden space-y-4 mt-4">
+      <%= render partial: "mobile_responses", locals: { responses: @responses } %>
     </div>
   <% else %>
     <p class="mt-4 text-gray-600">Вы ещё не откликались на вакансии.</p>

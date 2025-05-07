@@ -1,0 +1,13 @@
+<% @responses.each do |respons| %>
+    <% job_card = respons.job_card %>
+    <div class="bg-white shadow rounded-lg p-4 border border-gray-200" onclick="Turbo.visit('<%= job_card_path(job_card) %>')">
+      <p class="font-semibold text-lime-700 mb-1"><%= job_card.farm_name %></p>
+      <p class="text-gray-800 text-sm mb-2"><%= truncate(job_card.description, length: 80) %></p>
+      <div class="text-sm text-gray-600 space-y-1">
+        <p><strong>Местоположение:</strong> <%= job_card.location %></p>
+        <p><strong>Дата:</strong> <%= job_card.date_at.strftime("%d.%m.%Y") %></p>
+        <p><strong>Оплата:</strong> <%= number_to_currency(job_card.remuneration, unit: "₽", precision: 0) %></p>
+        <p><strong>Статус:</strong> <%= respons.status.humanize %></p>
+      </div>
+    </div>
+  <% end %>
