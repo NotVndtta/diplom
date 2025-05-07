@@ -17,11 +17,13 @@ class User < ApplicationRecord
   scope :with_jobs, -> { joins(:job_cards).distinct }
 
   has_one :foreman_description, dependent: :destroy
+
   has_many :ratings, as: :rateable, dependent: :destroy
   has_many :job_cards, dependent: :destroy
   has_many :job_applications, dependent: :destroy
   has_many :applied_jobs, through: :job_applications, source: :job_card
   has_many :experiences, dependent: :destroy
+  has_many :media_files
 
   validates :first_name, presence: true, length: { maximum: 100 }
   validates :last_name, presence: true, length: { maximum: 100 }

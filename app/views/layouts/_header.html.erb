@@ -23,6 +23,7 @@
         <%= link_to "Профиль", profile_path(current_user), class:"text-base font-semibold text-white hover:bg-lime-700 hover:scale-105 px-5 py-2 rounded-lg transition-all duration-300 animate-slide-in delay-100" %>
         <% if current_user.foreman? %>
           <%= link_to "Мои агрооперации", job_cards_profile_path(current_user), class:"text-base font-semibold text-white hover:bg-lime-700 hover:scale-105 px-5 py-2 rounded-lg transition-all duration-300 animate-slide-in" %>
+          <%= link_to "Библиотека", media_files_path, class:"text-base font-semibold text-white hover:bg-lime-700 hover:scale-105 px-5 py-2 rounded-lg transition-all duration-300 animate-slide-in" %>
         <%else%>
           <%= link_to "Мои отклики", responses_profile_path(current_user), class:"text-base font-semibold text-white hover:bg-lime-700 hover:scale-105 px-5 py-2 rounded-lg transition-all duration-300 animate-slide-in" %>
         <% end %>

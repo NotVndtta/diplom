@@ -17,6 +17,9 @@
 
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" %>
+    <%= javascript_include_tag "https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js", defer: true %>
   </head>
 
   <body class="bg-[#fffdf5]", style="font-family: 'Manrope', sans-serif;">
@@ -31,5 +34,11 @@
         <%= yield %>
       </main>
     <% end %>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        GLightbox({ selector: ".glightbox" });
+      });
+    </script>
   </body>
 </html>

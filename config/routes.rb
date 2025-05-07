@@ -2,8 +2,9 @@ Rails.application.routes.draw do
   root to: "job_cards#index"
 
   resources :job_cards do
-    resources :job_applications, only: [ :create, :index, :update ]
-    resources :ratings, only: [ :create, :destroy ]
+    resources :job_applications, only: %i[create index update]
+    resources :ratings, only: %i[create destroy]
+    resources :job_card_media, only: %i[new create destroy]
   end
 
   resources :profiles do
@@ -14,14 +15,21 @@ Rails.application.routes.draw do
       get :foreman_description
       post :foreman_description
     end
+
     resources :experiences, only: %i[create new update destroy edit] do
       member do
         get :show_modal
       end
     end
-    resources :ratings, only: [ :create, :destroy ]
+
+    resources :ratings, only: %i[create destroy]
   end
 
+  resources :media_files, only: %i[index new create destroy] do
+    collection do
+      get :show_modal
+    end
+  end
 
   devise_for :users, controllers: {
     registrations: "users/registrations",

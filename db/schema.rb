@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_28_201119) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_07_142959) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -45,6 +45,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_28_201119) do
     t.index ["user_id"], name: "index_job_applications_on_user_id"
   end
 
+  create_table "job_card_media", force: :cascade do |t|
+    t.bigint "job_card_id", null: false
+    t.bigint "media_file_id", null: false
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_card_id"], name: "index_job_card_media_on_job_card_id"
+    t.index ["media_file_id"], name: "index_job_card_media_on_media_file_id"
+  end
+
   create_table "job_cards", force: :cascade do |t|
     t.string "farm_name"
     t.integer "remuneration"
@@ -58,6 +68,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_28_201119) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_job_cards_on_user_id"
+  end
+
+  create_table "media_files", force: :cascade do |t|
+    t.string "file", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_media_files_on_user_id"
   end
 
   create_table "ratings", force: :cascade do |t|
@@ -96,5 +114,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_28_201119) do
   add_foreign_key "foreman_descriptions", "users"
   add_foreign_key "job_applications", "job_cards"
   add_foreign_key "job_applications", "users"
+  add_foreign_key "job_card_media", "job_cards"
+  add_foreign_key "job_card_media", "media_files"
   add_foreign_key "job_cards", "users"
+  add_foreign_key "media_files", "users"
 end
