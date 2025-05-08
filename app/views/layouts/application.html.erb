@@ -22,15 +22,20 @@
     <%= javascript_include_tag "https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js", defer: true %>
   </head>
 
-  <body class="bg-[#fffdf5]", style="font-family: 'Manrope', sans-serif;">
-    <%= render "layouts/header" %>
+  <body class="bg-[#fffdf5]" style="font-family: 'Manrope', sans-serif;">
+    <% unless devise_controller? || controller_name == "vineyard_auth" %>
+      <%= render "layouts/header" %>
+    <% end %>
 
     <% if current_user %>
       <main class="px-5">
         <%= yield %>
       </main>
     <% else %>
-      <main class="flex items-center justify-center h-screen bg-cover bg-center bg-no-repeat" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(<%= image_path('session_bg.png') %>);">
+      <main class="flex items-center justify-center h-screen bg-cover bg-center bg-no-repeat"
+            <% if devise_controller? || controller_name == "vineyard_auth" %>
+              style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(<%= image_path('session_bg.png') %>);"
+            <% end %>>
         <%= yield %>
       </main>
     <% end %>

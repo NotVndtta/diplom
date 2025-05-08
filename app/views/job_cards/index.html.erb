@@ -28,6 +28,6 @@
         data: { turbo_frame: "job_cards_frame", turbo_action: "replace" } %>
     </div>
 
-    <%= render partial: @view == 'table' ? 'table_index' : 'card_index', locals: { job_cards: @job_cards } %>
+    <%= render partial: @view == 'table' ? 'table_index' : 'card_index', locals: { job_cards: @job_cards, q: @q } %>
   </turbo-frame>
 </div>

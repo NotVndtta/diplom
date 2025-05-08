@@ -2,7 +2,10 @@ class JobCardsController < ApplicationController
   before_action :set_job_card, only: %i[ show edit update destroy ]
 
   def index
-    @job_cards = JobCard.all
+    @q = JobCard.ransack(params[:q]) # Initialize Ransack search with params[:q]
+    @job_cards = @q.result
+                   .where.not(farm_name: nil)
+                   
     @view = params[:view] == "table" ? "table" : "card"
   end
 
@@ -55,5 +58,17 @@ class JobCardsController < ApplicationController
 
   def job_card_params
     params.expect(job_card: [ :farm_name, :remuneration, :work_amount, :description, :date_at, :location, :status, :count_users, :user_id ])
+  end
+
+  def ransack_params
+    params[:q]&.permit(
+      :status_eq,
+      :remuneration_gteq,
+      :remuneration_lteq,
+      :count_users_eq,
+      :date_at_eq,
+      :work_amount_eq,
+      :text_query
+    ) || {}
   end
 end

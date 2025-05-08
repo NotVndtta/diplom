@@ -10,6 +10,9 @@ module GeneratedUrlHelpersModule
   include ::ActionDispatch::Routing::PolymorphicRoutes
 
   sig { params(args: T.untyped).returns(String) }
+  def attach_to_job_card_media_file_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def cancel_user_registration_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -40,6 +43,12 @@ module GeneratedUrlHelpersModule
   def job_card_job_applications_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def job_card_job_card_media_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def job_card_job_card_medium_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def job_card_rating_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -55,7 +64,19 @@ module GeneratedUrlHelpersModule
   def job_cards_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def media_file_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def media_files_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def new_job_card_job_card_medium_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def new_job_card_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def new_media_file_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def new_profile_experience_url(*args); end
@@ -191,6 +212,9 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def root_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def show_modal_media_files_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def show_modal_profile_experience_url(*args); end

@@ -1,4 +1,6 @@
 class JobCard < ApplicationRecord
+  include PgSearch::Model
+
   belongs_to :user
 
   has_one :accepted_application, -> { accepted }, class_name: "JobApplication"
@@ -13,6 +15,21 @@ class JobCard < ApplicationRecord
   validates :work_amount, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :description, presence: true, length: { maximum: 1000 }
   validate :accepted_applications_within_work_amount
+
+  def self.ransackable_associations(auth_object = nil)
+    [ "user" ]
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    [ "count_users", "created_at", "date_at", "description", "farm_name", "id", "location", "remuneration", "status", "updated_at", "work_amount" ]
+  end
+
+  pg_search_scope :search_by_text,
+                  against: [ :farm_name, :location, :description ],
+                  associated_against: { user: :name },
+                  using: {
+                    tsearch: { prefix: true }
+                  }
 
   private
 
