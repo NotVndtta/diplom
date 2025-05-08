@@ -17,18 +17,15 @@ Rails.application.routes.draw do
     end
 
     resources :experiences, only: %i[create new update destroy edit] do
-      member do
-        get :show_modal
-      end
+      get :show_modal, on: :member
     end
 
     resources :ratings, only: %i[create destroy]
   end
 
   resources :media_files, only: %i[index new create destroy] do
-    collection do
-      get :show_modal
-    end
+    get :show_modal, on: :collection
+    post :attach_to_job_card, on: :member
   end
 
   devise_for :users, controllers: {

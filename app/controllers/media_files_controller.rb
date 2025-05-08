@@ -5,6 +5,7 @@ class MediaFilesController < ApplicationController
   def index
     @media_files = current_user.media_files.order(created_at: :desc)
     @media_file = MediaFile.new
+    @job_cards = current_user.job_cards
   end
 
   def show
@@ -47,6 +48,17 @@ class MediaFilesController < ApplicationController
           renderable: FileModal.new(media_file)
         )
       }
+    end
+  end
+
+  def attach_to_job_card
+    job_card = current_user.job_cards.find(params[:job_card_id])
+    @job_card_media = job_card.job_card_media.build(media_file: @media_file)
+
+    if @job_card_media.save
+      redirect_to media_files_path, notice: "Медиафайл успешно привязан к агрооперации."
+    else
+      redirect_to media_files_path, alert: "Ошибка при привязке медиафайла."
     end
   end
 
