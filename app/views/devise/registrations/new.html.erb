@@ -1,123 +1,127 @@
-  <div class="mt-4 w-3/8 bg-white shadow-lg rounded-2xl p-8 space-y-8">
-    <div class="text-center">
-      <h2 class="text-3xl font-bold text-gray-900">Создайте аккаунт</h2>
-      <p class="mt-2 text-sm text-gray-600">Заполните данные ниже, чтобы начать</p>
-    </div>
-
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "space-y-6" }) do |f| %>
-
-      <div class="space-y-4">
-        <h3 class="text-lg font-medium text-gray-900">Информация об аккаунте</h3>
-        <div class="grid md:grid-cols-2 gap-4">
-          <div>
-            <%= render(Ui::StringInputComponent.new(
-              form: f,
-              field_name: :email,
-              label: "Адрес электронной почты",
-              type: "email",
-              autocomplete: "email",
-              input_class: "block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            )) %>
-          </div>
-          <div>
-            <%= render(Ui::StringInputComponent.new(
-              form: f,
-              field_name: :phone,
-              label: "Номер телефона",
-              type: "tel",
-              autocomplete: "tel",
-              input_class: "block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            )) %>
-          </div>
-          <div>
-            <%= render(Ui::StringInputComponent.new(
-              form: f,
-              field_name: :password,
-              label: "Пароль",
-              type: "password",
-              autocomplete: "new-password",
-              input_class: "block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            )) %>
-            <% if @minimum_password_length %>
-              <p class="mt-1 text-xs text-gray-500">Минимум <%= @minimum_password_length %> символов</p>
-            <% end %>
-          </div>
-          <div>
-            <%= render(Ui::StringInputComponent.new(
-              form: f,
-              field_name: :password_confirmation,
-              label: "Подтверждение пароля",
-              type: "password",
-              autocomplete: "new-password",
-              input_class: "block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            )) %>
-          </div>
-        </div>
+<div class="min-h-screen flex items-center justify-center p-4">
+  <div class="w-full max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-4xl mx-auto overflow-y-auto">
+    <div class="bg-white shadow-lg rounded-2xl p-4 sm:p-8 space-y-6">
+      <div class="text-center">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">Создайте аккаунт</h2>
+        <p class="mt-2 text-sm text-gray-600">Заполните данные ниже, чтобы начать</p>
       </div>
 
-      <div class="space-y-4">
-        <h3 class="text-lg font-medium text-gray-900">Личная информация</h3>
-        <div class="grid md:grid-cols-2 gap-4">
-          <div>
-            <%= render(Ui::StringInputComponent.new(
-              form: f,
-              field_name: :first_name,
-              label: "Имя",
-              autocomplete: "given-name",
-              input_class: "block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            )) %>
-          </div>
-          <div>
-            <%= render(Ui::StringInputComponent.new(
-              form: f,
-              field_name: :last_name,
-              label: "Фамилия",
-              autocomplete: "family-name",
-              input_class: "block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            )) %>
-          </div>
-          <div>
-            <%= render(Ui::NumberInputComponent.new(
-              form: f,
-              field_name: :birth_year,
-              label: "Год рождения",
-              input_class: "block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            )) %>
-          </div>
-          <div>
-            <%= render(Ui::StringInputComponent.new(
-              form: f,
-              field_name: :city,
-              label: "Город",
-              autocomplete: "address-level2",
-              input_class: "block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            )) %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "space-y-6" }) do |f| %>
+
+        <div class="space-y-4">
+          <h3 class="text-lg font-medium text-gray-900">Информация об аккаунте</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <%= render(Ui::StringInputComponent.new(
+                form: f,
+                field_name: :email,
+                label: "Адрес электронной почты",
+                type: "email",
+                autocomplete: "email",
+                input_class: "block w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-sm sm:text-base"
+              )) %>
+            </div>
+            <div>
+              <%= render(Ui::StringInputComponent.new(
+                form: f,
+                field_name: :phone,
+                label: "Номер телефона",
+                type: "tel",
+                autocomplete: "tel",
+                input_class: "block w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-sm sm:text-base"
+              )) %>
+            </div>
+            <div>
+              <%= render(Ui::StringInputComponent.new(
+                form: f,
+                field_name: :password,
+                label: "Пароль",
+                type: "password",
+                autocomplete: "new-password",
+                input_class: "block w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-sm sm:text-base"
+              )) %>
+              <% if @minimum_password_length %>
+                <p class="mt-1 text-xs text-gray-500">Минимум <%= @minimum_password_length %> символов</p>
+              <% end %>
+            </div>
+            <div>
+              <%= render(Ui::StringInputComponent.new(
+                form: f,
+                field_name: :password_confirmation,
+                label: "Подтверждение пароля",
+                type: "password",
+                autocomplete: "new-password",
+                input_class: "block w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-sm sm:text-base"
+              )) %>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="space-y-4">
-        <h3 class="text-lg font-medium text-gray-900">Дополнительная информация</h3>
+        <div class="space-y-4">
+          <h3 class="text-lg font-medium text-gray-900">Личная информация</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <%= render(Ui::StringInputComponent.new(
+                form: f,
+                field_name: :first_name,
+                label: "Имя",
+                autocomplete: "given-name",
+                input_class: "block w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-sm sm:text-base"
+              )) %>
+            </div>
+            <div>
+              <%= render(Ui::StringInputComponent.new(
+                form: f,
+                field_name: :last_name,
+                label: "Фамилия",
+                autocomplete: "family-name",
+                input_class: "block w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-sm sm:text-base"
+              )) %>
+            </div>
+            <div>
+              <%= render(Ui::NumberInputComponent.new(
+                form: f,
+                field_name: :birth_year,
+                label: "Год рождения",
+                input_class: "block w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-sm sm:text-base"
+              )) %>
+            </div>
+            <div>
+              <%= render(Ui::StringInputComponent.new(
+                form: f,
+                field_name: :city,
+                label: "Город",
+                autocomplete: "address-level2",
+                input_class: "block w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-sm sm:text-base"
+              )) %>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <h3 class="text-lg font-medium text-gray-900">Дополнительная информация</h3>
+          <div>
+            <%= render(Ui::TextAreaComponent.new(
+              form: f,
+              field_name: :about,
+              label: "О себе",
+              input_class: "block w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-sm sm:text-base"
+            )) %>
+          </div>
+          <div>
+            <%= f.label :role, "Роль", class: "block text-sm font-medium text-gray-700" %>
+            <%= f.select :role, options_for_select(User::ROLES, @user.role), { prompt: t('profile.select_role') }, class: "mt-1 block w-full px-3 sm:px-4 py-2 border #{@user.errors[:role].any? ? 'border-red-400' : 'border-gray-300'} rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-sm sm:text-base", required: true %>
+          </div>
+        </div>
+
         <div>
-          <%= render(Ui::TextAreaComponent.new(
-            form: f,
-            field_name: :about,
-            label: "О себе",
-            input_class: "block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-          )) %>
+          <%= f.submit "Зарегистрироваться", class: "w-full flex justify-center py-2 sm:py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm sm:text-base font-medium text-white bg-lime-600 hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500 transition duration-150" %>
         </div>
-        <div>
-          <%= f.label :role, "Роль", class: "block text-sm font-medium text-gray-700" %>
-          <%= f.select :role, options_for_select(User::ROLES, @user.role), { prompt: t('profile.select_role') }, class: "mt-1 block w-full px-4 py-2 border #{@user.errors[:role].any? ? 'border-red-400' : 'border-gray-300'} rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm", required: true %>
-        </div>
-      </div>
+      <% end %>
 
-      <div>
-        <%= f.submit "Зарегистрироваться", class: "w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150" %>
+      <div class="text-center text-sm text-gray-600">
+        <%= render "devise/shared/links" %>
       </div>
-    <% end %>
-
-    <div class="text-center text-sm text-gray-600">
-      <%= render "devise/shared/links" %>
     </div>
   </div>
+</div>

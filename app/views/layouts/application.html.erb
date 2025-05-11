@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html class="h-full">
   <head>
     <title><%= content_for(:title) || "Diplom" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
@@ -22,27 +22,42 @@
     <%= javascript_include_tag "https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js", defer: true %>
   </head>
 
-  <body class="bg-[#fffdf5]" style="font-family: 'Manrope', sans-serif;">
+  <body class="bg-[#fffdf5] min-h-full flex flex-col" style="font-family: 'Manrope', sans-serif;">
     <% unless devise_controller? || controller_name == "vineyard_auth" %>
       <%= render "layouts/header" %>
     <% end %>
 
     <% if current_user %>
-      <main class="px-5">
+      <main class="px-4 sm:px-5 flex-1">
         <%= yield %>
       </main>
     <% else %>
-      <main class="flex items-center justify-center h-screen bg-cover bg-center bg-no-repeat"
+      <main class="md:h-screen flex-1 flex items-center justify-center bg-cover bg-center bg-no-repeat py-4"
             <% if devise_controller? || controller_name == "vineyard_auth" %>
               style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(<%= image_path('session_bg.png') %>);"
             <% end %>>
-        <%= yield %>
+        <div class="w-full max-w-full px-4 py-8">
+          <%= yield %>
+        </div>
       </main>
     <% end %>
 
     <script>
       document.addEventListener("DOMContentLoaded", function() {
         GLightbox({ selector: ".glightbox" });
+        
+        if (window.innerWidth < 768) {
+          document.querySelector('main').classList.remove('h-screen');
+        }
+        
+        window.addEventListener('resize', function() {
+          const main = document.querySelector('main');
+          if (window.innerWidth < 768) {
+            main.classList.remove('h-screen');
+          } else {
+            main.classList.add('h-screen');
+          }
+        });
       });
     </script>
   </body>
