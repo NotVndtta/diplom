@@ -9,6 +9,7 @@ class JobCard < ApplicationRecord
   has_many :job_applications, dependent: :destroy
   has_many :applicants, through: :job_applications, source: :user
   has_many :ratings, as: :rateable, dependent: :destroy
+  has_many :job_card_media, class_name: "JobCardMedia", dependent: :destroy
   has_many :media_files, through: :job_card_media
 
   validates :farm_name, presence: true, length: { maximum: 255 }

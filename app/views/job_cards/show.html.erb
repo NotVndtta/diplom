@@ -78,7 +78,52 @@
         </div>
       </div>
     </div>
-
+ <div class="bg-gray-50 p-4 sm:p-6 rounded-lg sm:rounded-xl border border-gray-200">
+          <div class="flex justify-between items-center mb-4 sm:mb-6">
+            <h3 class="text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-wider">Медиафайлы</h3>
+            <% if user_signed_in? && @job_card.user == current_user %>
+              <%= link_to "Добавить медиафайл", media_files_path, class: "inline-flex items-center px-3 py-1 sm:px-4 sm:py-2 border border-transparent rounded-md shadow-sm text-xs sm:text-sm font-medium text-white bg-lime-600 hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500 transition-all" %>
+            <% end %>
+          </div>
+          <% if @job_card.media_files.any? %>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              <% @job_card.media_files.each do |media_file| %>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col">
+                  <div class="relative aspect-w-16 aspect-h-9 bg-gray-100">
+                    <% if media_file.file.file.resource_type == "image" %>
+                      <%= link_to media_file.file.url, class: "glightbox", data: { glightbox: "title: '#{File.basename(media_file.file.url)}'" } do %>
+                        <%= image_tag media_file.file.url, class: "w-full h-full object-cover", alt: "Media preview" %>
+                      <% end %>
+                    <% elsif media_file.file.file.resource_type == "video" %>
+                      <%= link_to media_file.file.url, class: "glightbox", data: { glightbox: "type: video", glightbox_video: "source: '#{media_file.file.url}', type: 'video/mp4'" } do %>
+                        <video muted class="w-full h-full object-cover pointer-events-none">
+                          <source src="<%= media_file.file.url %>" type="video/mp4">
+                        </video>
+                      <% end %>
+                    <% else %>
+                      <div class="w-full h-full flex items-center justify-center text-gray-600 px-2 text-sm">
+                        <p class="truncate"><%= File.basename(media_file.file.url) %></p>
+                      </div>
+                    <% end %>
+                  </div>
+                  <div class="p-4 flex-grow">
+                    <p class="text-sm text-gray-500 truncate"><%= File.basename(media_file.file.url.split('?').first) %></p>
+                    <% if media_file.job_card_media.find_by(job_card: @job_card).description.present? %>
+                      <p class="text-sm text-gray-700 mt-2"><%= simple_format(media_file.job_card_media.find_by(job_card: @job_card).description) %></p>
+                    <% end %>
+                  </div>
+                  <% if user_signed_in? && @job_card.user == current_user %>
+                    <div class="p-4 border-t border-gray-100">
+                      <%= link_to "Удалить", job_card_job_card_medium_path(@job_card, media_file.job_card_media.find_by(job_card: @job_card)), data: { turbo_method: :delete, turbo_confirm: "Вы уверены?" }, class: "text-red-600 hover:text-red-800 text-sm font-medium transition-colors duration-200" %>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          <% else %>
+            <p class="text-sm text-gray-500">Медиафайлы отсутствуют.</p>
+          <% end %>
+        </div>
     <div class="bg-gray-50 px-4 sm:px-6 py-4 sm:py-6 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-5">
       <%= link_to job_cards_path, class: "order-2 sm:order-1 inline-flex items-center px-4 py-2 sm:px-6 sm:py-3 border border-gray-300 rounded-md shadow-sm text-xs sm:text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500 transition-all" do %>
         <svg class="-ml-1 mr-2 sm:mr-3 h-4 w-4 sm:h-5 sm:w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">

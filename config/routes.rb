@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   resources :media_files, only: %i[index new create destroy] do
     get :show_modal, on: :collection
     post :attach_to_job_card, on: :member
+    post :attach_to_job_card, on: :member
   end
 
   devise_for :users, controllers: {
