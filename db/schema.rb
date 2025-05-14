@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_07_142959) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_14_212616) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -85,8 +85,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_07_142959) do
     t.bigint "rateable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["rateable_type", "rateable_id"], name: "index_ratings_on_rateable"
     t.index ["rateable_type", "rateable_id"], name: "index_ratings_on_rateable_type_and_rateable_id"
+    t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -118,4 +120,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_07_142959) do
   add_foreign_key "job_card_media", "media_files"
   add_foreign_key "job_cards", "users"
   add_foreign_key "media_files", "users"
+  add_foreign_key "ratings", "users"
 end

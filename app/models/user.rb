@@ -7,6 +7,7 @@ class User < ApplicationRecord
   ROLES = [
     FREELANCER = "freelancer",
     FOREMAN = "foreman",
+    STUDENT = "student",
     ADMIN = "admin"
   ].freeze
 

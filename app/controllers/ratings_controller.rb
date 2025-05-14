@@ -5,14 +5,15 @@ class RatingsController < ApplicationController
 
   def create
     @rateable = find_rateable
-    @rating = @rateable.ratings.new(rating_params)
+    @rating = @rateable.ratings.build(rating_params)
     @rating.user = current_user
 
+    binding.irb
     if @rating.save
-      redirect_to @rateable, notice: "Отзыв успешно добавлен."
+      redirect_to rating_reviews_path, notice: "Отзыв успешно добавлен."
     else
-      flash[:alert] = "Не удалось добавить отзыв."
-      render "new"
+      flash[:alert] = "Не удалось добавить отзыв: #{@rating.errors.full_messages.join(', ')}"
+      redirect_back(fallback_location: root_path)
     end
   end
 

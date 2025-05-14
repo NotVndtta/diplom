@@ -22,7 +22,7 @@
     <%= javascript_include_tag "https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js", defer: true %>
   </head>
 
-  <body class="bg-[#fffdf5] min-h-full flex flex-col" style="font-family: 'Manrope', sans-serif;">
+  <body class="bg-[#fffdf5] h-full" style="font-family: 'Manrope', sans-serif;">
     <% unless devise_controller? || controller_name == "vineyard_auth" %>
       <%= render "layouts/header" %>
     <% end %>
@@ -32,32 +32,17 @@
         <%= yield %>
       </main>
     <% else %>
-      <main class="md:h-screen flex-1 flex items-center justify-center bg-cover bg-center bg-no-repeat py-4"
+      <main class="h-full flex items-center justify-center bg-cover bg-center bg-no-repeat"
             <% if devise_controller? || controller_name == "vineyard_auth" %>
               style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(<%= image_path('session_bg.png') %>);"
             <% end %>>
-        <div class="w-full max-w-full px-4 py-8">
-          <%= yield %>
-        </div>
+        <%= yield %>
       </main>
     <% end %>
 
     <script>
       document.addEventListener("DOMContentLoaded", function() {
         GLightbox({ selector: ".glightbox" });
-        
-        if (window.innerWidth < 768) {
-          document.querySelector('main').classList.remove('h-screen');
-        }
-        
-        window.addEventListener('resize', function() {
-          const main = document.querySelector('main');
-          if (window.innerWidth < 768) {
-            main.classList.remove('h-screen');
-          } else {
-            main.classList.add('h-screen');
-          }
-        });
       });
     </script>
   </body>
