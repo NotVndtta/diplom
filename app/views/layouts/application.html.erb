@@ -18,8 +18,27 @@
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
 
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
     <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" %>
     <%= javascript_include_tag "https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js", defer: true %>
+
+
+    <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(registration => {
+            console.log('Service Worker зарегистрирован:', registration);
+          })
+          .catch(error => {
+            console.error('Ошибка регистрации Service Worker:', error);
+          });
+      });
+    }
+  </script>
+  
   </head>
 
   <body class="bg-[#fffdf5] h-full" style="font-family: 'Manrope', sans-serif;">

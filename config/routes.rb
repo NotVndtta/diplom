@@ -34,6 +34,12 @@ Rails.application.routes.draw do
     sessions: "users/sessions"
   }
 
+
+  get '/manifest.json', to: 'pwa#manifest'
+  get '/service-worker.js', to: 'pwa#service_worker'
+  get '/offline', to: 'pwa#offline'
+
+
   devise_scope :user do
   end
 
