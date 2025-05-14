@@ -4,45 +4,35 @@ export default class extends Controller {
   static targets = [ "star", "input" ]
 
   connect() {
-    this.rating = 0
-    this.updateStars()
+    this.resetStars()
   }
 
   setRating(event) {
-    const star = event.currentTarget
-    this.rating = parseInt(star.dataset.rating)
-    this.inputTarget.value = this.rating
-    this.updateStars()
-  }
-
-  updateStars() {
-    this.starTargets.forEach((star, index) => {
-      const rating = parseInt(star.dataset.rating)
-      if (rating <= this.rating) {
-        star.classList.remove('text-gray-300')
-        star.classList.add('text-yellow-400')
-      } else {
-        star.classList.remove('text-yellow-400')
-        star.classList.add('text-gray-300')
-      }
-    })
+    const rating = event.currentTarget.dataset.rating
+    this.inputTarget.value = rating
+    this.updateStars(rating)
   }
 
   hover(event) {
-    const rating = parseInt(event.currentTarget.dataset.rating)
-    this.starTargets.forEach((star, index) => {
-      const starRating = parseInt(star.dataset.rating)
-      if (starRating <= rating) {
-        star.classList.remove('text-gray-300')
-        star.classList.add('text-yellow-400')
-      } else {
-        star.classList.remove('text-yellow-400')
-        star.classList.add('text-gray-300')
-      }
-    })
+    const rating = event.currentTarget.dataset.rating
+    this.updateStars(rating)
   }
 
   resetStars() {
-    this.updateStars()
+    const currentRating = this.inputTarget.value
+    this.updateStars(currentRating)
+  }
+
+  updateStars(rating) {
+    this.starTargets.forEach((star, index) => {
+      const path = star.querySelector('path')
+      if (index < rating) {
+        path.classList.remove('text-gray-300')
+        path.classList.add('text-yellow-400')
+      } else {
+        path.classList.remove('text-yellow-400')
+        path.classList.add('text-gray-300')
+      }
+    })
   }
 } 

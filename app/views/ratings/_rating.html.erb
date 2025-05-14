@@ -1,11 +1,11 @@
 <div class="bg-white dark:bg-gray-600 p-4 rounded-2xl shadow-lg mb-4 rating-card flex flex-col justify-between">
   <div class="flex items-start mb-2">
     <div class="flex-shrink-0">
-      <% if avatar = rating.user.profile&.avatar_url %>
-        <img src="<%= avatar %>" class="w-10 h-10 rounded-full object-cover" alt="Аватар" />
+      <% if rating.user.avatar.present? %>
+        <%= image_tag rating.user.avatar.url, class: "w-10 h-10 rounded-full object-cover", alt: "Аватар" %>
       <% else %>
         <div class="w-10 h-10 rounded-full bg-lime-600 flex items-center justify-center text-white text-lg font-medium">
-          <%= rating.user.email[0].upcase %>
+          <%= rating.user.first_name[0].upcase %>
         </div>
       <% end %>
     </div>
@@ -14,22 +14,28 @@
       <div class="flex items-center justify-between">
         <div>
           <p class="font-semibold text-lg text-black dark:text-white">
-            <%= link_to "#{rating.user.profile.first_name} #{rating.user.profile.last_name}", user_profile_path(rating.user_id), class: "hover:text-lime-600 transition-colors duration-150" %>
+            <%= link_to "#{rating.user.first_name} #{rating.user.last_name}", profile_path(rating.user), class: "hover:text-lime-600 transition-colors duration-150" %>
           </p>
-          <div class="flex items-center mt-1">
+          <div class="flex items-center mt-1 space-x-1">
             <% 1.upto(5) do |i| %>
-              <span class="<%= i <= rating.grade ? 'text-yellow-400' : 'text-gray-300' %> text-lg">
-                ★
-              </span>
+              <svg class="w-6 h-6 sm:w-8 sm:h-8" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path class="<%= i <= rating.grade ? 'text-yellow-400' : 'text-gray-300' %>" 
+                      d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" 
+                      stroke="currentColor" 
+                      stroke-width="1.5" 
+                      stroke-linecap="round" 
+                      stroke-linejoin="round"/>
+              </svg>
             <% end %>
             <span class="ml-2 text-sm text-gray-500 dark:text-gray-400">
-              <%= rating.created_at.strftime("%d.%m.%Y") %>
+              <%= l(rating.created_at, format: :long) %>
             </span>
           </div>
         </div>
         
-        <% if rating.user == current_user || current_user&.admin? || current_user&.moderator? %>
-          <%= button_to polymorphic_path([rating.rateable, rating]), 
+        <% if rating.user == current_user || current_user&.admin?  %>
+          <% delete_path = rating.rateable.is_a?(User) ? profile_rating_path(rating.rateable, rating) : job_card_rating_path(rating.rateable, rating) %>
+          <%= button_to delete_path,
               method: :delete,
               data: { turbo_confirm: 'Вы уверены, что хотите удалить этот отзыв?' },
               class: "text-gray-400 hover:text-red-500 transition-colors duration-150" do %>

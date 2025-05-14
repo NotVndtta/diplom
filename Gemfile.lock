@@ -166,6 +166,8 @@ GEM
       raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    groupdate (6.6.0)
+      activesupport (>= 7.1)
     highline (3.1.2)
       reline
     i18n (1.14.7)
@@ -210,6 +212,18 @@ GEM
       sshkit (>= 1.23.0, < 2.0)
       thor (~> 1.3)
       zeitwerk (>= 2.6.18, < 3.0)
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
     language_server-protocol (3.17.0.4)
     lefthook (1.11.11)
     lint_roller (1.1.0)
@@ -528,10 +542,12 @@ DEPENDENCIES
   discard
   dotenv-rails
   factory_bot_rails
+  groupdate
   i18n-tasks
   importmap-rails
   jbuilder
   kamal
+  kaminari
   lefthook
   otp-jwt
   pg (~> 1.1)

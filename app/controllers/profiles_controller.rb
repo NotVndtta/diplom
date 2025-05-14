@@ -30,13 +30,26 @@ class ProfilesController < ApplicationController
   end
 
   def stats
-    @tasks_data = {
-      completed: @user.job_cards.where(status: "completed").count,
-      in_progress: @user.job_cards.where(status: "in_progress").count,
-      pending: @user.job_cards.where(status: "pending").count
-    }
+    @user = User.find(params[:id])
+    @stats = StatisticsService.new(@user)
 
-    render :stats
+    respond_to do |format|
+      format.html
+      format.json do
+        stats_data = {
+          job_cards: @stats.job_cards_stats,
+          ratings: @stats.ratings_distribution,
+          monthly_jobs: @stats.monthly_jobs_stats,
+          average_ratings: @stats.average_rating_by_month,
+          top_locations: @stats.top_locations,
+          earnings: @stats.earnings_by_month,
+          applications: @stats.job_applications_stats,
+          work_amounts: @stats.work_amount_distribution
+        }
+        Rails.logger.info "Stats data: #{stats_data.inspect}"
+        render json: stats_data
+      end
+    end
   end
 
 

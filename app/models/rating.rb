@@ -6,8 +6,4 @@ class Rating < ApplicationRecord
   validates :grade, presence: true, inclusion: { in: 1..5 }
   validates :user_id, presence: true
   validates :rateable, presence: true
-
-  # Пользователь может оставить только один отзыв для конкретного объекта
-  validates :user_id, uniqueness: { scope: [ :rateable_type, :rateable_id ],
-    message: "уже оставил отзыв для этого объекта" }
 end

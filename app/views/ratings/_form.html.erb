@@ -1,62 +1,69 @@
-<div class="w-full max-w-4xl mx-auto">
-  <div class="bg-white rounded-2xl shadow-lg p-6 sm:p-8">
-    <div class="text-center mb-8">
-      <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">Оставить отзыв</h2>
-      <p class="mt-2 text-gray-600">Поделитесь своим мнением</p>
-    </div>
-    
-    <% if user_signed_in? %>
-      <%= form_with model: Rating.new(rateable:), 
-        url: (rateable.is_a?(User) ? profile_ratings_path(rateable) : polymorphic_path([rateable, :rating])),
-        method: :post,
-        data: { turbo: "_top", controller: "rating" },
-        class: "space-y-6" do |form| 
-      %> 
-        <div class="field space-y-2">
-          <div class="flex items-center justify-center mb-4">
-            <div class="flex items-center space-x-2">
-              <% (1..5).each do |rating| %>
-                <button type="button"
-                        data-rating-target="star"
-                        data-rating="<%= rating %>"
-                        data-action="click->rating#setRating mouseover->rating#hover mouseout->rating#resetStars"
-                        class="text-4xl sm:text-5xl text-gray-300 hover:text-yellow-400 transform hover:scale-110 transition-all duration-150 focus:outline-none">
-                  ★
-                </button>
-              <% end %>
-            </div>
+<div id="rating_form" class="bg-white rounded-2xl shadow-lg p-6 sm:p-8 mb-8">
+  <div class="text-center mb-6">
+    <h2 class="text-2xl font-bold text-gray-900">Оставить отзыв</h2>
+    <p class="mt-2 text-sm text-gray-600">Поделитесь своим мнением и опытом</p>
+  </div>
+  
+  <% if user_signed_in? %>
+    <%= form_with model: Rating.new(rateable:), 
+      url: (rateable.is_a?(User) ? profile_ratings_path(rateable) : job_card_ratings_path(rateable)),
+      method: :post,
+      data: { controller: "rating", turbo: true },
+      class: "space-y-6" do |form| 
+    %>
+      <div class="field space-y-3">
+        <label class="block text-sm font-medium text-gray-700">Ваша оценка</label>
+        <div class="flex items-center justify-center bg-gray-50 rounded-xl p-2">
+          <div class="flex items-center space-x-2">
+            <% (1..5).each do |rating| %>
+              <button type="button"
+                      data-rating-target="star"
+                      data-rating="<%= rating %>"
+                      data-action="click->rating#setRating mouseover->rating#hover mouseout->rating#resetStars"
+                      class="focus:outline-none transform hover:scale-110 transition-all duration-150">
+                <svg class="w-8 h-8 sm:w-10 sm:h-10" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path class="text-gray-300 hover:text-yellow-400" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            <% end %>
           </div>
-          <%= form.hidden_field :grade, data: { rating_target: "input" }, required: true %>
         </div>
+        <%= form.hidden_field :grade, data: { rating_target: "input" }, required: true %>
+        <% if @rating&.errors&.include?(:grade) %>
+          <p class="mt-1 text-sm text-red-600"><%= @rating.errors[:grade].join(", ") %></p>
+        <% end %>
+      </div>
 
-        <div class="field space-y-2">
-          <%= form.label :comment, "Ваш комментарий", class: "block text-sm font-medium text-gray-700" %>
-          <div class="relative">
-            <%= form.text_area :comment,
-                required: true,
-                rows: 4,
-                placeholder: "Расскажите о вашем опыте...",
-                class: "w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-lime-500 focus:border-lime-500 text-sm sm:text-base placeholder-gray-400 transition duration-150" %>
-          </div>
-          <%= form.hidden_field :rateable_id, value: rateable.id %>
-          <%= form.hidden_field :rateable_type, value: rateable.class.name %>
+      <div class="field space-y-3">
+        <%= form.label :comment, "Ваш комментарий", class: "block text-sm font-medium text-gray-700" %>
+        <div class="relative">
+          <%= form.text_area :comment,
+              required: true,
+              rows: 4,
+              placeholder: "Расскажите о вашем опыте (минимум 10 символов)...",
+              class: "w-full px-4 py-3 border #{@rating&.errors&.include?(:comment) ? 'border-red-300 focus:ring-red-500 focus:border-red-500' : 'border-gray-300 focus:ring-lime-500 focus:border-lime-500'} rounded-xl text-sm sm:text-base placeholder-gray-400 transition duration-150 bg-gray-50" %>
         </div>
+        <% if @rating&.errors&.include?(:comment) %>
+          <p class="mt-1 text-sm text-red-600"><%= @rating.errors[:comment].join(", ") %></p>
+        <% end %>
+        <%= form.hidden_field :rateable_id, value: rateable.id %>
+        <%= form.hidden_field :rateable_type, value: rateable.class.name %>
+      </div>
 
-        <div class="actions">
-          <%= form.submit "Отправить отзыв", 
-              class: "w-full py-3 px-6 bg-lime-600 hover:bg-lime-700 text-white text-sm sm:text-base font-semibold rounded-xl shadow-sm transform hover:translate-y-[-1px] transition-all duration-150" %>
-        </div>
-      <% end %>
-    <% else %>
-      <div class="text-center py-8">
-        <div class="mb-4">
-          <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-          </svg>
-        </div>
-        <p class="text-gray-600 mb-4">Чтобы оставить отзыв, необходимо войти в систему</p>
-        <%= link_to "Войти", new_user_session_path, class: "inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-xl text-white bg-lime-600 hover:bg-lime-700 transition-colors duration-150" %>
+      <div class="actions">
+        <%= form.submit "Отправить отзыв", 
+            class: "w-full py-3 px-6 bg-lime-600 hover:bg-lime-700 text-white text-sm sm:text-base font-semibold rounded-xl shadow-sm transform hover:translate-y-[-1px] transition-all duration-150" %>
       </div>
     <% end %>
-  </div>
+  <% else %>
+    <div class="text-center py-8 bg-gray-50 rounded-xl">
+      <div class="mb-4">
+        <svg class="mx-auto h-100 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+        </svg>
+      </div>
+      <p class="text-gray-600 mb-4">Чтобы оставить отзыв, необходимо войти в систему</p>
+      <%= link_to "Войти", new_user_session_path, class: "inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-xl text-white bg-lime-600 hover:bg-lime-700 transition-colors duration-150" %>
+    </div>
+  <% end %>
 </div>

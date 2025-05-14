@@ -1,5 +1,9 @@
 <% content_for :title, "Профиль" %>
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
   <%= render "profiles/profile", user: @user %>
-  <%= render "ratings/form", rateable: @user, rating: @user.ratings.new %>
+  
+  <div class="mt-8">
+    <%= render "ratings/ratings_list", rateable: @user %>
+    <%= render "ratings/form", rateable: @user if user_signed_in? && current_user != @user %>
+  </div>
 </div>

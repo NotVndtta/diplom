@@ -162,3 +162,10 @@
     <%= link_to "Просмотр откликов", job_card_job_applications_path(@job_card), class: "w-full sm:w-auto inline-flex justify-center items-center px-6 py-3 border border-gray-300 rounded-xl shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500 transition-all" %>
   </div>
 <% end %>
+
+<div class="mt-8 max-w-4xl mx-auto">
+  <% if user_signed_in? %>
+    <%= render "ratings/form", rateable: @job_card %>
+  <% end %>
+  <%= render "ratings/ratings_list", rateable: @job_card %>
+</div>
