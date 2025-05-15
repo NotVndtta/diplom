@@ -1,12 +1,16 @@
-<%= form_with(model: job_card, class: "max-w-3xl ") do |form| %>
+<%= form_with(model: job_card, class: "max-w-3xl") do |form| %>
   <% fields = {
     farm_name: { label: "Название агрохозяйства", type: :string },
     location: { label: "Локация", type: :string },
-    remuneration: { label: "Оплата за работу", type: :number },
-    work_amount: { label: "Объем работы", type: :number },
-    date_at: { label: "Дата", type: :string, input_type: "date" },
+    remuneration: { label: "Оплата за работу (₽)", type: :number },
+    work_amount: { label: "Объем работы (часов)", type: :number },
+    date_at: { label: "Дата работы", type: :date_picker, required: true },
     count_users: { label: "Требуемое количество работников", type: :number },
-    status: { label: "Статус", type: :string },
+    status: { 
+      label: "Статус", 
+      type: :select,
+      options: JobCard.statuses.keys.map { |s| [t("job_card.statuses.#{s}"), s] }
+    },
     description: { label: "Описание", type: :textarea }
   } %>
 
@@ -30,6 +34,33 @@
             input_class: base_input_class(job_card, field),
             step: "any"
           ) %>
+        <% when :select %>
+          <%= render Ui::SelectComponent.new(
+            form: form,
+            field_name: field,
+            label: config[:label],
+            options: config[:options],
+            input_class: base_input_class(job_card, field)
+          ) %>
+        <% when :date_picker %>
+          <div>
+            <%= form.label field, class: "block text-sm font-medium text-gray-700 mb-1" do %>
+              <%= config[:label] %>
+              <% if config[:required] %>
+                <span class="text-red-500 ml-1">*</span>
+              <% end %>
+            <% end %>
+            <%= form.text_field field, 
+                class: "#{base_input_class(job_card, field)} block w-full rounded-lg border-gray-300 shadow-sm focus:border-lime-500 focus:ring-lime-500 sm:text-sm",
+                data: {
+                  controller: "flatpickr"
+                } %>
+            <% if job_card.errors[field].any? %>
+              <p class="mt-1 text-sm text-red-600">
+                <%= job_card.errors[field].join(", ") %>
+              </p>
+            <% end %>
+          </div>
         <% when :textarea %>
           <%= render Ui::TextAreaComponent.new(
             form: form,
@@ -43,7 +74,17 @@
   </div>
 
   <div class="flex flex-col sm:flex-row justify-end gap-2 pr-0 sm:pr-3">
-    <%= link_to "← Назад к вакансиям", job_cards_path, class: "rounded-md px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium transition" %>
+    <%= link_to "← Назад к агрооперациям", job_cards_path, class: "rounded-md px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium transition" %>
     <%= form.submit "Сохранить", class: "w-full sm:w-auto bg-lime-600 hover:bg-lime-500 text-white font-semibold px-4 py-2 rounded-md transition" %>
   </div>
+<% end %>
+
+<% content_for :head do %>
+  <style>
+    @media (min-width: 640px) {
+      body {
+        overflow: hidden;
+      }
+    }
+  </style>
 <% end %>

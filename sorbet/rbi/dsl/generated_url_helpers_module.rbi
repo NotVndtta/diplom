@@ -103,6 +103,9 @@ module GeneratedUrlHelpersModule
   def new_vineyard_auth_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def offline_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def preview_view_component_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }

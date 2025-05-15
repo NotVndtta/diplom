@@ -54,7 +54,9 @@ class ProfilesController < ApplicationController
 
 
   def job_cards
-    @job_cards = @user.job_cards.order(created_at: :desc)
+    @q = @user.job_cards.ransack(params[:q])
+    @job_cards = @q.result.order(created_at: :desc)
+    @view = params[:view] == "table" ? "table" : "card"
   end
 
   def foreman_description

@@ -1,12 +1,12 @@
 <% content_for :title, "Редактирование карточки" %>
-<div class="flex justify-between">
-  <%= link_to "← Назад к вакансиям", job_cards_path, class: "rounded-md px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium transition" %>
-  <%= link_to "Show this job card", @job_card, class: "rounded-md px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium transition" %>
-</div>
 
-<div class="flex items-center justify-center px-4 py-4 ">
-  <div class="w-full max-w-2xl p-4 bg-white rounded-2xl">
-    <h1 class="font-bold text-4xl text-center pb-8">Редактирование агрооперации</h1>
+<div class="min-h-screen flex items-center justify-center px-4 py-4">
+  <div class="w-full max-w-2xl bg-white p-6 rounded-3xl shadow-lg">
+    <div class="flex justify-end mb-4">
+      <%= link_to "Просмотр карточки", @job_card, class: "rounded-md px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium transition" %>
+    </div>
+
+    <h1 class="font-bold text-3xl text-center pb-6">Редактирование агрооперации</h1>
 
     <%= render "form", job_card: @job_card %>
   </div>

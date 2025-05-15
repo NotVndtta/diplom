@@ -10,6 +10,17 @@
 
     <%= yield :head %>
 
+    <style>
+      @media (min-width: 640px) {
+        body.new-job-card-page {
+          overflow: hidden;
+        }
+        body:not(.new-job-card-page) {
+          overflow: auto;
+        }
+      }
+    </style>
+
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
@@ -39,9 +50,22 @@
     }
   </script>
   
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+    <%# Flatpickr для датапикера %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/airbnb.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ru.js"></script>
+
+    <%# Swiper.js для слайдера %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <%= yield :javascript %>
   </head>
 
-  <body class="bg-[#fffdf5] h-full" style="font-family: 'Manrope', sans-serif;">
+  <body class="bg-[#fffdf5] h-full <%= 'new-job-card-page' if controller_name == 'job_cards' && (action_name == 'new' || action_name == 'edit') %>" style="font-family: 'Manrope', sans-serif;">
     <% unless devise_controller? || controller_name == "vineyard_auth" %>
       <%= render "layouts/header" %>
     <% end %>

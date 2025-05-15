@@ -8,6 +8,7 @@
 class JobCard
   include GeneratedAssociationMethods
   include GeneratedAttributeMethods
+  include EnumMethodsModule
   extend CommonRelationMethods
   extend GeneratedRelationMethods
 
@@ -19,6 +20,9 @@ class JobCard
   class << self
     sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::JobCard).void)).returns(::JobCard) }
     def new(attributes = nil, &block); end
+
+    sig { returns(T::Hash[T.any(String, Symbol), String]) }
+    def statuses; end
   end
 
   module CommonRelationMethods
@@ -328,6 +332,20 @@ class JobCard
     def third_to_last!; end
   end
 
+  module EnumMethodsModule
+    sig { void }
+    def active!; end
+
+    sig { returns(T::Boolean) }
+    def active?; end
+
+    sig { void }
+    def archived!; end
+
+    sig { returns(T::Boolean) }
+    def archived?; end
+  end
+
   module GeneratedAssociationMethods
     sig { returns(T.nilable(::JobApplication)) }
     def accepted_application; end
@@ -396,6 +414,34 @@ class JobCard
     sig { params(value: T::Enumerable[::JobApplication]).void }
     def job_applications=(value); end
 
+    # This method is created by ActiveRecord on the `JobCard` class because it declared `has_many :job_card_media`.
+    # 🔗 [Rails guide for `has_many` association](https://guides.rubyonrails.org/association_basics.html#the-has-many-association)
+    sig { returns(::JobCardMedia::PrivateCollectionProxy) }
+    def job_card_media; end
+
+    sig { params(value: T::Enumerable[::JobCardMedia]).void }
+    def job_card_media=(value); end
+
+    sig { returns(T::Array[T.untyped]) }
+    def job_card_medium_ids; end
+
+    sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
+    def job_card_medium_ids=(ids); end
+
+    sig { returns(T::Array[T.untyped]) }
+    def media_file_ids; end
+
+    sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
+    def media_file_ids=(ids); end
+
+    # This method is created by ActiveRecord on the `JobCard` class because it declared `has_many :media_files, through: :job_card_media`.
+    # 🔗 [Rails guide for `has_many_through` association](https://guides.rubyonrails.org/association_basics.html#the-has-many-through-association)
+    sig { returns(::MediaFile::PrivateCollectionProxy) }
+    def media_files; end
+
+    sig { params(value: T::Enumerable[::MediaFile]).void }
+    def media_files=(value); end
+
     sig { returns(T::Array[T.untyped]) }
     def rating_ids; end
 
@@ -442,6 +488,9 @@ class JobCard
   end
 
   module GeneratedAssociationRelationMethods
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def active(*args, &blk); end
+
     sig { returns(PrivateAssociationRelation) }
     def all; end
 
@@ -450,6 +499,9 @@ class JobCard
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def annotate(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def archived(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def arel_columns(*args, &blk); end
@@ -513,6 +565,12 @@ class JobCard
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def none(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def not_active(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def not_archived(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def null_relation?(*args, &blk); end
@@ -1112,7 +1170,7 @@ class JobCard
     sig { returns(T.nilable(::String)) }
     def status; end
 
-    sig { params(value: T.nilable(::String)).returns(T.nilable(::String)) }
+    sig { params(value: T.nilable(T.any(::String, ::Symbol))).returns(T.nilable(T.any(::String, ::Symbol))) }
     def status=(value); end
 
     sig { returns(T::Boolean) }
@@ -1133,7 +1191,12 @@ class JobCard
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def status_change_to_be_saved; end
 
-    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    sig do
+      params(
+        from: T.nilable(T.any(::String, ::Symbol)),
+        to: T.nilable(T.any(::String, ::Symbol))
+      ).returns(T::Boolean)
+    end
     def status_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
@@ -1142,7 +1205,12 @@ class JobCard
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def status_previous_change; end
 
-    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    sig do
+      params(
+        from: T.nilable(T.any(::String, ::Symbol)),
+        to: T.nilable(T.any(::String, ::Symbol))
+      ).returns(T::Boolean)
+    end
     def status_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
@@ -1330,6 +1398,9 @@ class JobCard
   end
 
   module GeneratedRelationMethods
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    def active(*args, &blk); end
+
     sig { returns(PrivateRelation) }
     def all; end
 
@@ -1338,6 +1409,9 @@ class JobCard
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def annotate(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    def archived(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def arel_columns(*args, &blk); end
@@ -1401,6 +1475,12 @@ class JobCard
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def none(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    def not_active(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    def not_archived(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def null_relation?(*args, &blk); end

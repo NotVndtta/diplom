@@ -1,0 +1,28 @@
+<div>
+  <% if @label %>
+    <%= @form.label @field, @label, class: label_classes %>
+  <% end %>
+  
+  <% case @type %>
+  <% when :search %>
+    <%= @form.search_field @field, 
+        value: @options[:value], 
+        placeholder: @placeholder,
+        class: "#{input_classes} #{@options[:class]}" %>
+  <% when :number %>
+    <%= @form.number_field @field,
+        value: @options[:value],
+        placeholder: @placeholder,
+        min: @min,
+        class: "#{input_classes} #{@options[:class]}" %>
+  <% when :date %>
+    <%= @form.date_field @field,
+        value: @options[:value],
+        class: "#{input_classes} #{@options[:class]}" %>
+  <% else %>
+    <%= @form.text_field @field,
+        value: @options[:value],
+        placeholder: @placeholder,
+        class: "#{input_classes} #{@options[:class]}" %>
+  <% end %>
+</div> 

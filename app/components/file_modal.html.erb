@@ -8,26 +8,71 @@
       </button>
 
       <h2 class="text-3xl font-bold text-center text-gray-800">
-        <%= t('profile.add_experience') %>
+        Загрузка медиафайла
       </h2>
 
-      <%= form_with(model: @media_file, url: media_files_path, class: "space-y-6", data: { turbo: false }) do |form| %>
+      <%= form_with(model: @media_file, 
+          url: media_files_path, 
+          class: "space-y-6", 
+          data: { 
+            controller: "file-upload",
+            action: "turbo:submit-end->file-upload#handleSubmit"
+          }) do |form| %>
         <div class="w-full">
-          <%= form.label :file, class: 'block text-sm font-medium text-gray-700 mb-2' %>
-          <label id="file_label" class="flex flex-col items-center justify-center px-4 py-6 bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 transition text-center">
-            <div id="file_icon" class="mb-2">
-              <svg class="w-8 h-8 text-gray-500 mx-auto" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M12 12v6m0-6l-3 3m3-3l3 3m6-6V5a2 2 0 00-2-2H6a2 2 0 00-2 2v7" />
-              </svg>
+          <label id="file_label" class="flex flex-col items-center justify-center px-4 py-6 bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 transition text-center relative"
+                 data-file-upload-target="dropZone"
+                 data-action="dragover->file-upload#dragOver dragenter->file-upload#dragOver dragleave->file-upload#dragLeave drop->file-upload#drop">
+            
+            <div class="space-y-4">
+              <div id="file_icon" data-file-upload-target="defaultIcon">
+                <svg class="w-12 h-12 text-gray-400 mx-auto" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M12 12v6m0-6l-3 3m3-3l3 3m6-6V5a2 2 0 00-2-2H6a2 2 0 00-2 2v7" />
+                </svg>
+              </div>
+
+              <div id="file_preview" class="hidden space-y-2" data-file-upload-target="preview">
+                <div class="w-16 h-16 mx-auto relative">
+                  <img data-file-upload-target="imagePreview" class="w-full h-full object-cover rounded hidden">
+                  <video data-file-upload-target="videoPreview" class="w-full h-full object-cover rounded hidden" controls>
+                    <source src="" type="video/mp4">
+                  </video>
+                  <div data-file-upload-target="fileIcon" class="hidden w-full h-full flex items-center justify-center bg-gray-100 rounded">
+                    <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                    </svg>
+                  </div>
+                </div>
+                <p class="text-sm font-medium text-gray-900" data-file-upload-target="fileName"></p>
+                <p class="text-xs text-gray-500" data-file-upload-target="fileSize"></p>
+              </div>
+
+              <div class="space-y-2" data-file-upload-target="placeholder">
+                <p class="text-sm font-medium text-gray-700">
+                  Перетащите файл сюда или
+                  <span class="text-lime-600">выберите на компьютере</span>
+                </p>
+                <p class="text-xs text-gray-500">Поддерживаются изображения и видео</p>
+              </div>
             </div>
-            <span id="file_text" class="text-gray-600 text-sm">Нажмите или перетащите файл сюда</span>
-            <%= form.file_field :file, class: "hidden", id: "file_input" %>
+
+            <%= form.file_field :file,
+                class: "hidden",
+                data: {
+                  file_upload_target: "input",
+                  action: "change->file-upload#handleFiles"
+                } %>
           </label>
+
+          <div class="hidden mt-2" data-file-upload-target="error">
+            <p class="text-sm text-red-600"></p>
+          </div>
         </div>
 
         <div>
-          <%= form.submit t('profile.create_experience'),
-            class: "w-full rounded-lg px-6 py-3 bg-lime-600 hover:bg-lime-700 text-white font-semibold transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500" %>
+          <%= form.submit "Загрузить файл",
+            class: "w-full rounded-lg px-6 py-3 bg-lime-600 hover:bg-lime-700 text-white font-semibold transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500 disabled:opacity-50 disabled:cursor-not-allowed",
+            data: { file_upload_target: "submit" },
+            disabled: true %>
         </div>
       <% end %>
     </div>
@@ -35,7 +80,7 @@
 </turbo-frame>
 
 <style>
-    #modal .fixed {
+  #modal .fixed {
     position: fixed;
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 50;

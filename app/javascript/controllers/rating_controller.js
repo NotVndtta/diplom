@@ -8,25 +8,27 @@ export default class extends Controller {
   }
 
   setRating(event) {
-    const rating = event.currentTarget.dataset.rating
+    const rating = parseInt(event.currentTarget.dataset.rating)
     this.inputTarget.value = rating
     this.updateStars(rating)
   }
 
   hover(event) {
-    const rating = event.currentTarget.dataset.rating
+    const rating = parseInt(event.currentTarget.dataset.rating)
     this.updateStars(rating)
   }
 
   resetStars() {
-    const currentRating = this.inputTarget.value
+    const currentRating = parseInt(this.inputTarget.value) || 0
     this.updateStars(currentRating)
   }
 
   updateStars(rating) {
     this.starTargets.forEach((star, index) => {
+      const starRating = parseInt(star.dataset.rating)
       const path = star.querySelector('path')
-      if (index < rating) {
+      
+      if (starRating <= rating) {
         path.classList.remove('text-gray-300')
         path.classList.add('text-yellow-400')
       } else {

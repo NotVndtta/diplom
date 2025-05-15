@@ -8,4 +8,7 @@ ru:
       location: "Местоположение"
       work_details: "Детали работы"
       date: "Детали работы"
-      status: "Статус" 
+      status: "Статус"
+    statuses:
+      active: "Активная"
+      archived: "В архиве" 

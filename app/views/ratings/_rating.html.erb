@@ -1,10 +1,10 @@
-<div class="bg-white dark:bg-gray-600 p-4 rounded-2xl shadow-lg mb-4 rating-card flex flex-col justify-between">
+<div class="bg-white p-4 rounded-2xl shadow-lg mb-4 rating-card flex flex-col justify-between">
   <div class="flex items-start mb-2">
     <div class="flex-shrink-0">
       <% if rating.user.avatar.present? %>
         <%= image_tag rating.user.avatar.url, class: "w-10 h-10 rounded-full object-cover", alt: "Аватар" %>
       <% else %>
-        <div class="w-10 h-10 rounded-full bg-lime-600 flex items-center justify-center text-white text-lg font-medium">
+        <div class="w-10 h-10 rounded-full bg-lime-600 flex items-center justify-center text-lg font-medium">
           <%= rating.user.first_name[0].upcase %>
         </div>
       <% end %>
@@ -13,7 +13,7 @@
     <div class="ml-4 flex-grow">
       <div class="flex items-center justify-between">
         <div>
-          <p class="font-semibold text-lg text-black dark:text-white">
+          <p class="font-semibold text-lg text-black">
             <%= link_to "#{rating.user.first_name} #{rating.user.last_name}", profile_path(rating.user), class: "hover:text-lime-600 transition-colors duration-150" %>
           </p>
           <div class="flex items-center mt-1 space-x-1">
@@ -27,7 +27,7 @@
                       stroke-linejoin="round"/>
               </svg>
             <% end %>
-            <span class="ml-2 text-sm text-gray-500 dark:text-gray-400">
+            <span class="ml-2 text-sm text-gray-500">
               <%= l(rating.created_at, format: :long) %>
             </span>
           </div>
@@ -46,7 +46,7 @@
         <% end %>
       </div>
 
-      <p class="text-gray-800 dark:text-gray-200 mt-3 break-words max-w-full text-sm">
+      <p class="text-gray-800 mt-3 break-words max-w-full text-sm">
         <%= rating.comment %>
       </p>
     </div>

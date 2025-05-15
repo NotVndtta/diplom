@@ -12,9 +12,15 @@ class JobCard < ApplicationRecord
   has_many :job_card_media, class_name: "JobCardMedia", dependent: :destroy
   has_many :media_files, through: :job_card_media
 
+  enum :status, { active: "active", archived: "archived" }, default: :active
+
   validates :farm_name, presence: true, length: { maximum: 255 }
   validates :work_amount, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :description, presence: true, length: { maximum: 1000 }
+  validates :location, presence: true
+  validates :remuneration, presence: true, numericality: { greater_than: 0 }
+  validates :date_at, presence: true
+  validate :date_cannot_be_in_the_past
   validate :accepted_applications_within_work_amount
 
   def self.ransackable_associations(auth_object = nil)
@@ -33,6 +39,12 @@ class JobCard < ApplicationRecord
                   }
 
   private
+
+  def date_cannot_be_in_the_past
+    if date_at.present? && date_at < Date.current
+      errors.add(:date_at, "не может быть в прошлом")
+    end
+  end
 
   def accepted_applications_within_work_amount
     return if work_amount.blank?

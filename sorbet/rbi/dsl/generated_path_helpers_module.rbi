@@ -103,6 +103,9 @@ module GeneratedPathHelpersModule
   def new_vineyard_auth_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def offline_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def preview_view_component_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }

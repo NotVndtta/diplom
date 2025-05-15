@@ -3,7 +3,7 @@ class MediaFilesController < ApplicationController
   before_action :set_media_file, only: [ :show, :destroy, :attach_to_job_card ]
 
   def index
-    @media_files = current_user.media_files.order(created_at: :desc)
+    @media_files = current_user.media_files.includes(:job_cards).order(created_at: :desc)
     @media_file = MediaFile.new
     @job_cards = current_user.job_cards
   end
