@@ -1,0 +1,28 @@
+image: ruby:3.2.2
+
+variables:
+  RAILS_ENV: production
+  BUNDLE_DEPLOYMENT: "true"
+  BUNDLE_WITHOUT: "development:test"
+  RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - vendor/bundle
+
+stages:
+  - deploy
+
+deploy_to_render:
+  stage: deploy
+  script:
+    - git config --global user.email "ci@gitlab.com"
+    - git config --global user.name "GitLab CI"
+    - git remote add github https://${GITHUB_TOKEN}@github.com/Yarosla23/diplom_hub.git
+    - git push github HEAD:master
+  only:
+    - master
+  environment:
+    name: production
+    url: https://diplom.onrender.com 

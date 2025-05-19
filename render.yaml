@@ -1,0 +1,47 @@
+services:
+  - type: web
+    name: diplom
+    env: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: diplom-db
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
+      - key: RAILS_ENV
+        value: production
+      - key: RAILS_SERVE_STATIC_FILES
+        value: true
+      - key: RAILS_LOG_TO_STDOUT
+        value: true
+      - key: SECRET_KEY_BASE
+        generateValue: true
+      - key: DEVISE_SECRET_KEY
+        generateValue: true
+      - key: HOST
+        value: diplom.onrender.com
+      - key: SMTP_ADDRESS
+        value: smtp.gmail.com
+      - key: SMTP_PORT
+        value: "587"
+      - key: SMTP_DOMAIN
+        value: diplom.onrender.com
+      - key: SMTP_USERNAME
+        sync: false
+      - key: SMTP_PASSWORD
+        sync: false
+      - key: REDIS_URL
+        value: redis://redis:6379/1
+      - key: RAILS_MAX_THREADS
+        value: "5"
+      - key: WEB_CONCURRENCY
+        value: "2"
+
+databases:
+  - name: diplom-db
+    databaseName: diplom
+    user: diplom
+    plan: free 

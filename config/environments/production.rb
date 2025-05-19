@@ -19,7 +19,7 @@ Rails.application.configure do
   config.public_file_server.headers = { "cache-control" => "public, max-age=#{1.year.to_i}" }
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  # config.asset_host = "http://assets.example.com"
+  config.asset_host = ENV["ASSET_HOST"] if ENV["ASSET_HOST"].present?
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
@@ -58,16 +58,18 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "example.com" }
+  config.action_mailer.default_url_options = { host: ENV["HOST"], protocol: "https" }
 
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
-  # config.action_mailer.smtp_settings = {
-  #   user_name: Rails.application.credentials.dig(:smtp, :user_name),
-  #   password: Rails.application.credentials.dig(:smtp, :password),
-  #   address: "smtp.example.com",
-  #   port: 587,
-  #   authentication: :plain
-  # }
+  config.action_mailer.smtp_settings = {
+    address: ENV["SMTP_ADDRESS"],
+    port: ENV["SMTP_PORT"],
+    domain: ENV["SMTP_DOMAIN"],
+    user_name: ENV["SMTP_USERNAME"],
+    password: ENV["SMTP_PASSWORD"],
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
@@ -87,4 +89,11 @@ Rails.application.configure do
   #
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+
+  # Disable serving static files from the `/public` folder by default since
+  # Apache or NGINX already handles this.
+  config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
+
+  # Specifies the header that your server uses for sending files.
+  config.action_dispatch.x_sendfile_header = "X-Accel-Redirect" # for NGINX
 end
