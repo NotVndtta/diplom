@@ -9,14 +9,14 @@
     <%= form_with(model: @user, url: profile_path(@user), local: true, class: "space-y-6") do |form| %>
 
       <% fields = {
-        first_name:  { label: t('profile.first_name'), type: :string },
-        last_name:   { label: t('profile.last_name'), type: :string },
-        email:       { label: t('profile.email'), type: :string, input_type: 'email' },
-        about:       { label: t('profile.about'), type: :textarea },
-        phone:       { label: t('profile.phone'), type: :string },
+        first_name:  { label: "Фамилия", type: :string },
+        last_name:   { label: "Имя", type: :string },
+        email:       { label: "Почта", type: :string, input_type: 'email' },
+        about:       { label: "О себе", type: :textarea },
+        phone:       { label: "Телфон", type: :string },
         birth_year:  { label: t('profile.birth_year'), type: :number },
         city:        { label: t('profile.city'), type: :string },
-        avatar:      { label: t('profile.avatar'), type: :file }
+        avatar:      { label: "Фото профиля", type: :file }
       } %>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -54,17 +54,17 @@
       </div>
 
       <div>
-        <%= form.label :role, t('profile.role'), class: "block text-sm font-medium text-gray-700" %>
+        <%= form.label :role, "Роль пользователя", class: "block text-sm font-medium text-gray-700" %>
         <%= form.select :role, options_for_select(User::ROLES, @user.role), { prompt: t('profile.select_role') }, class: "mt-1 block w-full px-3 py-2 bg-white border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 #{base_input_class(@user, :role)}", required: true %>
       </div>
 
       <div class="border-t border-gray-200 pt-6">
-        <h3 class="text-lg font-semibold text-gray-900 mb-4"><%= t('profile.change_password') %></h3>
+        <h3 class="text-lg font-semibold text-gray-900 mb-4"> Смена пароля</h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <%= render Ui::StringInputComponent.new(
             form: form,
             field_name: :password,
-            label: t('profile.password'),
+            label: "Пароль",
             type: "password",
             placeholder: t('profile.leave_blank'),
             input_class: base_input_class(@user, :password)
@@ -73,7 +73,7 @@
           <%= render Ui::StringInputComponent.new(
             form: form,
             field_name: :password_confirmation,
-            label: t('profile.password_confirmation'),
+            label: "Подтверждение пароля",
             type: "password",
             placeholder: t('profile.leave_blank'),
             input_class: base_input_class(@user, :password_confirmation)
@@ -83,7 +83,7 @@
 
       <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-6">
         <%= form.submit t('profile.save'), class: "flex-1 text-center px-6 py-3 border border-transparent text-sm font-medium rounded-md text-white bg-lime-600 hover:bg-lime-500 text-white transition" %>
-        <%= link_to t('profile.cancel'), profile_path(@user), class: "flex-1 text-center px-6 py-3 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200" %>
+        <%= link_to "Отмена", profile_path(@user), class: "flex-1 text-center px-6 py-3 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200" %>
       </div>
     <% end %>
   </div>

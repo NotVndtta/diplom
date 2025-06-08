@@ -1,15 +1,12 @@
-<div class="flex items-center justify-center min-h-screen">
-  <div class="w-full max-w-md sm:max-w-xl md:max-w-4xl lg:max-w-5xl mx-auto p-4">
-    <div class="bg-white shadow-lg rounded-2xl p-4 sm:p-8 space-y-4">
+  <div class="w-full max-w-md sm:max-w-x md:max-w-xl mx-auto p-4">
+    <div class="bg-white shadow-lg rounded-2xl p-3 sm:p-6 space-y-3">
       <div class="text-center">
-        <h2 class="text-xl sm:text-2xl font-bold text-gray-900">Создайте аккаунт</h2>
-        <p class="mt-1 text-sm text-gray-600">Заполните данные ниже, чтобы начать</p>
+        <h2 class="text-base sm:text-lg font-bold text-gray-900">Создайте аккаунт</h2>
       </div>
 
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "space-y-4" }) do |f| %>
-        <div class="space-y-3">
-          <h3 class="text-base font-medium text-gray-900">Информация об аккаунте</h3>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "space-y-3", novalidate: true }) do |f| %>
+        <div class="space-y-2">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
             <div>
               <%= render(Ui::StringInputComponent.new(
                 form: f,
@@ -17,7 +14,7 @@
                 label: "Адрес электронной почты",
                 type: "email",
                 autocomplete: "email",
-                input_class: "block w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-sm sm:text-base"
+                input_class: "block w-full px-2 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-xs sm:text-sm"
               )) %>
             </div>
             <div>
@@ -27,7 +24,7 @@
                 label: "Номер телефона",
                 type: "tel",
                 autocomplete: "tel",
-                input_class: "block w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-sm sm:text-base"
+                input_class: "block w-full px-2 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-xs sm:text-sm"
               )) %>
             </div>
             <div>
@@ -37,10 +34,10 @@
                 label: "Пароль <span class='text-red-500'>*</span>".html_safe,
                 type: "password",
                 autocomplete: "new-password",
-                input_class: "block w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-sm sm:text-base"
+                input_class: "block w-full px-2 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-xs sm:text-sm"
               )) %>
               <% if @minimum_password_length %>
-                <p class="mt-0.5 text-xs text-gray-500">Минимум <%= @minimum_password_length %> символов</p>
+                <p class="mt-0.5 text-[10px] sm:text-xs text-gray-500">Минимум <%= @minimum_password_length %> символов</p>
               <% end %>
             </div>
             <div>
@@ -50,22 +47,21 @@
                 label: "Подтверждение пароля <span class='text-red-500'>*</span>".html_safe,
                 type: "password",
                 autocomplete: "new-password",
-                input_class: "block w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-sm sm:text-base"
+                input_class: "block w-full px-2 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-xs sm:text-sm"
               )) %>
             </div>
           </div>
         </div>
 
-        <div class="space-y-3">
-          <h3 class="text-base font-medium text-gray-900">Личная информация</h3>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="space-y-2">
+          <div class="grid grid-cols-2 sm:grid-cols-2 gap-2 sm:gap-4">
             <div>
               <%= render(Ui::StringInputComponent.new(
                 form: f,
                 field_name: :first_name,
                 label: "Имя",
                 autocomplete: "given-name",
-                input_class: "block w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-sm sm:text-base"
+                input_class: "block w-full px-2 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-xs sm:text-sm"
               )) %>
             </div>
             <div>
@@ -74,7 +70,7 @@
                 field_name: :last_name,
                 label: "Фамилия",
                 autocomplete: "family-name",
-                input_class: "block w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-sm sm:text-base"
+                input_class: "block w-full px-2 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-xs sm:text-sm"
               )) %>
             </div>
             <div>
@@ -82,7 +78,7 @@
                 form: f,
                 field_name: :birth_year,
                 label: "Год рождения",
-                input_class: "block w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-sm sm:text-base"
+                input_class: "block w-full px-2 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-xs sm:text-sm"
               )) %>
             </div>
             <div>
@@ -91,45 +87,45 @@
                 field_name: :city,
                 label: "Город",
                 autocomplete: "address-level2",
-                input_class: "block w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-sm sm:text-base"
+                input_class: "block w-full px-2 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-xs sm:text-sm"
               )) %>
             </div>
           </div>
         </div>
 
-        <div class="space-y-3">
-          <h3 class="text-base font-medium text-gray-900">Дополнительная информация</h3>
-          <div>
-            <%= render(Ui::TextAreaComponent.new(
-              form: f,
-              field_name: :about,
-              label: "О себе",
-              input_class: "block w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-sm sm:text-base"
-            )) %>
-          </div>
-          <div>
-            <%= f.label :role, "Роль <span class='text-red-500'>*</span>".html_safe, class: "block text-sm font-medium text-gray-700" %>
-            <%= f.select :role,
-              options_for_select([
-                ["Фрилансер", "freelancer"],
-                ["Бригадир", "foreman"],
-                ["Студент", "student"]
-              ], @user.role),
-              { prompt: "Выберите вашу роль" },
-              { class: "mt-1 block w-full px-3 sm:px-4 py-2 border #{@user.errors[:role].any? ? 'border-red-400' : 'border-gray-300'} rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-sm sm:text-base",
-                required: true }
-            %>
+        <div class="space-y-2">
+          <div class="space-y-3">
+            <div>
+              <%= render(Ui::TextAreaComponent.new(
+                form: f,
+                field_name: :about,
+                label: "О себе",
+                input_class: "block w-full px-2 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-xs sm:text-sm"
+              )) %>
+            </div>
+            <div>
+              <%= f.label :role, "Роль <span class='text-red-500'>*</span>".html_safe, class: "block text-xs sm:text-sm font-medium text-gray-700" %>
+              <%= f.select :role,
+                options_for_select([
+                  ["Фрилансер", "freelancer"],
+                  ["Бригадир", "foreman"],
+                  ["Студент", "student"]
+                ], @user.role),
+                { prompt: "Выберите вашу роль" },
+                { class: "mt-1 block w-full px-2 sm:px-4 py-1.5 sm:py-2 border #{@user.errors[:role].any? ? 'border-red-400' : 'border-gray-300'} rounded-lg shadow-sm focus:ring-lime-500 focus:border-lime-500 text-xs sm:text-sm",
+                  required: true }
+              %>
+            </div>
           </div>
         </div>
 
-        <div>
-          <%= f.submit "Зарегистрироваться", class: "w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-lime-600 hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500 transition duration-150" %>
+        <div class="pt-3">
+          <%= f.submit "Зарегистрироваться", class: "w-full flex justify-center py-1.5 sm:py-2 px-4 border border-transparent rounded-lg shadow-sm text-xs sm:text-sm font-medium text-white bg-lime-600 hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500 transition duration-150" %>
         </div>
       <% end %>
 
-      <div class="text-center text-sm text-gray-600">
+      <div class="text-center text-xs sm:text-sm text-gray-600 pt-3">
         <%= render "devise/shared/links" %>
       </div>
     </div>
   </div>
-</div>
