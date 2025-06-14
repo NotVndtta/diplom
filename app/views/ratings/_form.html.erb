@@ -1,4 +1,5 @@
 <% if user_signed_in? && current_user != rateable %>
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 pt-6 px-6 mb-3  mr-4">
   <div id="rating_form" class="mb-6" data-controller="rating">
     <div class="flex items-center justify-between mb-4">
       <h2 class="text-lg font-semibold text-gray-900">Оставить отзыв</h2>
@@ -44,4 +45,6 @@
           class: "w-full py-2.5 px-4 bg-lime-600 hover:bg-lime-700 text-white text-sm font-medium rounded-xl shadow-sm transition-colors duration-150" %>
     <% end %>
   </div>
+  </div>
+
 <% end %>

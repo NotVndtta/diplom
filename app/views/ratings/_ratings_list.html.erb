@@ -1,4 +1,4 @@
-<div id="ratings_list" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+<div id="ratings_list" class="bg-white rounded-2xl shadow-sm border border-gray-100 px-6 py-2 mb-2 mr-4">
   <% if rateable.ratings.any? %>
     <div class="space-y-6">
       <div class="flex items-center justify-between">
@@ -10,6 +10,7 @@
         </div>
         
         <% average_rating = rateable.ratings.average(:grade)&.round(1) %>
+
         <% if average_rating %>
           <div class="flex items-center space-x-4">
             <div class="text-right">
@@ -36,9 +37,12 @@
           </div>
         <% end %>
       </div>
+    </div> 
+  </div> 
+</div> 
 
-      <div class="border-t border-gray-100 -mx-6 my-6"></div>
-
+ <div class="space-y-6">
+      <div class="w-full ">
       <div id="ratings_container" class="space-y-6">
         <%= render partial: "ratings/rating", collection: @ratings || rateable.ratings.includes(:user).order(created_at: :desc).page(1).per(5) %>
       </div>
@@ -68,4 +72,3 @@
       <% end %>
     </div>
   <% end %>
-</div> 

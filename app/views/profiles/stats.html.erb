@@ -14,65 +14,9 @@
 
     <!-- Распределение оценок -->
     <div class="bg-white rounded-2xl shadow-lg p-6 h-[400px]">
-      <h2 class="text-xl font-semibold mb-4">Рейтинг работников</h2>
+      <h2 class="text-xl font-semibold mb-4">Рейтинг работника</h2>
       <div class="h-[300px]">
         <canvas id="ratingsChart" class="w-full h-full"></canvas>
-      </div>
-    </div>
-
-    <!-- Статистика работников по месяцам -->
-    <div class="bg-white rounded-2xl shadow-lg p-6 h-[400px]">
-      <h2 class="text-xl font-semibold mb-4">Количество работников по месяцам</h2>
-      <div id="monthlyWorkersChartContainer" class="h-[300px] flex items-center justify-center">
-        <canvas id="monthlyWorkersChart" class="w-full h-full"></canvas>
-        <div class="hidden text-gray-500 text-center">
-          <svg class="w-16 h-16 mx-auto mb-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-          </svg>
-          <p>Нет данных о работниках</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Статистика агроопераций по месяцам -->
-    <div class="bg-white rounded-2xl shadow-lg p-6 h-[400px]">
-      <h2 class="text-xl font-semibold mb-4">Агрооперации по месяцам</h2>
-      <div id="monthlyJobsChartContainer" class="h-[300px] flex items-center justify-center">
-        <canvas id="monthlyJobsChart" class="w-full h-full"></canvas>
-        <div class="hidden text-gray-500 text-center">
-          <svg class="w-16 h-16 mx-auto mb-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-          </svg>
-          <p>Нет данных за последний год</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Статистика заявок -->
-    <div class="bg-white rounded-2xl shadow-lg p-6 h-[400px]">
-      <h2 class="text-xl font-semibold mb-4">Статус заявок на работу</h2>
-      <div id="applicationsChartContainer" class="h-[300px] flex items-center justify-center">
-        <canvas id="applicationsChart" class="w-full h-full"></canvas>
-        <div class="hidden text-gray-500 text-center">
-          <svg class="w-16 h-16 mx-auto mb-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-          </svg>
-          <p>Нет данных о заявках</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Распределение по типам агроопераций -->
-    <div class="bg-white rounded-2xl shadow-lg p-6 h-[400px]">
-      <h2 class="text-xl font-semibold mb-4">Типы агроопераций</h2>
-      <div id="jobTypesChartContainer" class="h-[300px] flex items-center justify-center">
-        <canvas id="jobTypesChart" class="w-full h-full"></canvas>
-        <div class="hidden text-gray-500 text-center">
-          <svg class="w-16 h-16 mx-auto mb-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-          </svg>
-          <p>Нет данных о типах агроопераций</p>
-        </div>
       </div>
     </div>
   </div>
@@ -81,77 +25,100 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOM loaded');
-  
-  if (typeof Chart === 'undefined') {
-    console.error('Chart.js not loaded!');
-    return;
-  }
-  
-  console.log('Chart.js loaded successfully');
+let jobStatusChart = null;
+let ratingsChart = null;
 
-  // Данные для графиков
-  const jobStatusData = {
-    labels: ['В процессе', 'Завершены', 'Запланированы'],
-    datasets: [{
-      data: [3, 5, 2],
-      backgroundColor: ['#facc15', '#84cc16', '#3b82f6']
-    }]
-  };
+function initializeCharts() {
+  // Уничтожаем существующие графики, если они есть
+  if (jobStatusChart) jobStatusChart.destroy();
+  if (ratingsChart) ratingsChart.destroy();
 
-  const ratingsData = {
-    labels: ['1', '2', '3', '4', '5'],
-    datasets: [{
-      label: 'Количество работников',
-      data: [1, 2, 5, 8, 4],
-      backgroundColor: '#84cc16'
-    }]
-  };
+  // Получаем данные с сервера
+  fetch(`/profiles/<%= @user.id %>/stats.json`)
+    .then(response => response.json())
+    .then(data => {
+      console.log('Received data:', data);
 
-  // Создаем графики
-  try {
-    const jobStatusChart = new Chart(
-      document.getElementById('jobStatusChart'),
-      {
-        type: 'doughnut',
-        data: jobStatusData,
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              position: 'bottom',
-              labels: { font: { size: 14 } }
+      // Данные для графика статуса задач
+      const jobStatusData = {
+        labels: ['В процессе', 'Завершены', 'Запланированы'],
+        datasets: [{
+          data: [
+            data.job_cards.in_progress,
+            data.job_cards.completed,
+            data.job_cards.pending
+          ],
+          backgroundColor: ['#facc15', '#84cc16', '#3b82f6']
+        }]
+      };
+
+      // Данные для графика рейтингов
+      const ratingsData = {
+        labels: ['1', '2', '3', '4', '5'],
+        datasets: [{
+          label: 'Количество оценок',
+          data: [
+            data.ratings['1'] || 0,
+            data.ratings['2'] || 0,
+            data.ratings['3'] || 0,
+            data.ratings['4'] || 0,
+            data.ratings['5'] || 0
+          ],
+          backgroundColor: '#84cc16'
+        }]
+      };
+
+      // Создаем графики
+      try {
+        jobStatusChart = new Chart(
+          document.getElementById('jobStatusChart'),
+          {
+            type: 'doughnut',
+            data: jobStatusData,
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  labels: { font: { size: 14 } }
+                }
+              }
             }
           }
-        }
-      }
-    );
+        );
 
-    const ratingsChart = new Chart(
-      document.getElementById('ratingsChart'),
-      {
-        type: 'bar',
-        data: ratingsData,
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              position: 'bottom',
-              labels: { font: { size: 14 } }
+        ratingsChart = new Chart(
+          document.getElementById('ratingsChart'),
+          {
+            type: 'bar',
+            data: ratingsData,
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  labels: { font: { size: 14 } }
+                }
+              }
             }
           }
-        }
+        );
+
+        console.log('Charts created successfully');
+      } catch (error) {
+        console.error('Error creating charts:', error);
       }
-    );
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
+}
 
-    // Дополнительные графики можно инициализировать здесь по мере добавления данных
+// Инициализируем графики при первой загрузке страницы
+document.addEventListener('DOMContentLoaded', initializeCharts);
 
-    console.log('Charts created successfully');
-  } catch (error) {
-    console.error('Error creating charts:', error);
-  }
-});
+// Инициализируем графики при навигации через Turbo
+document.addEventListener('turbo:load', initializeCharts);
 </script>
