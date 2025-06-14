@@ -170,11 +170,9 @@
                 data: { turbo_method: :post }, 
                 class: "w-full inline-flex justify-center items-center px-6 py-3 border border-transparent rounded-xl text-base font-medium text-white bg-lime-600 hover:bg-lime-700 transition-colors duration-200" %>
           <% end %>
-
           <% if user_signed_in? && @job_card.user == current_user %>
             <%= link_to "Просмотр откликов", job_card_job_applications_path(@job_card), 
                 class: "w-full inline-flex justify-center items-center px-6 py-3 border border-gray-300 rounded-xl text-base font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-200" %>
-          <% end %>
 
           <%= link_to edit_job_card_path(@job_card), 
               class: "w-full inline-flex justify-center items-center px-6 py-3 border border-gray-300 rounded-xl text-base font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-200" do %>
@@ -191,6 +189,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
             </svg>
             Удалить
+          <% end %>
           <% end %>
         </div>
       </div>

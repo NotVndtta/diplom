@@ -33,7 +33,7 @@
           </div>
         </div>
         
-        <% if rating.user == current_user || current_user&.admin?  %>
+        <% if policy(rating).destroy? %>
           <% delete_path = rating.rateable.is_a?(User) ? profile_rating_path(rating.rateable, rating) : job_card_rating_path(rating.rateable, rating) %>
           <%= button_to delete_path,
               method: :delete,

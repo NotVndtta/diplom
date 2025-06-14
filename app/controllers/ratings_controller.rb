@@ -1,10 +1,9 @@
 class RatingsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_rating, only: [ :destroy ]
-  before_action :authorize_user!, only: [ :destroy ]
+  before_action :set_rateable
 
   def index
-    @rateable = find_rateable
     @ratings = @rateable.ratings.includes(:user).order(created_at: :desc).page(params[:page]).per(5)
 
     respond_to do |format|
@@ -14,9 +13,10 @@ class RatingsController < ApplicationController
   end
 
   def create
-    @rateable = find_rateable
     @rating = @rateable.ratings.build(rating_params)
     @rating.user = current_user
+
+    authorize @rating
 
     respond_to do |format|
       if @rating.save
@@ -41,6 +41,7 @@ class RatingsController < ApplicationController
   end
 
   def destroy
+    authorize @rating
     @rateable = @rating.rateable
     @rating.destroy
 
@@ -61,8 +62,8 @@ class RatingsController < ApplicationController
     params.require(:rating).permit(:comment, :grade)
   end
 
-  def find_rateable
-    if params[:job_card_id]
+  def set_rateable
+    @rateable = if params[:job_card_id]
       JobCard.find(params[:job_card_id])
     elsif params[:profile_id]
       User.find(params[:profile_id])
@@ -73,12 +74,6 @@ class RatingsController < ApplicationController
 
   def set_rating
     @rating = Rating.find(params[:id])
-  end
-
-  def authorize_user!
-    unless @rating.user == current_user || current_user.admin?
-      redirect_to @rating.rateable, alert: "Вы не можете удалить этот отзыв."
-    end
   end
 
   def rating_reviews_path
