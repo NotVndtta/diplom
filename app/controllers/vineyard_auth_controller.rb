@@ -1,13 +1,6 @@
-require "net/http"
-require "uri"
-require "json"
-
 class VineyardAuthController < ApplicationController
-  def new
-  end
-
   def create
-    uri = URI("http://localhost:3001/auth/api/sign_in")
+    uri = URI("https://dev.digitalwinery.ru/auth/api/sign_in")
 
     request = Net::HTTP::Post.new(uri, "Content-Type" => "application/json")
     request.body = {
@@ -15,42 +8,66 @@ class VineyardAuthController < ApplicationController
       password: params[:password]
     }.to_json
 
-    response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == "https") do |http|
-      http.request(request)
+    begin
+      response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == "https") do |http|
+        http.request(request)
+      end
+    rescue SocketError, Errno::ECONNREFUSED, Net::OpenTimeout => e
+      Rails.logger.error "Network error: #{e.message}"
+      flash.now[:alert] = "Сервер авторизации недоступен. Попробуйте позже."
+      return render :new
     end
 
-    if response.is_a?(Net::HTTPSuccess)
-      begin
-        Rails.logger.info "Raw response from auth service: #{response.body}"
-
-        parsed = JSON.parse(response.body)
-        parsed = JSON.parse(parsed) if parsed.is_a?(String)
-
-        user_data = parsed["data"]["attributes"]
-        jwt = user_data["auth_token"]
-
-        unless jwt
-          flash.now[:alert] = "Не получен токен авторизации"
-          return render :new
-        end
-
-        user = User.find_or_create_by(email: user_data["email"]) do |u|
-          u.first_name = user_data["first_name"]
-          u.last_name = user_data["last_name"]
-          u.password = Devise.friendly_token[0..19]
-        end
-
-        user.update(vineyard_token: jwt)
-        sign_in(user)
-        redirect_to root_path, notice: "Signed in with Vineyard!"
-      rescue JSON::ParserError => e
-        Rails.logger.error "JSON parse error: #{e.message}"
-        flash.now[:alert] = "Ошибка разбора данных от сервера авторизации"
-        render :new
-      end
-    else
+    unless response.is_a?(Net::HTTPSuccess)
       Rails.logger.warn "Auth failed with status #{response.code}: #{response.body}"
-      flash.now[:alert] = "Authentication failed"
+
+      # Можно вытащить сообщение об ошибке, если API его возвращает
+      begin
+        error_json = JSON.parse(response.body)
+        message = error_json.dig("errors", 0, "detail") || "Неверный email или пароль"
+      rescue JSON::ParserError
+        message = "Ошибка авторизации. Проверьте email и пароль."
+      end
+
+      flash.now[:alert] = message
+      return render :new
+    end
+
+    begin
+      parsed = JSON.parse(response.body)
+      user_data = parsed.dig("data", "attributes")
+      included = parsed["included"] || []
+
+      tenant_data = included.find { |item| item["type"] == "tenant" }&.dig("attributes")
+
+      user = User.find_or_create_by(email: user_data["email"]) do |u|
+        u.password = params[:password]
+        u.password_confirmation = params[:password]
+
+        u.first_name = user_data["first_name"]
+        u.last_name = user_data["last_name"]
+        u.phone = user_data["phone_number"]
+        u.birth_year = 2000
+        u.city = "Не выбран"
+        u.role = "admin"
+      end
+
+      user.update(
+        vineyard_token: user_data["auth_token"],
+        first_name: user_data["first_name"],
+        last_name: user_data["last_name"],
+        phone: user_data["phone_number"]
+      )
+
+      sign_in(user)
+      redirect_to root_path, notice: "Успешный вход через Vineyard!"
+    rescue JSON::ParserError => e
+      Rails.logger.error "Ошибка парсинга JSON: #{e.message}"
+      flash.now[:alert] = "Ошибка обработки ответа от сервера авторизации"
+      render :new
+    rescue => e
+      Rails.logger.error "Ошибка в логике create: #{e.message}"
+      flash.now[:alert] = "Что-то пошло не так при входе. Попробуйте снова."
       render :new
     end
   end

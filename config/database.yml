@@ -16,7 +16,7 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: localhost  # Explicitly set to avoid socket issues
+  # host: localhost  # Explicitly set to avoid socket issues
   port: 5432
 
 
@@ -25,6 +25,7 @@ development:
   database: diplom_development
   username: wlapp_db_admin  # Например, "myuser"
   password: wlapp-db-pas
+  host: localhost
 
 test:
   <<: *default
@@ -33,6 +34,9 @@ test:
   password: wlapp-db-pas
 
 production:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
+
   primary: &primary_production
     <<: *default
     database: diplom_production
